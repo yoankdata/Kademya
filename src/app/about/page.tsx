@@ -1,14 +1,18 @@
 import Image from 'next/image';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { findImage } from '@/lib/placeholder-data';
+import { Pattern } from '@/components/pattern';
 
 const aboutImage = findImage('about-us');
 
 export default function AboutPage() {
   return (
     <div className="bg-background">
-      <header className="bg-primary/5 py-16 md:py-24">
-        <div className="container mx-auto px-4 text-center">
+      <header className="relative bg-primary/5 py-16 md:py-24 overflow-hidden">
+        <div className="absolute inset-0 opacity-[.06]">
+          <Pattern />
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary">À Propos d'Edalia</h1>
           <p className="mt-4 text-lg text-foreground/80 max-w-2xl mx-auto">
             Notre mission est de connecter les professeurs dévoués et les élèves motivés à Abidjan, pour créer une communauté d'apprentissage et de réussite.
@@ -37,6 +41,18 @@ export default function AboutPage() {
                 data-ai-hint={aboutImage.imageHint}
               />
             )}
+          </div>
+        </section>
+
+        <section className="text-center bg-secondary py-16 rounded-lg relative overflow-hidden">
+          <div className="absolute inset-0 opacity-[.06]">
+              <Pattern />
+          </div>
+          <div className="relative z-10 max-w-3xl mx-auto px-4">
+            <h2 className="font-headline text-3xl font-bold text-primary mb-4">Notre Mission</h2>
+            <p className="text-lg text-foreground/80 leading-relaxed">
+              Chez Edalia, notre mission est simple : offrir à chaque élève d’Abidjan un accès facilité à un enseignement de qualité, et permettre à chaque professeur de valoriser son expertise sans intermédiaire ni commission. Nous créons un espace fiable, transparent et accessible où familles et enseignants peuvent se rencontrer, échanger et collaborer en toute confiance. Grâce à un parcours fluide, vérifié et pensé pour les usages locaux, Edalia rend le soutien scolaire plus proche, plus humain et plus efficace.
+            </p>
           </div>
         </section>
 
