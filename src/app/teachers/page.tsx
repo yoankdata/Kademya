@@ -6,9 +6,9 @@ export default function TeachersPage() {
     <div className="bg-primary/5 min-h-screen">
       <div className="container mx-auto px-4 py-16 md:py-24">
         <header className="text-center space-y-4 mb-12">
-          <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary">Meet Our Educators</h1>
+          <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary">Découvrez nos professeurs</h1>
           <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
-            Browse our directory of verified and passionate teachers ready to help you succeed.
+            Parcourez notre annuaire de professeurs vérifiés et passionnés, prêts à vous accompagner vers la réussite.
           </p>
         </header>
 

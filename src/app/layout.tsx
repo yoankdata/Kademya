@@ -5,8 +5,8 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Edalia - Quality Education for Every Child',
-  description: 'Connect with verified, passionate teachers for personalized learning experiences.',
+  title: 'Edalia - Trouvez un professeur fiable à Abidjan',
+  description: 'Mise en relation avec des professeurs vérifiés et passionnés pour des cours particuliers de qualité.',
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="fr" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

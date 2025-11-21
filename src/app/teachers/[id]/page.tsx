@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { Star, MapPin, Book, Briefcase, GraduationCap, Phone } from 'lucide-react';
+import { Star, MapPin, Book, Briefcase, GraduationCap, Phone, Verified } from 'lucide-react';
 import { teachers, findImage, Teacher } from '@/lib/placeholder-data';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -39,13 +39,19 @@ export default function TeacherProfilePage({ params }: { params: { id: string } 
                   {image && (
                     <Image
                       src={image.imageUrl}
-                      alt={`Portrait of ${teacher.name}`}
+                      alt={`Portrait de ${teacher.name}`}
                       fill
                       style={{ objectFit: 'cover' }}
                       priority
                       data-ai-hint={image.imageHint}
                     />
                   )}
+                   <div className="absolute top-2 right-2">
+                        <Badge className="bg-primary/80 backdrop-blur-sm text-primary-foreground">
+                            <Verified className="w-4 h-4 mr-1.5" />
+                            Vérifié
+                        </Badge>
+                    </div>
                 </div>
               </CardHeader>
               <CardContent className="p-6 text-center space-y-4">
@@ -57,18 +63,19 @@ export default function TeacherProfilePage({ params }: { params: { id: string } 
                 <div className="flex justify-center items-center gap-2 text-accent">
                     <Star className="w-5 h-5 fill-current" />
                     <span className="font-bold text-lg">{teacher.rating.toFixed(1)}</span>
-                    <span className="text-muted-foreground text-sm">({teacher.reviews} reviews)</span>
+                    <span className="text-muted-foreground text-sm">({teacher.reviews} avis)</span>
                 </div>
                 <Separator />
                 <div className="text-left space-y-1">
-                    <p className="text-muted-foreground">Rate</p>
-                    <p><span className="font-bold text-2xl text-primary">${teacher.rate}</span> / hour</p>
+                    <p className="text-muted-foreground">Tarif</p>
+                    <p><span className="font-bold text-2xl text-primary">{teacher.rate.toLocaleString('fr-CI')} FCFA</span> / heure</p>
                 </div>
                  <Button size="lg" className="w-full bg-green-600 hover:bg-green-700 text-white" asChild>
                   <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                    <Phone className="mr-2 h-5 w-5" /> Contact on WhatsApp
+                    <Phone className="mr-2 h-5 w-5" /> Contacter sur WhatsApp
                   </a>
                 </Button>
+                <p className="text-xs text-muted-foreground pt-2">Professeur vérifié par Edalia</p>
               </CardContent>
             </Card>
           </aside>
@@ -76,7 +83,7 @@ export default function TeacherProfilePage({ params }: { params: { id: string } 
           {/* Right Column */}
           <main className="md:col-span-2 space-y-10">
             <section>
-              <h2 className="font-headline text-2xl font-bold text-primary mb-4">About Me</h2>
+              <h2 className="font-headline text-2xl font-bold text-primary mb-4">À propos de moi</h2>
               <p className="text-lg text-foreground/80 leading-relaxed">{teacher.bio}</p>
             </section>
             
@@ -86,14 +93,14 @@ export default function TeacherProfilePage({ params }: { params: { id: string } 
                         <div className="flex items-start gap-4">
                             <Briefcase className="w-8 h-8 text-accent mt-1 flex-shrink-0" />
                             <div>
-                                <h3 className="font-semibold text-lg">Experience</h3>
+                                <h3 className="font-semibold text-lg">Expérience</h3>
                                 <p className="text-muted-foreground">{teacher.experience}</p>
                             </div>
                         </div>
                          <div className="flex items-start gap-4">
                             <GraduationCap className="w-8 h-8 text-accent mt-1 flex-shrink-0" />
                             <div>
-                                <h3 className="font-semibold text-lg">Qualifications</h3>
+                                <h3 className="font-semibold text-lg">Diplômes</h3>
                                 <ul className="list-disc list-inside text-muted-foreground">
                                     {teacher.qualifications.map(q => <li key={q}>{q}</li>)}
                                 </ul>
@@ -104,7 +111,7 @@ export default function TeacherProfilePage({ params }: { params: { id: string } 
             </section>
 
             <section>
-              <h2 className="font-headline text-2xl font-bold text-primary mb-4">Subjects</h2>
+              <h2 className="font-headline text-2xl font-bold text-primary mb-4">Matières enseignées</h2>
               <div className="flex flex-wrap gap-3">
                 {teacher.subjects.map((subject) => (
                   <Badge key={subject} className="text-base px-4 py-2" variant="secondary">{subject}</Badge>

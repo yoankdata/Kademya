@@ -11,10 +11,10 @@ import { Logo } from '@/components/icons';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/teachers', label: 'Find a Teacher' },
-  { href: '/become-a-teacher', label: 'Become a Teacher' },
-  { href: '/about', label: 'About' },
+  { href: '/', label: 'Accueil' },
+  { href: '/teachers', label: 'Nos Profs' },
+  { href: '/become-a-teacher', label: 'Devenir Prof' },
+  { href: '/about', label: 'À Propos' },
 ];
 
 export function Header() {
@@ -46,13 +46,13 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-4">
             <Button className="hidden md:inline-flex bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-              <Link href="/teachers">Get Started</Link>
+              <Link href="/teachers">Voir les profs</Link>
             </Button>
             <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon" className="md:hidden">
                   <Menu className="h-6 w-6" />
-                  <span className="sr-only">Toggle navigation menu</span>
+                  <span className="sr-only">Ouvrir le menu</span>
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-full max-w-sm">
@@ -79,7 +79,7 @@ export function Header() {
                   </nav>
                    <div className="mt-auto">
                      <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-                        <Link href="/teachers" onClick={() => setIsSheetOpen(false)}>Get Started</Link>
+                        <Link href="/teachers" onClick={() => setIsSheetOpen(false)}>Voir les profs</Link>
                      </Button>
                    </div>
                 </div>
