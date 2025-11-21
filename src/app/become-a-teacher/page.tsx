@@ -22,7 +22,7 @@ export default function BecomeATeacherPage() {
         )}
         <div className="absolute inset-0 bg-primary/80 z-10" />
         <div className="relative z-20 container mx-auto px-4">
-          <h1 className="font-headline text-4xl md:text-5xl font-bold">Rejoignez notre équipe de profs à Abidjan</h1>
+          <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary-foreground">Rejoignez notre équipe de profs à Abidjan</h1>
           <p className="mt-4 text-lg max-w-2xl mx-auto text-primary-foreground/90">
             Augmentez vos revenus en donnant des cours particuliers quand vous voulez, où vous voulez.
           </p>
