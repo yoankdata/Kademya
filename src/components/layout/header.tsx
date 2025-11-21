@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle, SheetHeader, SheetDescription } from '@/components/ui/sheet';
 import { Logo } from '@/components/icons';
 import { cn } from '@/lib/utils';
 
@@ -56,6 +56,10 @@ export function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-full max-w-sm">
+                <SheetHeader>
+                  <SheetTitle className="sr-only">Menu principal</SheetTitle>
+                  <SheetDescription className="sr-only">Navigation principale du site Edalia.</SheetDescription>
+                </SheetHeader>
                 <div className="flex flex-col h-full">
                   <div className="border-b pb-4">
                     <Link href="/" className="flex items-center" onClick={() => setIsSheetOpen(false)}>

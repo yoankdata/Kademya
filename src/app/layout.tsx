@@ -21,6 +21,7 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   title: 'Edalia - Trouvez un professeur fiable à Abidjan',
   description: 'Mise en relation avec des professeurs vérifiés et passionnés pour des cours particuliers de qualité.',
+  icons: null,
 };
 
 export default function RootLayout({
