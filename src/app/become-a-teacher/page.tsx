@@ -79,7 +79,7 @@ export default function BecomeATeacherPage() {
             <h2 className="font-headline text-3xl font-bold text-primary mb-8 text-center">Questions fréquentes (FAQ)</h2>
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
-                <AccordionTrigger className="text-lg">Comment je suis payé ?</AccordionTrigger>
+                <AccordionTrigger className="text-lg">Comment suis-je payé ?</AccordionTrigger>
                 <AccordionContent className="text-base text-foreground/80">
                   Le paiement se fait directement entre vous et le parent d'élève, par le moyen que vous préférez (Orange Money, Wave, cash, etc.). Edalia ne s'implique pas dans les transactions, ce qui garantit 0% de commission pour vous.
                 </AccordionContent>
@@ -91,13 +91,13 @@ export default function BecomeATeacherPage() {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3">
-                <AccordionTrigger className="text-lg">Comment l'abonnement de 5 000 FCFA fonctionne ?</AccordionTrigger>
+                <AccordionTrigger className="text-lg">Comment l'abonnement de 5 000 FCFA fonctionne-t-il ?</AccordionTrigger>
                 <AccordionContent className="text-base text-foreground/80">
                   L'abonnement vous donne un accès illimité à la plateforme pour être contacté par des parents. C'est un paiement mensuel fixe, que vous ayez 1 ou 20 élèves grâce à Edalia. Il n'y a aucun engagement, vous pouvez arrêter quand vous voulez.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-4">
-                <AccordionTrigger className="text-lg">Est-ce que je peux choisir mes horaires et mes zones ?</AccordionTrigger>
+                <AccordionTrigger className="text-lg">Puis-je choisir mes horaires et mes zones ?</AccordionTrigger>
                 <AccordionContent className="text-base text-foreground/80">
                   Oui, absolument. Vous êtes 100% indépendant. Sur votre profil, vous indiquez vos disponibilités et les zones d'Abidjan où vous souhaitez enseigner (Cocody, Marcory, Yopougon, etc.). Vous avez le contrôle total.
                 </AccordionContent>
