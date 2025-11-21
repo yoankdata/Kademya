@@ -188,7 +188,7 @@ export default function Home() {
                      <Card className="text-center shadow-md">
                         <CardContent className="p-6">
                             <h3 className="font-bold text-lg text-primary">Supérieur</h3>
-                            <p className="font-headline text-2xl font-bold text-foreground my-2">7 000 - 10 000 FCFA</p>
+                            <p className="font-headline text-2xl font-bold text-foreground my-2">Entre 7000 et 20 000 FCFA</p>
                             <p className="text-sm text-muted-foreground">/ heure</p>
                         </CardContent>
                     </Card>
