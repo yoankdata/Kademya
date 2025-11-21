@@ -44,9 +44,9 @@
     },
     {
       "id": "about-us",
-      "description": "Groupe diversifié d'étudiants africains apprenant ensemble avec enthousiasme dans une salle de classe.",
-      "imageUrl": "https://images.unsplash.com/photo-1611117775531-e642436b8a8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwc3R1ZGVudHMlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjQzMjEzMDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "african students learning"
+      "description": "Illustration moderne et épurée sur le thème de l'éducation en Afrique.",
+      "imageUrl": "https://images.unsplash.com/photo-1760475267474-108e1a73dff3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxlZHVjYXRpb24lMjBpbGx1c3RyYXRpb258ZW58MHx8fHwxNzYzNjkxMjYyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "education illustration"
     },
     {
       "id": "become-teacher",
