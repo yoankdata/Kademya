@@ -23,16 +23,16 @@ export function Footer() {
               <div>
                 <h3 className="font-headline text-lg font-semibold text-accent">Liens Rapides</h3>
                 <ul className="mt-4 space-y-2">
-                  <li><Link href="/teachers" className="hover:underline text-sm">Trouver un prof</Link></li>
-                  <li><Link href="/become-a-teacher" className="hover:underline text-sm">Devenir prof</Link></li>
-                  <li><Link href="/become-a-teacher#faq" className="hover:underline text-sm">FAQ</Link></li>
+                  <li><Link href="/teachers" className="hover:underline text-sm text-primary-foreground/90">Trouver un prof</Link></li>
+                  <li><Link href="/become-a-teacher" className="hover:underline text-sm text-primary-foreground/90">Devenir prof</Link></li>
+                  <li><Link href="/become-a-teacher#faq" className="hover:underline text-sm text-primary-foreground/90">FAQ</Link></li>
                 </ul>
               </div>
               <div>
                 <h3 className="font-headline text-lg font-semibold text-accent">Edalia</h3>
                 <ul className="mt-4 space-y-2">
-                  <li><Link href="/about" className="hover:underline text-sm">À propos</Link></li>
-                  <li><Link href="/about#contact" className="hover:underline text-sm">Contact</Link></li>
+                  <li><Link href="/about" className="hover:underline text-sm text-primary-foreground/90">À propos</Link></li>
+                  <li><Link href="/about#contact" className="hover:underline text-sm text-primary-foreground/90">Contact</Link></li>
                 </ul>
               </div>
               <div>

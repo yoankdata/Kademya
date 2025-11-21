@@ -2,55 +2,55 @@
   "placeholderImages": [
     {
       "id": "hero-image",
-      "description": "Un professeur africain souriant aidant une élève dans une salle de classe lumineuse.",
-      "imageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwdGVhY2hlciUyMHN0dWRlbnR8ZW58MHx8fHwxNzYzNzM4NjMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Un professeur africain souriant aidant une élève dans une salle de classe lumineuse et moderne.",
+      "imageUrl": "https://images.unsplash.com/photo-1542744094-3a31f272c4b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhZnJpY2FuJTIwdGVhY2hlciUyMHN0dWRlbnR8ZW58MHx8fHwxNzYzNzM4NjMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "african teacher student"
     },
     {
       "id": "teacher-1",
-      "description": "Portrait d'une enseignante africaine sympathique dans une salle de classe.",
-      "imageUrl": "https://images.unsplash.com/photo-1610414859534-173d19359a25?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxhZnJpY2FuJTIwZmVtYWxlJTIwdGVhY2hlciUyMHBvcnRyYWl0fGVufDB8fHx8MTc2NDMyMTAzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Portrait d'une jeune enseignante africaine sympathique dans une salle de classe, regardant la caméra.",
+      "imageUrl": "https://images.unsplash.com/photo-1593182440958-534ac967e17c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhZnJpY2FuJTIwZmVtYWxlJTIwdGVhY2hlciUyMHBvcnRyYWl0fGVufDB8fHx8MTc2NDMyMTAzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "african female teacher"
     },
     {
       "id": "teacher-2",
-      "description": "Portrait d'un enseignant africain souriant devant un tableau.",
-      "imageUrl": "https://images.unsplash.com/photo-1606587971430-53416c3b5368?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwbWFsZSUyMHRlYWNoZXIlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjQzMjEwODJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Portrait d'un enseignant africain souriant devant un tableau, crédible et professionnel.",
+      "imageUrl": "https://images.unsplash.com/photo-1634351624396-487732385153?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhZnJpY2FuJTIwbWFsZSUyMHRlYWNoZXIlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjQzMjEwODJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "african male teacher"
     },
     {
       "id": "teacher-3",
-      "description": "Portrait d'un enseignant africain dans une bibliothèque.",
-      "imageUrl": "https://images.unsplash.com/photo-1711624424369-23a5c13eaa7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhZnJpY2FuJTIwdGVhY2hlciUyMGxpYnJhcnl8ZW58MHx8fHwxNzY0MzIxMTE5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Portrait d'un enseignant africain dans une bibliothèque, l'air studieux et accessible.",
+      "imageUrl": "https://images.unsplash.com/photo-1610414859534-173d19359a25?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwdGVhY2hlciUyMGxpYnJhcnl8ZW58MHx8fHwxNzY0MzIxMTE5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "african teacher library"
     },
     {
       "id": "teacher-4",
-      "description": "Portrait d'une enseignante de sciences africaine en blouse de laboratoire.",
+      "description": "Portrait d'une jeune enseignante de sciences africaine en blouse de laboratoire, souriante.",
       "imageUrl": "https://images.unsplash.com/photo-1581093582303-91103f6db3a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwc2NpZW5jZSUyMHRlYWNoZXJ8ZW58MHx8fHwxNzY0MzIxMTYxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "african science teacher"
     },
     {
       "id": "teacher-5",
-      "description": "Portrait d'un professeur de musique africain avec une guitare.",
+      "description": "Portrait d'un professeur de musique africain tenant une guitare, ambiance chaleureuse.",
       "imageUrl": "https://images.unsplash.com/photo-1593697821252-0c9137d9fc45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwbXVzaWMlMjB0ZWFjaGVyfGVufDB8fHx8MTc2NDMyMTIwM3ww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "african music teacher"
     },
     {
       "id": "teacher-6",
-      "description": "Portrait d'une professeure d'art africaine dans son atelier.",
+      "description": "Portrait d'une professeure d'art africaine dans son atelier, l'air créatif.",
       "imageUrl": "https://images.unsplash.com/photo-1620910418312-3c7674a2f8d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwYXJ0JTIwdGVhY2hlcnxlbnwwfHx8fDE3NjQzMjEyNDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "african art teacher"
     },
     {
       "id": "about-us",
-      "description": "Groupe diversifié d'étudiants africains apprenant ensemble avec enthousiasme.",
+      "description": "Groupe diversifié d'étudiants africains apprenant ensemble avec enthousiasme dans une salle de classe.",
       "imageUrl": "https://images.unsplash.com/photo-1611117775531-e642436b8a8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwc3R1ZGVudHMlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjQzMjEzMDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "african students learning"
     },
     {
       "id": "become-teacher",
-      "description": "Un professeur africain encadrant un jeune étudiant dans un cadre positif.",
+      "description": "Un professeur africain encadrant un jeune étudiant dans un cadre positif et lumineux.",
       "imageUrl": "https://images.unsplash.com/photo-1618641986557-1ecd230959aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwdGVhY2hlciUyMG1lbnRvcmluZ3xlbnwwfHx8fDE3NjQzMjEzNDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "african teacher mentoring"
     }

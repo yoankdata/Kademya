@@ -33,7 +33,7 @@ export default function BecomeATeacherPage() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="font-headline text-3xl font-bold text-primary mb-6">Pourquoi enseigner avec Edalia ?</h2>
-            <p className="text-lg text-foreground/80 mb-8">On a créé la plateforme la plus simple pour les profs particuliers à Abidjan.</p>
+            <p className="text-lg text-muted-foreground mb-8">On a créé la plateforme la plus simple pour les profs particuliers à Abidjan.</p>
             <ul className="space-y-6">
               <li className="flex items-start gap-4">
                 <Users className="w-8 h-8 text-accent mt-1 flex-shrink-0" />
@@ -62,12 +62,12 @@ export default function BecomeATeacherPage() {
           <div className="bg-card p-8 rounded-lg shadow-lg border text-center">
             <h2 className="font-headline text-2xl font-bold text-primary mb-2">Prêt à commencer ?</h2>
             <p className="text-muted-foreground mb-4">C'est simple et rapide.</p>
-            <div className="my-6 py-4 px-6 bg-primary/5 rounded-lg">
+            <div className="my-6 py-4 px-6 rounded-lg" style={{ backgroundColor: '#E9F0EB' }}>
                 <p className="text-lg font-semibold text-primary">Abonnement Mensuel</p>
                 <p className="font-headline text-4xl font-bold text-primary my-2">5 000 FCFA</p>
                 <p className="text-sm text-muted-foreground">Aucun engagement, aucune commission.</p>
             </div>
-            <Button size="lg" type="submit" className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button size="lg" type="submit" className="w-full">
               Créer mon profil enseignant
             </Button>
             <p className="text-xs text-muted-foreground mt-3">Le processus d'inscription et de vérification prend moins de 24h.</p>

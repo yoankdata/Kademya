@@ -47,7 +47,7 @@ export default function TeacherProfilePage({ params }: { params: { id: string } 
                     />
                   )}
                    <div className="absolute top-2 right-2">
-                        <Badge className="bg-primary/80 backdrop-blur-sm text-primary-foreground">
+                        <Badge className="bg-accent/80 backdrop-blur-sm text-accent-foreground border-accent">
                             <Verified className="w-4 h-4 mr-1.5" />
                             Vérifié
                         </Badge>
@@ -70,7 +70,7 @@ export default function TeacherProfilePage({ params }: { params: { id: string } 
                     <p className="text-muted-foreground">Tarif</p>
                     <p><span className="font-bold text-2xl text-primary">{teacher.rate.toLocaleString('fr-CI')} FCFA</span> / heure</p>
                 </div>
-                 <Button size="lg" className="w-full bg-green-600 hover:bg-green-700 text-white" asChild>
+                 <Button size="lg" className="w-full" asChild>
                   <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
                     <Phone className="mr-2 h-5 w-5" /> Contacter sur WhatsApp
                   </a>
@@ -84,7 +84,7 @@ export default function TeacherProfilePage({ params }: { params: { id: string } 
           <main className="md:col-span-2 space-y-10">
             <section>
               <h2 className="font-headline text-2xl font-bold text-primary mb-4">À propos de moi</h2>
-              <p className="text-lg text-foreground/80 leading-relaxed">{teacher.bio}</p>
+              <p className="text-lg text-muted-foreground leading-relaxed">{teacher.bio}</p>
             </section>
             
             <section>

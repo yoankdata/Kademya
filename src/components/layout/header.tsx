@@ -36,7 +36,7 @@ export function Header() {
                 href={link.href}
                 className={cn(
                   'font-medium transition-colors hover:text-primary',
-                  isActive ? 'text-primary' : 'text-foreground/70'
+                  isActive ? 'text-primary' : 'text-muted-foreground'
                 )}
               >
                 {link.label}
@@ -70,7 +70,7 @@ export function Header() {
                         onClick={() => setIsSheetOpen(false)}
                         className={cn(
                           'flex items-center gap-4 px-2.5 transition-colors hover:text-primary',
-                          pathname.startsWith(link.href) ? 'text-primary' : 'text-foreground/70'
+                          pathname.startsWith(link.href) ? 'text-primary' : 'text-muted-foreground'
                         )}
                       >
                         {link.label}
@@ -78,7 +78,7 @@ export function Header() {
                     ))}
                   </nav>
                    <div className="mt-auto">
-                     <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+                     <Button className="w-full" asChild>
                         <Link href="/teachers" onClick={() => setIsSheetOpen(false)}>Voir les profs</Link>
                      </Button>
                    </div>

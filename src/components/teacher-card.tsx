@@ -16,7 +16,7 @@ export function TeacherCard({ teacher }: TeacherCardProps) {
   const whatsappLink = `https://wa.me/${teacher.whatsappNumber}`;
 
   return (
-    <Card className="w-full overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl group">
+    <Card className="w-full overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl group" style={{ backgroundColor: '#E9F0EB' }}>
       <CardHeader className="p-0">
         <Link href={`/teachers/${teacher.id}`} className="block relative h-56 w-full">
             {image && (
@@ -30,7 +30,7 @@ export function TeacherCard({ teacher }: TeacherCardProps) {
                 />
             )}
             <div className="absolute top-2 right-2">
-                <Badge className="bg-primary/80 backdrop-blur-sm text-primary-foreground">
+                <Badge className="bg-accent/80 backdrop-blur-sm text-accent-foreground border-accent">
                     <Verified className="w-4 h-4 mr-1.5" />
                     Vérifié
                 </Badge>
@@ -61,7 +61,7 @@ export function TeacherCard({ teacher }: TeacherCardProps) {
             <span className="font-bold text-lg text-primary">{teacher.rate.toLocaleString('fr-CI')} F</span>
             <span className="text-sm text-muted-foreground">/h</span>
         </div>
-        <Button asChild className="bg-green-600 hover:bg-green-700 text-white">
+        <Button asChild>
           <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
             <Phone className="mr-2 h-4 w-4" /> WhatsApp
           </a>
