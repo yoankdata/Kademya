@@ -3,6 +3,20 @@ import './globals.css';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
+import { Poppins, Nunito } from 'next/font/google';
+import { cn } from '@/lib/utils';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['600'],
+  variable: '--font-poppins',
+});
+
+const nunito = Nunito({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-nunito',
+});
 
 export const metadata: Metadata = {
   title: 'Edalia - Trouvez un professeur fiable à Abidjan',
@@ -16,13 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="scroll-smooth">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
-      </head>
-      <body className="font-body antialiased">
+      <body className={cn("font-body antialiased", poppins.variable, nunito.variable)}>
         <div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-grow">{children}</main>
