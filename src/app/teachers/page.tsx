@@ -1,6 +1,6 @@
 // src/app/teachers/page.tsx
 import { supabase } from '@/lib/supabase';
-import { TeacherCard } from '@/components/teacher-card';
+import { TeachersListClient } from './TeachersListClient';
 
 type ProfesseurRow = {
   id: string;
@@ -14,13 +14,18 @@ type ProfesseurRow = {
   numero_whatsapp: string;
   verifie: boolean;
   cree_le: string;
+  abonnement_actif: boolean;
+  abonnement_expire_le: string | null;
+  avis_moyenne: number | null;
+  avis_nombre: number | null;
 };
 
 export default async function TeachersPage() {
-  // Lecture de la table Supabase
   const { data, error } = await supabase
     .from('professeurs')
     .select('*')
+    .eq('verifie', true)
+    .eq('abonnement_actif', true)
     .order('cree_le', { ascending: false });
 
   if (error) {
@@ -39,40 +44,24 @@ export default async function TeachersPage() {
 
   const rows = (data ?? []) as ProfesseurRow[];
 
-  // Transformer les lignes Supabase → format TeacherCard
   const teachersForCard = rows.map((p) => ({
     id: p.id,
     name: p.nom_complet,
     location: p.commune,
+    subject: p.matiere,
+    level: p.niveau,
     subjects: [p.matiere, p.niveau],
     rate: p.tarif_horaire,
     whatsappNumber: p.numero_whatsapp,
-    rating: 5.0,
+    rating: p.avis_moyenne ?? null,
+    reviews: p.avis_nombre ?? 0,
     photoUrl: p.photo_url,
     verified: p.verifie,
   }));
 
   return (
     <div className="container py-16">
-      <h1 className="text-3xl md:text-4xl font-headline font-semibold mb-6">
-        Nos professeurs à Abidjan
-      </h1>
-
-      <p className="text-muted-foreground mb-10 max-w-2xl">
-        Découvrez des enseignants vérifiés, disponibles pour accompagner vos enfants à domicile ou en ligne.
-      </p>
-
-      {teachersForCard.length === 0 ? (
-        <p className="text-muted-foreground">
-          Aucun professeur n&apos;est encore inscrit.
-        </p>
-      ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teachersForCard.map((t) => (
-            <TeacherCard key={t.id} teacher={t} />
-          ))}
-        </div>
-      )}
+      <TeachersListClient initialTeachers={teachersForCard} />
     </div>
   );
 }
