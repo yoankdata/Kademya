@@ -24,7 +24,7 @@ export default async function FeaturedTeachersSection() {
     .select('*')
     .eq('verifie', true)
     .eq('abonnement_actif', true)
-    .gt('avis_nombre', 0) // au moins 1 avis
+    .gt('avis_nombre', 0)
     .order('avis_moyenne', { ascending: false })
     .order('avis_nombre', { ascending: false })
     .limit(3);
@@ -40,16 +40,13 @@ export default async function FeaturedTeachersSection() {
     return (
       <section className="py-20 md:py-28 bg-background">
         <div className="container text-center space-y-6">
-          <h2 className="text-3xl md:text-4xl font-headline font-semibold">
+          <h2 className="text-3xl md:4xl font-headline font-semibold">
             Nos professeurs à la une
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Les premiers enseignants vérifiés et notés apparaîtront ici.
           </p>
-          <Link
-            href="/become-a-teacher"
-            className="inline-block px-4 py-2 border rounded-lg"
-          >
+          <Link href="/become-a-teacher" className="inline-block px-4 py-2 border rounded-lg">
             Devenir professeur
           </Link>
         </div>
@@ -57,16 +54,18 @@ export default async function FeaturedTeachersSection() {
     );
   }
 
+  // CORRECTION : Mapper comme TeacherForClient
   const teachersForCard = teachers.map((p) => ({
     id: p.id,
-    name: p.nom_complet,
-    location: p.commune,
-    subjects: [p.matiere, p.niveau],
-    rate: p.tarif_horaire,
-    photoUrl: p.photo_url,
-    whatsappNumber: p.numero_whatsapp,
-    verified: p.verifie,
-    rating: p.avis_moyenne ?? 5.0, // cohérent avec TeacherCard
+    nom_complet: p.nom_complet,
+    matiere: p.matiere,
+    niveau: p.niveau,
+    tarif_horaire: p.tarif_horaire,
+    commune: p.commune,
+    biographie: null,
+    photo_url: p.photo_url,
+    avis_moyenne: p.avis_moyenne,
+    avis_nombre: p.avis_nombre,
   }));
 
   return (

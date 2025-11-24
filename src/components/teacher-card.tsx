@@ -1,135 +1,112 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { Star, MapPin, Verified, Phone } from 'lucide-react';
-import { findImage } from '@/lib/placeholder-data';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+'use client';
 
-type BaseTeacher = {
+import { MapPin, DollarSign, BookOpen, Star } from 'lucide-react';
+
+export type TeacherForClient = {
   id: string;
-  name: string;
-  location: string;
-  subjects: string[];           // ex: ["Mathématiques", "Lycée"]
-  rate: number;                 // tarif horaire
-  whatsappNumber: string;       // numéro sans +
-  rating?: number;              // optionnel, défaut 5.0
-  avatarImageId?: string;       // pour les données placeholder
-  photoUrl?: string | null;     // pour Supabase
-  verified?: boolean;           // verifie = true/false en base
+  nom_complet: string;
+  matiere: string;
+  niveau: string;
+  tarif_horaire: number;
+  commune: string;
+  biographie: string | null;
+  photo_url: string | null;
+  avis_moyenne: number | null;
+  avis_nombre: number;
 };
 
-interface TeacherCardProps {
-  teacher: BaseTeacher;
-}
+type TeacherCardProps = {
+  teacher: TeacherForClient;
+};
 
 export function TeacherCard({ teacher }: TeacherCardProps) {
-  const placeholderPhoto = '/images/teachers/placeholder-teacher.jpg';
+  // Ton vrai placeholder local
+  const placeholder = '/images/teachers/placeholder-teacher.jpg';
 
-  // On commence par un fallback neutre
-  let imageUrl = placeholderPhoto;
-  let imageHint = 'portrait enseignant Edalia';
+  // Si Supabase a une photo → afficher
+  // Sinon → placeholder
+  const photoUrl = teacher.photo_url || placeholder;
 
-  // 1) Si avatarImageId existe (données placeholder), on l’utilise
-  if (teacher.avatarImageId) {
-    const img = findImage(teacher.avatarImageId);
-    if (img) {
-      imageUrl = img.imageUrl;
-      imageHint = img.imageHint;
-    }
-  }
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>,
+  ) => {
+    const target = e.target as HTMLImageElement;
+    target.onerror = null;
+    target.src = placeholder;
+  };
 
-  // 2) Si une vraie photo (Supabase) est fournie, elle prend le dessus
-  if (teacher.photoUrl && teacher.photoUrl.trim() !== '') {
-    imageUrl = teacher.photoUrl;
-    imageHint = 'portrait enseignant réel';
-  }
-
-  const rating = teacher.rating ?? 5.0;
-  const whatsappLink = `https://wa.me/${teacher.whatsappNumber}`;
-
-  const mainSubjects = teacher.subjects.slice(0, 2);
-  const extraCount =
-    teacher.subjects.length > 2 ? teacher.subjects.length - 2 : 0;
+  const displayRating = teacher.avis_moyenne
+    ? teacher.avis_moyenne.toFixed(1)
+    : 'N/A';
 
   return (
-    <Card className="w-full overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl group bg-secondary border-none shadow-md">
-      <CardHeader className="p-0">
-        <Link href={`/teachers/${teacher.id}`} className="block relative h-64 w-full">
-          <Image
-            src={imageUrl}
-            alt={`Portrait de ${teacher.name}`}
-            fill
-            style={{ objectFit: 'cover' }}
-            className="transition-transform duration-300 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            data-ai-hint={imageHint}
-          />
-          <div className="absolute top-3 right-3">
-            {teacher.verified && (
-              <Badge className="bg-accent text-accent-foreground border-accent shadow">
-                <Verified className="w-4 h-4 mr-1.5" />
-                Vérifié
-              </Badge>
-            )}
-          </div>
-        </Link>
-      </CardHeader>
+    <div className="bg-card border border-border rounded-xl shadow-sm hover:shadow-md transition duration-300 overflow-hidden">
+      {/* IMAGE */}
+      <div className="w-full h-40 bg-muted relative overflow-hidden">
+        <img
+          src={photoUrl}
+          alt={`Photo de ${teacher.nom_complet}`}
+          className="w-full h-full object-cover"
+          onError={handleImageError}
+        />
+      </div>
 
-      <CardContent className="p-4 space-y-2">
-        <div className="flex items-start justify-between gap-4">
-          <h3 className="font-headline text-xl font-semibold text-foreground">
-            {teacher.name}
-          </h3>
-          <div className="flex items-center gap-1.5 text-accent flex-shrink-0 pt-1">
-            <Star className="w-5 h-5 fill-current" />
-            <span className="font-bold text-foreground">
-              {rating.toFixed(1)}
+      <div className="px-6 pt-4 pb-6">
+        {/* HEADER */}
+        <div className="flex items-start justify-between mb-2">
+          <div>
+            <h2 className="text-base md:text-lg font-semibold text-foreground">
+              {teacher.nom_complet}
+            </h2>
+
+            <p className="text-xs md:text-sm text-muted-foreground flex items-center mt-1">
+              <BookOpen className="w-4 h-4 mr-1" />
+              {teacher.matiere} ({teacher.niveau})
+            </p>
+          </div>
+
+          <div className="flex items-center text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full border border-primary/30">
+            <Star className="w-4 h-4 mr-1 fill-primary text-primary" />
+            {displayRating}
+          </div>
+        </div>
+
+        {/* BIO */}
+        <p className="text-xs md:text-sm text-muted-foreground mb-3 line-clamp-3 min-h-[3rem]">
+          {teacher.biographie ||
+            "Le professeur n'a pas encore rédigé sa biographie."}
+        </p>
+
+        {/* INFOS */}
+        <div className="space-y-2 mb-4 border-t border-border pt-3">
+          <p className="flex items-center text-xs md:text-sm text-muted-foreground">
+            <MapPin className="w-4 h-4 mr-2" />
+            Secteur :
+            <span className="font-medium text-foreground ml-1">
+              {teacher.commune}
             </span>
-          </div>
+          </p>
+
+          <p className="flex items-center text-xs md:text-sm text-muted-foreground">
+            <DollarSign className="w-4 h-4 mr-2" />
+            Tarif :
+            <span className="font-semibold text-primary ml-1">
+              {teacher.tarif_horaire.toLocaleString()} FCFA/h
+            </span>
+            <span className="ml-4 text-[11px] text-muted-foreground">
+              ({teacher.avis_nombre} avis)
+            </span>
+          </p>
         </div>
 
-        <div className="flex items-center gap-2.5 text-sm text-muted-foreground">
-          <MapPin className="w-5 h-5" />
-          <span>{teacher.location}</span>
-        </div>
-
-        {mainSubjects.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-2">
-            {mainSubjects.map((subject) => (
-              <Badge
-                key={subject}
-                variant="outline"
-                className="border-primary/20 text-primary"
-              >
-                {subject}
-              </Badge>
-            ))}
-            {extraCount > 0 && (
-              <Badge
-                variant="outline"
-                className="border-primary/20 text-primary"
-              >
-                +{extraCount}
-              </Badge>
-            )}
-          </div>
-        )}
-      </CardContent>
-
-      <CardFooter className="p-4 flex justify-between items-center bg-secondary">
-        <div>
-          <span className="font-bold text-lg text-foreground">
-            {teacher.rate.toLocaleString('fr-FR')} F
-          </span>
-          <span className="text-sm text-muted-foreground">/h</span>
-        </div>
-        <Button asChild size="sm">
-          <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-            <Phone className="mr-2 h-4 w-4" /> WhatsApp
-          </a>
-        </Button>
-      </CardFooter>
-    </Card>
+        {/* BOUTON */}
+        <a
+          href={`/teachers/${teacher.id}`}
+          className="block w-full text-center py-2 px-4 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition"
+        >
+          Voir le profil
+        </a>
+      </div>
+    </div>
   );
 }

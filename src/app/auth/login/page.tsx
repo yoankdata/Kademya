@@ -1,25 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
   const supabase = useSupabaseClient();
-  const user = useUser();
   const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-
-  if (user) {
-    // déjà connecté → rediriger vers le dashboard
-    router.push('/teachers/dashboard');
-  }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +25,7 @@ export default function LoginPage() {
     });
 
     if (error) {
-      setErrorMsg('Identifiants incorrects ou compte non encore activé.');
+      setErrorMsg('Identifiants incorrects.');
       setLoading(false);
       return;
     }
@@ -43,9 +36,7 @@ export default function LoginPage() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-background px-4">
       <div className="bg-white shadow-xl rounded-lg p-6 w-full max-w-md border">
-        <h1 className="text-2xl font-bold text-center mb-6">
-          Connexion Professeur
-        </h1>
+        <h1 className="text-2xl font-bold text-center mb-6">Connexion Professeur</h1>
 
         {errorMsg && (
           <p className="text-red-600 text-sm mb-4 text-center">{errorMsg}</p>
@@ -60,14 +51,12 @@ export default function LoginPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="vous@example.com"
+              placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Mot de passe
-            </label>
+            <label className="block text-sm font-medium mb-1">Mot de passe</label>
             <input
               type="password"
               className="w-full border rounded-lg p-2"
@@ -81,7 +70,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary text-primary-foreground py-2 rounded-lg font-semibold hover:bg-primary/90 flex justify-center"
+            className="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-primary/90 flex justify-center"
           >
             {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Se connecter'}
           </button>

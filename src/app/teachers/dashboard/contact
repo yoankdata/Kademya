@@ -1,0 +1,149 @@
+// app/teacher/dashboard/page.tsx
+
+'use client'; // Nécessaire pour les hooks Supabase et React
+
+import React, { useState, useEffect } from 'react';
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { Loader2 } from 'lucide-react';
+import DashboardLayout from '@/components/DashboardLayout'; // Assurez-vous du bon chemin
+import { useRouter } from 'next/navigation';
+
+// --- Type de Données (A adapter à votre schéma Supabase) ---
+interface TeacherData {
+  name: string;
+  is_verified: boolean; // Statut de vérification
+  subscription_status: 'active' | 'expired' | 'pending';
+  subscription_expiry: string; // Format 'YYYY-MM-DD'
+  profile_views: number;
+  whatsapp_clicks: number;
+  average_rating: number; 
+}
+
+// --- Composant de Carte Statistique ---
+const StatCard: React.FC<{ title: string; value: string | number; colorClass?: string }> = ({ title, value, colorClass = 'bg-gray-600' }) => (
+  <div className={`p-5 rounded-lg shadow-md ${colorClass} text-white`}>
+    <p className="text-sm font-medium opacity-80">{title}</p>
+    <p className="text-3xl font-bold mt-1">{value}</p>
+  </div>
+);
+
+// --- Page du Tableau de Bord ---
+export default function TeacherDashboardPage() {
+  const router = useRouter();
+  const user = useUser(); // Hook pour l'utilisateur Supabase
+  const supabase = useSupabaseClient(); // Hook pour le client Supabase
+
+  const [teacherData, setTeacherData] = useState<TeacherData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // 1. Redirection si non connecté
+  useEffect(() => {
+    if (!user && !loading) {
+      // Rediriger vers la page de connexion si l'utilisateur n'est pas là
+      router.push('/teacher/login'); 
+    }
+  }, [user, loading, router]);
+
+
+  // 2. Récupération des données du professeur
+  useEffect(() => {
+    if (!user) return;
+
+    async function fetchTeacherData() {
+      setLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from('teachers') // Assurez-vous que c'est le nom de votre table
+          .select('name, is_verified, subscription_status, subscription_expiry, profile_views, whatsapp_clicks, average_rating')
+          .eq('user_id', user.id) // IMPORTANT: Assurez-vous que la colonne 'user_id' stocke l'ID Supabase
+          .single();
+
+        if (error) throw error;
+        
+        setTeacherData(data as TeacherData);
+
+      } catch (error) {
+        console.error("Erreur de récupération des données prof:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchTeacherData();
+  }, [user, supabase]);
+
+  // --- Affichages de statut ---
+  if (loading || !user) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loader2 className="w-8 h-8 animate-spin text-blue-600 mr-2" />
+        Chargement de l'Espace Professeur...
+      </div>
+    );
+  }
+
+  const { name, is_verified, subscription_status, subscription_expiry, profile_views, whatsapp_clicks, average_rating } = teacherData || {} as TeacherData;
+
+  const subscriptionText = subscription_status === 'active' 
+    ? `ACTIF (Expire le ${new Date(subscription_expiry).toLocaleDateString()})` 
+    : (subscription_status === 'expired' ? 'EXPIRÉ - Profil masqué' : 'EN ATTENTE de validation');
+  
+  const subscriptionColor = subscription_status === 'active' ? 'bg-green-600' : 'bg-red-600';
+
+
+  return (
+    <DashboardLayout activePath="/teacher/dashboard">
+      <h1 className="text-3xl font-bold text-gray-800 mb-8">
+        Bienvenue, {name || 'Cher Professeur'} !
+      </h1>
+
+      {/* Bloc d'Alertes et Statut */}
+      <div className="mb-8 p-6 bg-white rounded-lg shadow-xl border-t-4 border-blue-600">
+        <h2 className="text-xl font-semibold text-gray-700 mb-5">Statut de votre compte Edalia</h2>
+        
+        <div className="flex flex-wrap gap-6">
+          <StatCard 
+            title="Statut de Vérification" 
+            value={is_verified ? 'VÉRIFIÉ ✅' : 'EN ATTENTE 🕒'} 
+            colorClass={is_verified ? 'bg-indigo-600' : 'bg-yellow-600'}
+          />
+          <StatCard 
+            title="Statut Abonnement" 
+            value={subscriptionText} 
+            colorClass={subscriptionColor}
+          />
+        </div>
+        
+        {subscription_status !== 'active' && (
+          <div className="mt-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-md">
+            Votre profil est **masqué** du catalogue. Veuillez <a href="/teacher/dashboard/subscription" className="font-bold underline hover:text-red-900">renouveler votre abonnement</a>.
+          </div>
+        )}
+      </div>
+
+      {/* Statistiques Rapides */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <StatCard title="Vues du Profil (30J)" value={profile_views || 0} colorClass="bg-gray-700" />
+        <StatCard title="Contacts WhatsApp (30J)" value={whatsapp_clicks || 0} colorClass="bg-emerald-600" />
+        <StatCard title="Note Moyenne" value={`${average_rating?.toFixed(1) || 'N/A'} / 5`} colorClass="bg-fuchsia-600" />
+      </div>
+      
+      {/* Zone d'Actions Rapides */}
+      <div className="p-6 bg-white rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">Prochaines Étapes</h2>
+          <div className="space-y-3">
+            <a href="/teacher/dashboard/profile" className="inline-block p-3 bg-blue-100 text-blue-800 rounded-md hover:bg-blue-200 transition-colors">
+              Mettre à jour ma bio et mes tarifs
+            </a>
+            {subscription_status !== 'active' && (
+              <a href="/teacher/dashboard/subscription" className="inline-block p-3 bg-red-100 text-red-800 rounded-md hover:bg-red-200 transition-colors ml-4">
+                Payer mon abonnement (Urgent)
+              </a>
+            )}
+            
+          </div>
+      </div>
+
+    </DashboardLayout>
+  );
+}
