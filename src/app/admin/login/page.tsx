@@ -16,9 +16,10 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
+  // Si déjà connecté → on envoie direct sur l'admin
   if (user) {
-    // déjà connecté → rediriger vers le dashboard
-    router.push('/teachers/dashboard');
+    router.push('/admin');
+    return null;
   }
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -37,7 +38,8 @@ export default function LoginPage() {
       return;
     }
 
-    router.push('/teachers/dashboard');
+    // Après connexion, on redirige vers la page admin
+    router.push('/admin');
   };
 
   return (
@@ -83,7 +85,11 @@ export default function LoginPage() {
             disabled={loading}
             className="w-full bg-primary text-primary-foreground py-2 rounded-lg font-semibold hover:bg-primary/90 flex justify-center"
           >
-            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Se connecter'}
+            {loading ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              'Se connecter'
+            )}
           </button>
         </form>
       </div>
