@@ -9,82 +9,92 @@
   :root {
     /* COULEURS DE BASE */
     --background: 0 0% 100%;           /* Blanc pur */
-    --foreground: 210 5% 18%;          /* Gris foncé #2D2D2D */
+    --foreground: 153 40% 15%;         /* Vert très sombre (presque noir) pour le texte - plus doux que le gris */
 
     --card: 0 0% 100%;
-    --card-foreground: 210 5% 18%;
+    --card-foreground: 153 40% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 5% 18%;
+    --popover-foreground: 153 40% 15%;
 
-    /* COULEURS PRINCIPALES */
-    --primary: 153 39% 21%;            /* Vert profond */
+    /* COULEURS PRINCIPALES - Premium Green */
+    --primary: 153 45% 25%;            /* Vert Kademya riche et profond */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 147 23% 88%;          /* Vert clair modernisé */
-    --secondary-foreground: 153 39% 21%;
+    --secondary: 150 30% 96%;          /* Vert très pâle, frais et propre */
+    --secondary-foreground: 153 45% 25%;
 
-    --muted: 0 0% 95%;
-    --muted-foreground: 0 0% 42%;      /* Gris neutre */
+    --muted: 150 10% 96%;
+    --muted-foreground: 153 10% 40%;   /* Gris-vert neutre pour le texte secondaire */
 
-    --accent: 39 59% 58%;              /* Ocre doré */
-    --accent-foreground: 210 5% 18%;
+    --accent: 35 90% 55%;              /* Or vibrant pour les CTA/Accents */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
     /* BORDURES & INPUTS */
-    --border: 153 10% 85%;
-    --input: 153 10% 92%;
-    --ring: 153 39% 21%;
+    --border: 153 15% 90%;
+    --input: 153 15% 94%;
+    --ring: 153 45% 25%;
 
     /* CHART COLORS */
-    --chart-1: 153 39% 21%;
-    --chart-2: 39 59% 58%;
+    --chart-1: 153 45% 25%;
+    --chart-2: 35 90% 55%;
     --chart-3: 153 20% 50%;
-    --chart-4: 39 59% 70%;
-    --chart-5: 153 39% 35%;
+    --chart-4: 35 90% 75%;
+    --chart-5: 153 45% 35%;
 
     /* RADIUS + SHADOW */
     --radius: 0.75rem;
-    --shadow-subtle: 0 4px 6px -1px rgba(0,0,0,0.05),
-                     0 2px 4px -2px rgba(0,0,0,0.03);
+    
+    /* Ombres modernes et douces */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    --shadow-subtle: var(--shadow); /* Alias pour compatibilité */
   }
 
   /* ================================================================
      MODE SOMBRE
      ================================================================ */
   .dark {
-    --background: 210 5% 10%;
-    --foreground: 220 10% 95%;
+    --background: 153 45% 5%;          /* Vert très très sombre */
+    --foreground: 150 10% 98%;
 
-    --card: 210 5% 12%;
-    --card-foreground: 220 10% 95%;
+    --card: 153 45% 7%;
+    --card-foreground: 150 10% 98%;
 
-    --popover: 210 5% 12%;
-    --popover-foreground: 220 10% 95%;
+    --popover: 153 45% 7%;
+    --popover-foreground: 150 10% 98%;
 
-    --primary: 153 40% 75%;
-    --primary-foreground: 153 40% 10%;
+    --primary: 153 45% 45%;            /* Vert plus lumineux pour le dark mode */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 147 23% 20%;
-    --secondary-foreground: 147 23% 90%;
+    --secondary: 153 30% 15%;
+    --secondary-foreground: 150 10% 98%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 153 30% 15%;
+    --muted-foreground: 153 10% 65%;
 
-    --accent: 39 70% 65%;
-    --accent-foreground: 39 59% 10%;
+    --accent: 35 90% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 20%;
-    --ring: 153 40% 75%;
+    --border: 153 20% 15%;
+    --input: 153 20% 15%;
+    --ring: 153 45% 45%;
 
-    --shadow-subtle: 0 4px 6px -1px rgba(0,0,0,0.20),
-                     0 2px 4px -2px rgba(0,0,0,0.15);
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+    
+    --shadow-subtle: var(--shadow);
   }
 }
 

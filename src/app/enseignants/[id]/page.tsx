@@ -68,7 +68,7 @@ const renderStars = (rating: number) => {
 };
 
 export default async function TeacherProfilePage({ params }: PageProps) {
-  const { id } = params;
+  const { id } = await params;
 
   // 1. Prof
   const { data, error } = await supabase

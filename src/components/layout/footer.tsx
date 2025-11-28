@@ -6,48 +6,25 @@ import { Logo } from '@/components/Logo';
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
-  // Nouvelle palette premium
-  const BG_DARK = '#0C0C0E';          // fond anthracite doux
-  const ACCENT = '#5BB98C';           // vert profond premium
-  const ACCENT_LIGHT = '#AEE7C8';     // vert clair secondaire
-  const TEXT_MAIN = '#F1F5F9';        // blanc cassé moderne
-  const TEXT_MUTED = 'rgba(241,245,249,0.7)';  // blanc atténué
-  const BORDER = 'rgba(255,255,255,0.12)';      // bordure douce
-
   return (
-    <footer
-      style={{ backgroundColor: BG_DARK, color: TEXT_MAIN }}
-      className="mt-24 shadow-2xl shadow-black/30"
-    >
-      <div className="container mx-auto px-4 py-10 md:px-6 md:py-14">
+    <footer className="mt-24 bg-card text-card-foreground border-t border-border shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.05)]">
+      <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
 
         {/* ================= TOP ================= */}
         <div className="grid gap-10 md:gap-12 lg:gap-16 md:grid-cols-[minmax(0,1.4fr)_minmax(0,2fr)] items-start">
 
           {/* Logo + Description */}
-          <div className="space-y-4">
-            <Logo variant="footer" />
+          <div className="space-y-6">
+            <Logo variant="default" />
 
-            <p
-              className="max-w-xs text-sm leading-relaxed"
-              style={{ color: TEXT_MUTED }}
-            >
+            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
               Kademya connecte les professeurs passionnés et les élèves motivés
               à Abidjan, du primaire au supérieur.
             </p>
 
-            <div
-              className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 mt-2"
-              style={{ border: `1px solid ${BORDER}` }}
-            >
-              <span
-                className="h-2 w-2 rounded-full"
-                style={{ backgroundColor: ACCENT }}
-              />
-              <span
-                className="text-xs font-medium"
-                style={{ color: TEXT_MUTED }}
-              >
+            <div className="inline-flex items-center gap-2 rounded-full bg-secondary/30 px-3 py-1.5 border border-secondary">
+              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-xs font-medium text-primary">
                 Plateforme 100% dédiée aux familles d’Abidjan
               </span>
             </div>
@@ -58,26 +35,23 @@ export function Footer() {
 
             {/* Colonne 1 */}
             <div>
-              <h3
-                className="font-headline text-lg font-semibold"
-                style={{ color: ACCENT }}
-              >
+              <h3 className="font-headline text-base font-semibold text-foreground mb-4">
                 Liens rapides
               </h3>
 
-              <ul className="mt-4 space-y-2 text-sm">
+              <ul className="space-y-3 text-sm">
                 <li>
-                  <Link href="/enseignants" style={{ color: TEXT_MUTED }} className="hover:text-white transition-colors">
+                  <Link href="/enseignants" className="text-muted-foreground hover:text-primary transition-colors">
                     Trouver un prof
                   </Link>
                 </li>
                 <li>
-                  <Link href="/devenir-enseignant" style={{ color: TEXT_MUTED }} className="hover:text-white transition-colors">
+                  <Link href="/devenir-enseignant" className="text-muted-foreground hover:text-primary transition-colors">
                     Devenir prof
                   </Link>
                 </li>
                 <li>
-                  <Link href="/faq" style={{ color: TEXT_MUTED }} className="hover:text-white transition-colors">
+                  <Link href="/faq" className="text-muted-foreground hover:text-primary transition-colors">
                     FAQ
                   </Link>
                 </li>
@@ -86,26 +60,23 @@ export function Footer() {
 
             {/* Colonne 2 */}
             <div>
-              <h3
-                className="font-headline text-lg font-semibold"
-                style={{ color: ACCENT }}
-              >
+              <h3 className="font-headline text-base font-semibold text-foreground mb-4">
                 Kademya
               </h3>
 
-              <ul className="mt-4 space-y-2 text-sm">
+              <ul className="space-y-3 text-sm">
                 <li>
-                  <Link href="/a-propos" style={{ color: TEXT_MUTED }} className="hover:text-white transition-colors">
+                  <Link href="/a-propos" className="text-muted-foreground hover:text-primary transition-colors">
                     À propos
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" style={{ color: TEXT_MUTED }} className="hover:text-white transition-colors">
+                  <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
                     Contact
                   </Link>
                 </li>
                 <li>
-                  <Link href="/abonnement" style={{ color: TEXT_MUTED }} className="hover:text-white transition-colors">
+                  <Link href="/abonnement" className="text-muted-foreground hover:text-primary transition-colors">
                     Abonnement
                   </Link>
                 </li>
@@ -116,40 +87,30 @@ export function Footer() {
             <div className="space-y-6">
 
               <div>
-                <h3
-                  className="font-headline text-lg font-semibold"
-                  style={{ color: ACCENT }}
-                >
+                <h3 className="font-headline text-base font-semibold text-foreground mb-4">
                   Besoin d&apos;aide ?
                 </h3>
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors shadow-md mt-4"
-                  style={{
-                    border: `1px solid ${BORDER}`,
-                    color: TEXT_MAIN,
-                  }}
+                  className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all shadow-sm bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-md hover:-translate-y-0.5"
                 >
-                  <Mail className="h-4 w-4" style={{ color: ACCENT }} />
-                  <span>Parler à l’équipe Kademya</span>
+                  <Mail className="h-4 w-4" />
+                  <span>Parler à l’équipe</span>
                 </Link>
               </div>
 
-              {/* Social : uniquement Facebook */}
+              {/* Social */}
               <div>
-                <h3
-                  className="font-headline text-lg font-semibold"
-                  style={{ color: ACCENT }}
-                >
+                <h3 className="font-headline text-base font-semibold text-foreground mb-4">
                   Suivez-nous
                 </h3>
 
-                <div className="mt-4 flex items-center gap-4" style={{ color: TEXT_MUTED }}>
+                <div className="flex items-center gap-4">
                   <Link
                     href="https://facebook.com"
                     aria-label="Facebook"
-                    className="hover:text-white transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors p-2 hover:bg-secondary/50 rounded-full"
                   >
                     <Facebook className="h-5 w-5" aria-hidden="true" />
                   </Link>
@@ -161,39 +122,29 @@ export function Footer() {
         </div>
 
         {/* ================= BOTTOM ================= */}
-        <div
-          className="mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm"
-          style={{
-            borderTop: `1px solid ${BORDER}`,
-            color: 'rgba(241,245,249,0.85)', // texte lisible & propre
-            letterSpacing: '0.3px',
-          }}
-        >
-          <p className="font-medium">
+        <div className="mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm border-t border-border">
+          <p className="text-muted-foreground font-medium">
             © {currentYear} Kademya Abidjan. Tous droits réservés.
           </p>
 
           <div className="flex items-center gap-6">
             <Link
               href="/mentions-legales"
-              className="hover:text-white transition-colors font-medium"
-              style={{ color: 'rgba(241,245,249,0.85)' }}
+              className="text-muted-foreground hover:text-primary transition-colors"
             >
               Mentions légales
             </Link>
 
             <Link
               href="/politique-confidentialite"
-              className="hover:text-white transition-colors font-medium"
-              style={{ color: 'rgba(241,245,249,0.85)' }}
+              className="text-muted-foreground hover:text-primary transition-colors"
             >
               Politique de confidentialité
             </Link>
 
             <Link
               href="/cgu"
-              className="hover:text-white transition-colors font-medium"
-              style={{ color: 'rgba(241,245,249,0.85)' }}
+              className="text-muted-foreground hover:text-primary transition-colors"
             >
               CGU
             </Link>

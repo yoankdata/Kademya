@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
 
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
+  },
+
   images: {
     remotePatterns: [
       // Placehold (déjà présent)

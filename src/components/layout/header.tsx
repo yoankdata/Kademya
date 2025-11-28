@@ -5,7 +5,7 @@ import { HeaderClient } from './header-client';
 
 export function Header() {
   return (
-    <header className="bg-white/95 backdrop-blur-sm sticky top-0 z-40 w-full border-b border-gray-200 shadow-sm">
+    <header className="bg-background/80 backdrop-blur-md sticky top-0 z-40 w-full border-b border-border shadow-subtle">
       <div className="container mx-auto flex h-24 items-center justify-between px-4 md:px-6">
 
         {/* LOGO */}

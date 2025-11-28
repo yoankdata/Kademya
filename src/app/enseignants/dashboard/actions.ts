@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 
 export async function updateTeacherProfile(formData: FormData) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const supabase = createServerActionClient({ cookies: () => cookieStore });
 
   const {

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 type LogoProps = {
-  variant?: 'header' | 'footer' | 'app';
+  variant?: 'header' | 'footer' | 'app' | 'default';
 };
 
 export function Logo({ variant = 'header' }: LogoProps) {

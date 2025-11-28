@@ -296,6 +296,8 @@ export default function Home() {
                 <p className="text-muted-foreground mb-6">Le paiement se fait de la main à la main ou par Mobile Money. Kademya ne touche rien sur vos cours.</p>
                 <div className="absolute bottom-0 right-0 opacity-10 transform translate-x-1/4 translate-y-1/4">
                   <Banknote className="w-48 h-48" />
+                  {/* Noise texture (simulated with CSS) */}
+                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
                 </div>
               </div>
 
@@ -309,14 +311,14 @@ export default function Home() {
               </div>
 
               {/* Card 4: Wide - Charte */}
-              <div className="md:col-span-2 bg-[#1A3626] text-white rounded-3xl p-8 shadow-lg relative overflow-hidden flex flex-col justify-center">
+              <div className="md:col-span-2 bg-primary text-primary-foreground rounded-3xl p-8 shadow-lg relative overflow-hidden flex flex-col justify-center group">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay" />
                 <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                   <div>
                     <h3 className="text-2xl font-bold mb-2 text-white">Charte de Qualité Kademya</h3>
-                    <p className="text-white/80 max-w-md">Un engagement mutuel pour l'excellence pédagogique et le respect des familles.</p>
+                    <p className="text-primary-foreground/80 max-w-md">Un engagement mutuel pour l'excellence pédagogique et le respect des familles.</p>
                   </div>
-                  <Button variant="outline" className="bg-transparent text-white border-white/30 hover:bg-white hover:text-[#1A3626] transition-colors whitespace-nowrap" asChild>
+                  <Button variant="outline" className="bg-transparent text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground hover:text-primary transition-colors whitespace-nowrap" asChild>
                     <Link href="/charte-qualite">Lire la charte</Link>
                   </Button>
                 </div>
