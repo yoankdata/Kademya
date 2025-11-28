@@ -9,7 +9,7 @@ export async function ajouterAvisAction(formData: FormData) {
   const id_professeur = formData.get('id_professeur')?.toString();
   const nom_parent = formData.get('nom_parent')?.toString();
   // --- NOUVEAU CHAMP : Contact pour la vérification ---
-  const parent_contact = formData.get('parent_contact')?.toString(); 
+  const parent_contact = formData.get('parent_contact')?.toString();
   const note = Number(formData.get('note'));
   const commentaire = formData.get('commentaire')?.toString() || null;
 
@@ -17,7 +17,7 @@ export async function ajouterAvisAction(formData: FormData) {
   if (!id_professeur || !nom_parent || !parent_contact || isNaN(note) || note < 1 || note > 5) {
     console.error('Champs manquants ou invalides pour ajouter un avis (Veuillez vérifier nom, contact et note).');
     // Dans un cas réel, vous pourriez utiliser une librairie comme react-toastify pour afficher un message d'erreur
-    return; 
+    return;
   }
 
   // 3. Insertion dans la BDD
@@ -35,11 +35,11 @@ export async function ajouterAvisAction(formData: FormData) {
     // Gérer l'erreur utilisateur ici
     return;
   }
-  
+
   // 4. Invalider le cache et Redirection
   // Cela garantit que la page de profil est fraîche, même si l'avis n'est pas encore visible.
-  revalidatePath(`/teachers/${id_professeur}`);
-  
+  revalidatePath(`/enseignants/${id_professeur}`);
+
   // Redirection (Optionnel: vous pouvez rediriger vers la même page avec un paramètre de succès)
-  redirect(`/teachers/${id_professeur}?review_submitted=true`);
+  redirect(`/enseignants/${id_professeur}?review_submitted=true`);
 }

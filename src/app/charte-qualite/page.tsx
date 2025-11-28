@@ -290,10 +290,10 @@ export default function Page() {
           </div>
           <div className="flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/become-a-teacher">Devenir professeur sur Kademya</Link>
+              <Link href="/devenir-enseignant">Devenir professeur sur Kademya</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href="/teachers">Voir les professeurs vérifiés</Link>
+              <Link href="/enseignants">Voir les professeurs vérifiés</Link>
             </Button>
           </div>
         </section>

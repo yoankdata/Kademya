@@ -10,20 +10,20 @@ export function Logo({ variant = 'header' }: LogoProps) {
   const config =
     variant === 'footer'
       ? {
-          src: '/images/kademya-logo-mono-white.png',
-          width: 260,
-          height: 90,
-          // >> GROS LOGO DANS LE FOOTER
-          className: 'h-16 md:h-20 w-auto',
-        }
+        src: '/images/kademya-icon-gold.png',
+        width: 260,
+        height: 90,
+        // >> GROS LOGO DANS LE FOOTER
+        className: 'h-16 md:h-20 w-auto',
+      }
       : variant === 'app'
-      ? {
+        ? {
           src: '/images/kademya-app-icon.png',
           width: 64,
           height: 64,
           className: 'h-12 w-12',
         }
-      : {
+        : {
           // HEADER = logo horizontal
           src: '/images/kademya-logo-horizontal.png',
           width: 260,

@@ -3,7 +3,10 @@
 
 import { useEffect, useState, useTransition, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabaseBrowser } from '@/lib/supabase-browser';
+import {
+  useSupabaseClient,
+  useUser,
+} from '@supabase/auth-helpers-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -42,30 +45,14 @@ type Professeur = {
   abonnement_expire_le: string | null;
 };
 
-// -------------------- HELPERS STORAGE --------------------
-
-// URL publique documents (CNI / diplôme)
-function getTeacherDocumentUrl(path: string | null): string | null {
-  if (!path) return null;
-  const { data } = supabaseBrowser.storage
-    .from('teacher-documents')
-    .getPublicUrl(path);
-  return data?.publicUrl ?? null;
-}
-
-// URL publique photo de profil (stockée dans teacher-photos)
-function getTeacherPhotoUrl(path: string | null): string | null {
-  if (!path) return null;
-  const { data } = supabaseBrowser.storage
-    .from('teacher-photos')
-    .getPublicUrl(path);
-  return data?.publicUrl ?? null;
-}
+// -------------------- COMPOSANT --------------------
 
 export default function AdminPage() {
   const router = useRouter();
+  const supabase = useSupabaseClient();
+  const user = useUser(); // même source de vérité que le login
 
-  const [loadingUser, setLoadingUser] = useState(true);
+  const [authChecked, setAuthChecked] = useState(false);
   const [loadingDemandes, setLoadingDemandes] = useState(false);
   const [loadingProfs, setLoadingProfs] = useState(false);
   const [demandes, setDemandes] = useState<DemandeProf[]>([]);
@@ -75,112 +62,133 @@ export default function AdminPage() {
   // -------------------- AUTH ADMIN --------------------
 
   useEffect(() => {
-    async function checkAuth() {
-      const { data, error } = await supabaseBrowser.auth.getUser();
-      if (error || !data.user) {
-        router.replace('/admin/login');
-        return;
-      }
-      setLoadingUser(false);
+    // Tant qu'on ne sait pas, on attend
+    if (user === undefined) return;
+
+    if (!user) {
+      router.replace('/admin/login');
+      return;
     }
-    checkAuth();
-  }, [router]);
+
+    setAuthChecked(true);
+  }, [user, router]);
+
+  // -------------------- HELPERS STORAGE --------------------
+
+  const getTeacherDocumentUrl = (path: string | null): string | null => {
+    if (!path) return null;
+    const { data } = supabase.storage
+      .from('teacher-documents')
+      .getPublicUrl(path);
+    return data?.publicUrl ?? null;
+  };
+
+  const getTeacherPhotoUrl = (path: string | null): string | null => {
+    if (!path) return null;
+    const { data } = supabase.storage
+      .from('teacher-photos')
+      .getPublicUrl(path);
+    return data?.publicUrl ?? null;
+  };
 
   // -------------------- CHARGEMENT DONNÉES --------------------
 
   useEffect(() => {
-    if (loadingUser) return;
+    if (!authChecked) return;
 
     async function fetchDemandes() {
       setLoadingDemandes(true);
-      const { data, error } = await supabaseBrowser
+      const { data, error } = await supabase
         .from('demandes_professeurs')
         .select('*')
         .order('cree_le', { ascending: false });
 
       if (!error && data) {
         setDemandes(data as DemandeProf[]);
+      } else if (error) {
+        console.error('Erreur chargement demandes:', error.message);
       }
       setLoadingDemandes(false);
     }
 
     async function fetchProfs() {
       setLoadingProfs(true);
-      const { data, error } = await supabaseBrowser
+      const { data, error } = await supabase
         .from('professeurs')
         .select('*')
         .order('cree_le', { ascending: false });
 
       if (!error && data) {
         setProfs(data as Professeur[]);
+      } else if (error) {
+        console.error('Erreur chargement professeurs:', error.message);
       }
       setLoadingProfs(false);
     }
 
     fetchDemandes();
     fetchProfs();
-  }, [loadingUser]);
+  }, [authChecked, supabase]);
 
   // -------------------- ACTIONS DEMANDES --------------------
 
-  // APPROUVER DEMANDE → créer prof + marquer demande approuvée
-  async function handleApprove(demande: DemandeProf) {
-    startTransition(async () => {
-      // Générer l'URL publique à partir du path stocké dans la demande
-      const photoUrl = getTeacherPhotoUrl(demande.photo_profil_path);
+  async function approveDemande(demande: DemandeProf) {
+    const photoUrl = getTeacherPhotoUrl(demande.photo_profil_path);
 
-      const { error: insertError } = await supabaseBrowser
-        .from('professeurs')
-        .insert([
-          {
-            nom_complet: demande.nom_complet,
-            matiere: demande.matiere,
-            niveau: demande.niveau,
-            commune: demande.commune,
-            tarif_horaire: demande.tarif_horaire,
-            biographie: demande.biographie,
-            photo_url: photoUrl, // <-- utilisé ensuite par les pages publiques
-            numero_whatsapp: demande.numero_whatsapp,
-            verifie: false,
-            abonnement_actif: false,
-            abonnement_expire_le: null,
-          },
-        ]);
+    const { error: insertError } = await supabase
+      .from('professeurs')
+      .insert([
+        {
+          nom_complet: demande.nom_complet,
+          matiere: demande.matiere,
+          niveau: demande.niveau,
+          commune: demande.commune,
+          tarif_horaire: demande.tarif_horaire,
+          biographie: demande.biographie,
+          photo_url: photoUrl,
+          numero_whatsapp: demande.numero_whatsapp,
+          verifie: false,
+          abonnement_actif: false,
+          abonnement_expire_le: null,
+        },
+      ]);
 
-      if (insertError) {
-        console.error('Erreur insertion professeur:', insertError.message);
-        return;
-      }
+    if (insertError) {
+      console.error('Erreur insertion professeur:', insertError.message);
+      return;
+    }
 
-      // Marquer la demande comme approuvée
-      const { error: updateError } = await supabaseBrowser
-        .from('demandes_professeurs')
-        .update({ statut: 'approuve' })
-        .eq('id', demande.id);
+    const { error: updateError } = await supabase
+      .from('demandes_professeurs')
+      .update({ statut: 'approuve' })
+      .eq('id', demande.id);
 
-      if (!updateError) {
-        setDemandes(prev =>
-          prev.map(d =>
-            d.id === demande.id ? { ...d, statut: 'approuve' } : d,
-          ),
-        );
-      }
+    if (!updateError) {
+      setDemandes(prev =>
+        prev.map(d =>
+          d.id === demande.id ? { ...d, statut: 'approuve' } : d,
+        ),
+      );
+    }
 
-      // Recharger la liste des profs après insertion
-      const { data: profsData, error: profsError } = await supabaseBrowser
-        .from('professeurs')
-        .select('*')
-        .order('cree_le', { ascending: false });
+    const { data: profsData, error: profsError } = await supabase
+      .from('professeurs')
+      .select('*')
+      .order('cree_le', { ascending: false });
 
-      if (!profsError && profsData) {
-        setProfs(profsData as Professeur[]);
-      }
+    if (!profsError && profsData) {
+      setProfs(profsData as Professeur[]);
+    }
+  }
+
+  function handleApprove(demande: DemandeProf) {
+    startTransition(() => {
+      void approveDemande(demande);
     });
   }
 
-  // REFUSER DEMANDE
   async function handleReject(demande: DemandeProf) {
-    const { error } = await supabaseBrowser
+    const { error } = await supabase
       .from('demandes_professeurs')
       .update({ statut: 'refuse' })
       .eq('id', demande.id);
@@ -196,9 +204,8 @@ export default function AdminPage() {
 
   // -------------------- ACTIONS PROFS --------------------
 
-  // TOGGLE VERIFICATION
   async function handleToggleVerification(prof: Professeur) {
-    const { error } = await supabaseBrowser
+    const { error } = await supabase
       .from('professeurs')
       .update({ verifie: !prof.verifie })
       .eq('id', prof.id);
@@ -212,13 +219,12 @@ export default function AdminPage() {
     }
   }
 
-  // ACTIVER ABONNEMENT (30 jours)
   async function handleActivateSubscription(prof: Professeur) {
     const now = new Date();
     const expire = new Date();
     expire.setDate(now.getDate() + 30);
 
-    const { error } = await supabaseBrowser
+    const { error } = await supabase
       .from('professeurs')
       .update({
         abonnement_actif: true,
@@ -231,19 +237,18 @@ export default function AdminPage() {
         prev.map(p =>
           p.id === prof.id
             ? {
-                ...p,
-                abonnement_actif: true,
-                abonnement_expire_le: expire.toISOString().slice(0, 10),
-              }
+              ...p,
+              abonnement_actif: true,
+              abonnement_expire_le: expire.toISOString().slice(0, 10),
+            }
             : p,
         ),
       );
     }
   }
 
-  // DÉSACTIVER ABONNEMENT
   async function handleDeactivateSubscription(prof: Professeur) {
-    const { error } = await supabaseBrowser
+    const { error } = await supabase
       .from('professeurs')
       .update({
         abonnement_actif: false,
@@ -256,23 +261,22 @@ export default function AdminPage() {
         prev.map(p =>
           p.id === prof.id
             ? {
-                ...p,
-                abonnement_actif: false,
-                abonnement_expire_le: null,
-              }
+              ...p,
+              abonnement_actif: false,
+              abonnement_expire_le: null,
+            }
             : p,
         ),
       );
     }
   }
 
-  // RENOUVELER ABONNEMENT (30 jours)
   async function handleRenewSubscription(prof: Professeur) {
     const now = new Date();
     const expire = new Date();
     expire.setDate(now.getDate() + 30);
 
-    const { error } = await supabaseBrowser
+    const { error } = await supabase
       .from('professeurs')
       .update({
         abonnement_actif: true,
@@ -285,10 +289,10 @@ export default function AdminPage() {
         prev.map(p =>
           p.id === prof.id
             ? {
-                ...p,
-                abonnement_actif: true,
-                abonnement_expire_le: expire.toISOString().slice(0, 10),
-              }
+              ...p,
+              abonnement_actif: true,
+              abonnement_expire_le: expire.toISOString().slice(0, 10),
+            }
             : p,
         ),
       );
@@ -360,7 +364,7 @@ export default function AdminPage() {
 
   // -------------------- RENDU --------------------
 
-  if (loadingUser) {
+  if (!authChecked) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-muted-foreground">Vérification de l&apos;accès…</p>
@@ -379,7 +383,7 @@ export default function AdminPage() {
           <Button
             variant="outline"
             onClick={async () => {
-              await supabaseBrowser.auth.signOut();
+              await supabase.auth.signOut();
               router.replace('/admin/login');
             }}
           >
@@ -459,7 +463,7 @@ export default function AdminPage() {
 
           {loadingDemandes ? (
             <p className="text-muted-foreground">Chargement…</p>
-          ) : totalDemandes === 0 ? (
+          ) : demandes.length === 0 ? (
             <p className="text-muted-foreground">Aucune demande.</p>
           ) : (
             <div className="space-y-4">
@@ -495,8 +499,8 @@ export default function AdminPage() {
                           demande.statut === 'approuve'
                             ? 'border-green-500 text-green-500'
                             : demande.statut === 'refuse'
-                            ? 'border-red-500 text-red-500'
-                            : 'border-amber-500 text-amber-500'
+                              ? 'border-red-500 text-red-500'
+                              : 'border-amber-500 text-amber-500'
                         }
                       >
                         {demande.statut === 'en_attente' && 'En attente'}
@@ -646,7 +650,7 @@ export default function AdminPage() {
                           </Badge>
 
                           {prof.abonnement_actif &&
-                          prof.abonnement_expire_le ? (
+                            prof.abonnement_expire_le ? (
                             <Badge
                               className={
                                 expiringSoon

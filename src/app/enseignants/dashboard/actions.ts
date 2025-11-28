@@ -80,6 +80,6 @@ export async function updateTeacherProfile(formData: FormData) {
   }
 
   // Purge cache
-  revalidatePath('/teachers');
+  revalidatePath('/enseignants');
   return { success: true, message: 'Profil mis à jour avec succès.' };
 }

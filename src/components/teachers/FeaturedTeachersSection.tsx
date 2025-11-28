@@ -46,7 +46,7 @@ export default async function FeaturedTeachersSection() {
           <p className="text-muted-foreground max-w-xl mx-auto">
             Les premiers enseignants vérifiés et notés apparaîtront ici.
           </p>
-          <Link href="/become-a-teacher" className="inline-block px-4 py-2 border rounded-lg">
+          <Link href="/devenir-enseignant" className="inline-block px-4 py-2 border rounded-lg">
             Devenir professeur
           </Link>
         </div>
@@ -88,7 +88,7 @@ export default async function FeaturedTeachersSection() {
 
         <div className="text-center">
           <Link
-            href="/teachers"
+            href="/enseignants"
             className="inline-block px-6 py-3 border rounded-lg text-primary font-semibold"
           >
             Voir tous les professeurs

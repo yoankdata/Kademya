@@ -136,7 +136,7 @@ export default async function TeacherProfilePage({ params }: PageProps) {
 
       <div className="container py-8 md:py-12 space-y-8 md:space-y-12 max-w-7xl">
         <a
-          href="/teachers"
+          href="/enseignants"
           className="inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors"
         >
           <svg

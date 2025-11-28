@@ -1,5 +1,4 @@
-'use client';
-
+import Image from 'next/image';
 import { MapPin, DollarSign, BookOpen, Star } from 'lucide-react';
 
 export type TeacherForClient = {
@@ -20,20 +19,8 @@ type TeacherCardProps = {
 };
 
 export function TeacherCard({ teacher }: TeacherCardProps) {
-  // Ton vrai placeholder local
   const placeholder = '/images/teachers/placeholder-teacher.jpg';
-
-  // Si Supabase a une photo → afficher
-  // Sinon → placeholder
   const photoUrl = teacher.photo_url || placeholder;
-
-  const handleImageError = (
-    e: React.SyntheticEvent<HTMLImageElement, Event>,
-  ) => {
-    const target = e.target as HTMLImageElement;
-    target.onerror = null;
-    target.src = placeholder;
-  };
 
   const displayRating = teacher.avis_moyenne
     ? teacher.avis_moyenne.toFixed(1)
@@ -43,11 +30,13 @@ export function TeacherCard({ teacher }: TeacherCardProps) {
     <div className="bg-card border border-border rounded-xl shadow-sm hover:shadow-md transition duration-300 overflow-hidden">
       {/* IMAGE */}
       <div className="w-full h-40 bg-muted relative overflow-hidden">
-        <img
+        <Image
           src={photoUrl}
           alt={`Photo de ${teacher.nom_complet}`}
-          className="w-full h-full object-cover"
-          onError={handleImageError}
+          fill
+          className="object-cover"
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
 
@@ -101,7 +90,7 @@ export function TeacherCard({ teacher }: TeacherCardProps) {
 
         {/* BOUTON */}
         <a
-          href={`/teachers/${teacher.id}`}
+          href={`/enseignants/${teacher.id}`}
           className="block w-full text-center py-2 px-4 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition"
         >
           Voir le profil

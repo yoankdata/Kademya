@@ -21,6 +21,7 @@ export type TeacherFormErrors = Partial<
     | 'numero_whatsapp'
     | 'tarif_horaire'
     | 'biographie'
+    | 'cgu_accepted'
     | 'global',
     string
   >

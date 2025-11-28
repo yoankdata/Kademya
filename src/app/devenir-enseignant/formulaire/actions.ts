@@ -1,12 +1,12 @@
-// src/app/become-a-teacher/form/actions.ts
+// src/app/devenir-enseignant/formulaire/actions.ts
 'use server';
 
-import { supabase } from '@/lib/supabase';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 import { sendMail } from '@/lib/mail';
 import {
   TeacherFormState,
   TeacherFormValues,
-  sanitize,
   validate,
   initialFormState,
 } from './form-state';
@@ -50,19 +50,53 @@ export async function createTeacherCandidate(
   formData: FormData,
 ): Promise<TeacherFormState> {
   try {
-    // 1. Nettoyage / validation
-    const values = sanitize(formData);
-    const errors = validate(values);
+    // Initialiser le client Supabase avec les cookies pour les Server Actions
+    const cookieStore = await cookies();
+    const supabase = createServerComponentClient({ cookies: () => cookieStore });
 
-    if (Object.keys(errors).length > 0) {
+    // 0. Honeypot anti-bot
+    const honeypot = formData.get('website');
+    if (honeypot && honeypot.toString().length > 0) {
+      // On fait semblant que tout s'est bien passé (bot piégé)
+      return {
+        success: true,
+        errors: {},
+        values: initialFormState.values,
+      };
+    }
+
+    // 1. Construction manuelle des valeurs (texte uniquement)
+    const values: TeacherFormValues = {
+      nom_complet: (formData.get('nom_complet') ?? '').toString().trim(),
+      email: (formData.get('email') ?? '').toString().trim(),
+      matiere: (formData.get('matiere') ?? '').toString().trim(),
+      niveau: (formData.get('niveau') ?? '').toString().trim(),
+      commune: (formData.get('commune') ?? '').toString().trim(),
+      numero_whatsapp: (formData.get('numero_whatsapp') ?? '').toString().trim(),
+      tarif_horaire: (formData.get('tarif_horaire') ?? '').toString().trim(),
+      biographie: (formData.get('biographie') ?? '').toString().trim(),
+    };
+
+    // 2. Validation (réutilise ta fonction existante)
+    const baseErrors = validate(values);
+
+    // CGU (gérée côté server pour être sûr)
+    const cguAccepted = formData.get('cgu_accepted');
+    // La checkbox retourne 'on' si cochée, null sinon
+    if (!cguAccepted || cguAccepted.toString() !== 'on') {
+      baseErrors.cgu_accepted =
+        'Vous devez accepter les CGU pour continuer.';
+    }
+
+    if (Object.keys(baseErrors).length > 0) {
       return {
         success: false,
-        errors,
+        errors: baseErrors,
         values,
       };
     }
 
-    // 2. Fichiers
+    // 3. Fichiers (NE SONT PAS remontés dans le state)
     const idDocument = formData.get('id_document') as File | null;
     const diplomeDocument = formData.get('diplome_document') as File | null;
     const photoProfil = formData.get('photo_profil') as File | null;
@@ -71,7 +105,7 @@ export async function createTeacherCandidate(
       return {
         success: false,
         errors: {
-          ...errors,
+          ...baseErrors,
           global: 'La pièce d’identité est obligatoire.',
         },
         values,
@@ -82,7 +116,7 @@ export async function createTeacherCandidate(
       return {
         success: false,
         errors: {
-          ...errors,
+          ...baseErrors,
           global: 'Le diplôme ou l’attestation est obligatoire.',
         },
         values,
@@ -93,7 +127,7 @@ export async function createTeacherCandidate(
       ? Number(values.tarif_horaire)
       : null;
 
-    // 3. Insertion dans demandes_professeurs (sans les paths pour l'instant)
+    // 4. Insertion dans demandes_professeurs
     const { data: demande, error: insertError } = await supabase
       .from('demandes_professeurs')
       .insert([
@@ -142,7 +176,7 @@ export async function createTeacherCandidate(
       return {
         success: false,
         errors: {
-          ...errors,
+          ...baseErrors,
           global: globalMessage,
         },
         values,
@@ -151,7 +185,7 @@ export async function createTeacherCandidate(
 
     const demandeId = demande.id as string;
 
-    // 4. Upload des documents dans Storage
+    // 5. Upload des documents dans Storage
     let idDocumentPath: string | null = null;
     let diplomeDocumentPath: string | null = null;
     let photoProfilPath: string | null = null;
@@ -210,7 +244,7 @@ export async function createTeacherCandidate(
       console.error('[Kademya] Exception upload diplôme :', err);
     }
 
-    // Photo de profil (optionnelle) -> bucket teacher-photos
+    // Photo de profil optionnelle -> bucket teacher-photos
     try {
       if (photoProfil && photoProfil.size > 0) {
         const photoExt = getExtension(photoProfil);
@@ -237,7 +271,7 @@ export async function createTeacherCandidate(
       console.error('[Kademya] Exception upload photo de profil :', err);
     }
 
-    // 5. Update des chemins dans la demande (y compris photo_profil_path)
+    // 6. Update des chemins dans la demande
     if (idDocumentPath || diplomeDocumentPath || photoProfilPath) {
       const { error: updateError } = await supabase
         .from('demandes_professeurs')
@@ -256,10 +290,10 @@ export async function createTeacherCandidate(
       }
     }
 
-    // 6. Notification admin (non bloquant)
+    // 7. Notification admin (non bloquant)
     await notifyAdminNewCandidate(values);
 
-    // 7. Succès
+    // 8. Succès : on renvoie un state clean
     return {
       success: true,
       errors: {},

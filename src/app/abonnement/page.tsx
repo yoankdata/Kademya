@@ -1,4 +1,4 @@
-// src/app/subscription/page.tsx
+// src/app/abonnement/page.tsx
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     'Activez votre abonnement Kademya pour apparaître dans le catalogue des professeurs.',
 };
 
-export default function SubscriptionPage() {
+export default function abonnementPage() {
   // Numéro WhatsApp support : +33 7 60 16 49 98
   const whatsappUrl =
     'https://wa.me/33760164998?text=Bonjour%20Kademya%2C%20je%20viens%20de%20payer%20mon%20abonnement%20professeur%20(10%20000%20FCFA)%20et%20je%20vous%20envoie%20la%20preuve%20de%20paiement.';
@@ -238,9 +238,9 @@ export default function SubscriptionPage() {
                     <MessageCircle className="h-4 w-4 text-emerald-300" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold mb-1">
+                    <h3 className="text-sm font-semibold mb-1 text-white">
                       Confirmer votre paiement à l’équipe Kademya
-                    </p>
+                    </h3>
                     <p className="text-xs md:text-sm text-slate-200 mb-2">
                       Après le paiement (Wave / MTN MoMo / Orange Money), envoyez la
                       capture d’écran ou la référence de transaction sur WhatsApp.

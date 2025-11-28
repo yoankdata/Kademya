@@ -20,7 +20,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
 
 import {
   User,
@@ -127,10 +126,10 @@ export default function TeacherFormClient({ submitted }: Props) {
         )}
 
         {state.errors[name] && (
-          <p className="text-xs text-red-500 flex items-center gap-1 mt-1">
+          <div role="alert" aria-live="assertive" className="text-xs text-red-500 flex items-center gap-1 mt-1">
             <AlertTriangle className="h-3 w-3" />
             {state.errors[name]}
-          </p>
+          </div>
         )}
       </div>
     );
@@ -176,10 +175,10 @@ export default function TeacherFormClient({ submitted }: Props) {
         </select>
 
         {state.errors[name] && (
-          <p className="text-xs text-red-500 flex items-center gap-1 mt-1">
+          <div role="alert" aria-live="assertive" className="text-xs text-red-500 flex items-center gap-1 mt-1">
             <AlertTriangle className="h-3 w-3" />
             {state.errors[name]}
-          </p>
+          </div>
         )}
       </div>
     );
@@ -236,7 +235,7 @@ export default function TeacherFormClient({ submitted }: Props) {
         </div>
 
         {state.errors.global && (
-          <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-400 dark:bg-red-500/10 mb-4 flex items-center gap-2">
+          <div role="alert" aria-live="assertive" className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-400 dark:bg-red-500/10 mb-4 flex items-center gap-2">
             <AlertTriangle className="h-4 w-4" />
             <p>{state.errors.global}</p>
           </div>
@@ -250,6 +249,18 @@ export default function TeacherFormClient({ submitted }: Props) {
           </CardHeader>
           <CardContent>
             <form action={formAction} className="space-y-8">
+              {/* HONEYPOT FIELD (Anti-spam) */}
+              <div className="opacity-0 absolute -z-10 h-0 w-0 overflow-hidden">
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div className="grid md:grid-cols-2 gap-6">
                 <InputField
                   id="nom_complet"
@@ -393,18 +404,19 @@ export default function TeacherFormClient({ submitted }: Props) {
                 </p>
 
                 <div className="flex items-start gap-3">
-                  <Checkbox
+                  <input
+                    type="checkbox"
                     id="cgu_accepted"
                     name="cgu_accepted"
                     required
-                    className="mt-1"
+                    className="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 text-green-600 focus:ring-green-500 cursor-pointer"
                   />
                   <div className="space-y-1 text-sm text-gray-700 dark:text-gray-200">
                     <label
                       htmlFor="cgu_accepted"
                       className="font-medium cursor-pointer"
                     >
-                      J’accepte les CGU et la politique de confidentialité
+                      J'accepte les CGU et la politique de confidentialité
                       de Kademya.
                     </label>
                     <p className="text-xs text-muted-foreground">
@@ -427,10 +439,10 @@ export default function TeacherFormClient({ submitted }: Props) {
                     </p>
 
                     {state.errors.cgu_accepted && (
-                      <p className="text-xs text-red-500 flex items-center gap-1 mt-1">
+                      <div role="alert" aria-live="assertive" className="text-xs text-red-500 flex items-center gap-1 mt-1">
                         <AlertTriangle className="h-3 w-3" />
                         {state.errors.cgu_accepted}
-                      </p>
+                      </div>
                     )}
                   </div>
                 </div>

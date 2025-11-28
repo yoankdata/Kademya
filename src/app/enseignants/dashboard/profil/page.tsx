@@ -111,7 +111,7 @@ export default function TeacherProfilePage() {
 
   if (!profile) {
     return (
-      <DashboardLayout activePath="/teachers/dashboard/profil">
+      <DashboardLayout activePath="/enseignants/dashboard/profil">
         <div className="p-8">
           <p className="text-gray-700">
             Aucun profil professeur n’est encore associé à ce compte.
@@ -122,7 +122,7 @@ export default function TeacherProfilePage() {
   }
 
   return (
-    <DashboardLayout activePath="/teachers/dashboard/profil">
+    <DashboardLayout activePath="/enseignants/dashboard/profil">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">
         Mon profil public
       </h1>
@@ -209,12 +209,12 @@ export default function TeacherProfilePage() {
                     setProfile((p) =>
                       p
                         ? {
-                            ...p,
-                            tarif_horaire:
-                              e.target.value === ''
-                                ? null
-                                : parseInt(e.target.value, 10),
-                          }
+                          ...p,
+                          tarif_horaire:
+                            e.target.value === ''
+                              ? null
+                              : parseInt(e.target.value, 10),
+                        }
                         : p,
                     )
                   }
@@ -285,11 +285,10 @@ export default function TeacherProfilePage() {
             <button
               type="submit"
               disabled={isSaving}
-              className={`flex items-center px-6 py-3 font-semibold rounded-lg transition-colors ${
-                isSaving
+              className={`flex items-center px-6 py-3 font-semibold rounded-lg transition-colors ${isSaving
                   ? 'bg-indigo-400 cursor-not-allowed text-white'
                   : 'bg-indigo-600 hover:bg-indigo-700 text-white'
-              }`}
+                }`}
             >
               {isSaving ? (
                 <Loader2 className="w-5 h-5 animate-spin mr-2" />

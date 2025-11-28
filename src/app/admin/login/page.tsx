@@ -1,31 +1,19 @@
+// src/app/admin/login/page.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+import { useState } from 'react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
   const supabase = useSupabaseClient();
-  const user = useUser();
   const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-
-  // 🔥 Correction : redirection sécurisée dans un useEffect
-  useEffect(() => {
-    if (user) {
-      router.replace('/admin'); // replace évite de garder la page login dans l’historique
-    }
-  }, [user, router]);
-
-  // 🔥 Important : si user existe mais redirection pas encore faite → on affiche rien
-  if (user) {
-    return null;
-  }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,21 +26,24 @@ export default function LoginPage() {
     });
 
     if (error) {
-      setErrorMsg('Identifiants incorrects ou compte non encore activé.');
+      setErrorMsg('Identifiants incorrects.');
       setLoading(false);
       return;
     }
 
-    // Redirection après login
+    // Succès → on envoie vers /admin
     router.push('/admin');
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-background px-4">
       <div className="bg-white shadow-xl rounded-lg p-6 w-full max-w-md border">
-        <h1 className="text-2xl font-bold text-center mb-6">
-          Connexion Professeur
+        <h1 className="text-2xl font-bold text-center mb-2">
+          Connexion Administrateur
         </h1>
+        <p className="text-xs text-muted-foreground text-center mb-6">
+          Accès strictement réservé à l&apos;administration Kademya.
+        </p>
 
         {errorMsg && (
           <p className="text-red-600 text-sm mb-4 text-center">{errorMsg}</p>
@@ -66,8 +57,8 @@ export default function LoginPage() {
               className="w-full border rounded-lg p-2"
               required
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="vous@example.com"
+              onChange={e => setEmail(e.target.value)}
+              placeholder="ykilolo77@gmail.com"
             />
           </div>
 
@@ -80,7 +71,7 @@ export default function LoginPage() {
               className="w-full border rounded-lg p-2"
               required
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               placeholder="********"
             />
           </div>

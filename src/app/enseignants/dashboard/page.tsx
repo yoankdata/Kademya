@@ -1,3 +1,5 @@
+// app/teachers/dashboard/abonnement/page.tsx
+
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
@@ -10,7 +12,7 @@ interface SubscriptionData {
   abonnement_expire_le: string | null;
 }
 
-const ABONNEMENT_PRIX = 5000;
+const ABONNEMENT_PRIX = 5000; // FCFA
 const ABONNEMENT_DUREE_JOURS = 30;
 
 export default function SubscriptionPage() {
@@ -27,6 +29,7 @@ export default function SubscriptionPage() {
     text: string;
   } | null>(null);
 
+  // 1. Récupération des données d'abonnement
   const fetchSubscriptionData = useCallback(async () => {
     if (!user) return;
     setLoading(true);
@@ -34,14 +37,14 @@ export default function SubscriptionPage() {
       const { data, error } = await supabase
         .from('professeurs')
         .select('abonnement_actif, abonnement_expire_le')
-        .eq('user_id', user.id)
+        .eq('user_id', user.id) // ✅ lien via user_id
         .maybeSingle();
 
       if (error && error.code !== 'PGRST116') throw error;
 
-      setSubData((data ?? null) as SubscriptionData | null);
-    } catch (err) {
-      console.error("Erreur de récupération de l'abonnement:", err);
+      setSubData(data as SubscriptionData | null);
+    } catch (error) {
+      console.error('Erreur de récupération de l’abonnement:', error);
     } finally {
       setLoading(false);
     }
@@ -51,6 +54,7 @@ export default function SubscriptionPage() {
     fetchSubscriptionData();
   }, [fetchSubscriptionData]);
 
+  // 2. Simulation du paiement Mobile Money
   const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
@@ -69,6 +73,7 @@ export default function SubscriptionPage() {
       text: `Tentative de paiement via ${paymentOperator} au ${phoneNumber}... Validez sur votre téléphone.`,
     });
 
+    // Simulation délai
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     try {
@@ -91,7 +96,7 @@ export default function SubscriptionPage() {
           abonnement_actif: true,
           abonnement_expire_le: baseDate.toISOString(),
         })
-        .eq('user_id', user.id);
+        .eq('user_id', user.id); // ✅ on met à jour la ligne du prof connecté
 
       if (error) throw error;
 
@@ -103,30 +108,20 @@ export default function SubscriptionPage() {
       });
 
       fetchSubscriptionData();
-    } catch (err) {
-      console.error('Erreur de paiement simulée:', err);
+    } catch (error) {
+      console.error('Erreur de paiement simulée:', error);
       setPaymentMessage({
         type: 'error',
-        text: 'Échec du paiement. Vérifiez votre solde et réessayez.',
+        text: "Échec du paiement. Vérifiez votre solde et réessayez.",
       });
     } finally {
       setIsProcessingPayment(false);
     }
   };
 
-  if (!user) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <p className="text-red-600">
-          Vous devez être connecté pour accéder à cette page.
-        </p>
-      </div>
-    );
-  }
-
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center h-screen">
         <Loader2 className="w-8 h-8 animate-spin text-blue-600 mr-2" />
         Chargement des données d’abonnement...
       </div>
@@ -142,31 +137,29 @@ export default function SubscriptionPage() {
     : 'N/A';
 
   return (
-    <DashboardLayout activePath="/teachers/dashboard/abonnement">
+    <DashboardLayout activePath="/enseignants/dashboard/abonnement">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">
-        Mon abonnement Kademya
+        Mon Abonnement Kademya
       </h1>
 
       <div className="max-w-4xl space-y-8">
+        {/* Statut actuel */}
         <section
-          className={`p-6 rounded-lg shadow-xl ${
-            isExpired
+          className={`p-6 rounded-lg shadow-xl ${isExpired
               ? 'bg-red-50 border-t-4 border-red-600'
               : 'bg-green-50 border-t-4 border-green-600'
-          }`}
+            }`}
         >
           <h2 className="text-2xl font-semibold mb-3">Statut actuel</h2>
           <div className="flex items-center space-x-4">
             <Clock
-              className={`w-8 h-8 ${
-                isExpired ? 'text-red-600' : 'text-green-600'
-              }`}
+              className={`w-8 h-8 ${isExpired ? 'text-red-600' : 'text-green-600'
+                }`}
             />
             <div>
               <p
-                className={`text-xl font-bold ${
-                  isExpired ? 'text-red-600' : 'text-green-600'
-                }`}
+                className={`text-xl font-bold ${isExpired ? 'text-red-600' : 'text-green-600'
+                  }`}
               >
                 {isExpired ? 'EXPIRÉ' : 'ACTIF'}
               </p>
@@ -179,6 +172,7 @@ export default function SubscriptionPage() {
           </div>
         </section>
 
+        {/* Plan Kademya */}
         <section className="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-600">
           <h2 className="text-xl font-semibold mb-4 text-gray-700">
             Le plan Kademya (abonnement mensuel)
@@ -203,6 +197,7 @@ export default function SubscriptionPage() {
           </ul>
         </section>
 
+        {/* Paiement */}
         <section className="bg-white p-6 rounded-lg shadow-md border-t-4 border-yellow-600">
           <h2 className="text-xl font-semibold mb-5 text-gray-700">
             Renouveler mon abonnement
@@ -210,13 +205,12 @@ export default function SubscriptionPage() {
 
           {paymentMessage && (
             <div
-              className={`p-3 mb-4 rounded-md font-medium ${
-                paymentMessage.type === 'success'
+              className={`p-3 mb-4 rounded-md font-medium ${paymentMessage.type === 'success'
                   ? 'bg-green-100 text-green-800'
                   : paymentMessage.type === 'error'
-                  ? 'bg-red-100 text-red-800'
-                  : 'bg-blue-100 text-blue-800'
-              }`}
+                    ? 'bg-red-100 text-red-800'
+                    : 'bg-blue-100 text-blue-800'
+                }`}
             >
               {paymentMessage.text}
             </div>
@@ -259,11 +253,10 @@ export default function SubscriptionPage() {
             <button
               type="submit"
               disabled={isProcessingPayment}
-              className={`w-full flex items-center justify-center px-6 py-3 font-semibold rounded-lg transition-colors ${
-                isProcessingPayment
+              className={`w-full flex items-center justify-center px-6 py-3 font-semibold rounded-lg transition-colors ${isProcessingPayment
                   ? 'bg-yellow-400 cursor-not-allowed'
                   : 'bg-yellow-500 hover:bg-yellow-600 text-white'
-              }`}
+                }`}
             >
               {isProcessingPayment ? (
                 <>

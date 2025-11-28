@@ -21,6 +21,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://www.kademya.com'),
   title: 'Kademya - Trouvez un professeur fiable à Abidjan',
   description:
     'Mise en relation avec des professeurs vérifiés et passionnés pour des cours particuliers de qualité.',
@@ -33,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="scroll-smooth">
+    <html lang="fr" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={cn(
           'font-body antialiased',
