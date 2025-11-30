@@ -8,8 +8,10 @@
 @layer base {
   :root {
     /* COULEURS DE BASE */
-    --background: 0 0% 100%;           /* Blanc pur */
-    --foreground: 153 40% 15%;         /* Vert très sombre (presque noir) pour le texte - plus doux que le gris */
+    --background: 0 0% 100%;
+    /* Blanc pur */
+    --foreground: 153 40% 15%;
+    /* Vert très sombre (presque noir) pour le texte - plus doux que le gris */
 
     --card: 0 0% 100%;
     --card-foreground: 153 40% 15%;
@@ -18,16 +20,20 @@
     --popover-foreground: 153 40% 15%;
 
     /* COULEURS PRINCIPALES - Premium Green */
-    --primary: 153 45% 25%;            /* Vert Kademya riche et profond */
+    --primary: 153 45% 25%;
+    /* Vert Kademya riche et profond */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 150 30% 96%;          /* Vert très pâle, frais et propre */
+    --secondary: 150 30% 96%;
+    /* Vert très pâle, frais et propre */
     --secondary-foreground: 153 45% 25%;
 
     --muted: 150 10% 96%;
-    --muted-foreground: 153 10% 40%;   /* Gris-vert neutre pour le texte secondaire */
+    --muted-foreground: 153 10% 40%;
+    /* Gris-vert neutre pour le texte secondaire */
 
-    --accent: 35 90% 55%;              /* Or vibrant pour les CTA/Accents */
+    --accent: 35 90% 55%;
+    /* Or vibrant pour les CTA/Accents */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -47,21 +53,23 @@
 
     /* RADIUS + SHADOW */
     --radius: 0.75rem;
-    
+
     /* Ombres modernes et douces */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    
-    --shadow-subtle: var(--shadow); /* Alias pour compatibilité */
+
+    --shadow-subtle: var(--shadow);
+    /* Alias pour compatibilité */
   }
 
   /* ================================================================
      MODE SOMBRE
      ================================================================ */
   .dark {
-    --background: 153 45% 5%;          /* Vert très très sombre */
+    --background: 153 45% 5%;
+    /* Vert très très sombre */
     --foreground: 150 10% 98%;
 
     --card: 153 45% 7%;
@@ -70,7 +78,8 @@
     --popover: 153 45% 7%;
     --popover-foreground: 150 10% 98%;
 
-    --primary: 153 45% 45%;            /* Vert plus lumineux pour le dark mode */
+    --primary: 153 45% 45%;
+    /* Vert plus lumineux pour le dark mode */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 153 30% 15%;
@@ -93,7 +102,7 @@
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
-    
+
     --shadow-subtle: var(--shadow);
   }
 }
@@ -112,14 +121,18 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-headline text-foreground tracking-tight;
   }
 
   /* Paragraphes – base moderne et lisible */
   p {
-    @apply text-[15px] sm:text-[16px] md:text-[17px] lg:text-[18px]
-           leading-relaxed md:leading-loose text-foreground/80;
+    @apply text-[15px] sm:text-[16px] md:text-[17px] lg:text-[18px] leading-relaxed md:leading-loose text-foreground/80;
   }
 
   /* Liens de base */
@@ -127,9 +140,7 @@
     @apply text-primary underline-offset-4;
   }
 
-  a:hover {
-    @apply underline;
-  }
+
 
   /* Sélection */
   ::selection {
@@ -159,6 +170,7 @@
    COMPONENT UTILITIES
    ================================================================ */
 @layer components {
+
   /* Ombre Kademya standard (cards, images, blocs) */
   .shadow-subtle {
     box-shadow: var(--shadow-subtle);

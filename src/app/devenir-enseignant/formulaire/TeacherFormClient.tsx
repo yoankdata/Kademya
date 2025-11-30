@@ -190,26 +190,41 @@ export default function TeacherFormClient({ submitted }: Props) {
       <div className="container mx-auto px-4 py-24 md:py-32 max-w-xl text-center min-h-[80vh]">
         <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-6" />
         <h1 className="text-3xl md:text-4xl font-headline font-bold text-gray-900 dark:text-white mb-4">
-          Ta candidature a bien été envoyée !
+          Candidature envoyée avec succès
         </h1>
         <p className="text-lg text-muted-foreground mb-6">
-          Merci pour ta confiance. Ton profil sera vérifié par l&apos;équipe
+          Merci pour ta confiance. Ton dossier a bien été reçu et sera examiné par l&apos;équipe
           Kademya dans les prochaines heures.
         </p>
-        <p className="text-base text-gray-700 dark:text-gray-200 mb-8">
-          <span className="font-semibold">
-            Étape suivante obligatoire pour être visible :
-          </span>{' '}
-          active ton abonnement{' '}
-          <span className="font-semibold">(10 000 FCFA / mois)</span> pour
-          apparaître dans le catalogue Kademya auprès des parents d&apos;Abidjan.
-          Sans abonnement actif, ton profil restera invisible, même après
-          validation.
-        </p>
+
+        <div className="space-y-4 mb-8 text-gray-700 dark:text-gray-200">
+          <p className="font-bold text-lg text-primary uppercase tracking-wide">
+            Étape indispensable pour apparaître dans le catalogue
+          </p>
+          <p>
+            Choisis ton abonnement professeur pour devenir visible auprès des parents d&apos;Abidjan :
+          </p>
+
+          <div className="bg-secondary/30 p-6 rounded-xl text-left space-y-3 border border-border/50">
+            <div className="flex items-start gap-3">
+              <div className="mt-1.5 w-2 h-2 rounded-full bg-green-500 shrink-0" />
+              <p><span className="font-bold text-foreground">10 000 FCFA / mois</span> – visibilité immédiate pendant 30 jours</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="mt-1.5 w-2 h-2 rounded-full bg-green-500 shrink-0" />
+              <p><span className="font-bold text-foreground">25 000 FCFA / trimestre</span> – visibilité 90 jours à tarif réduit</p>
+            </div>
+          </div>
+
+          <p className="text-sm text-muted-foreground italic">
+            Sans abonnement actif, ton profil restera invisible, même après
+            validation de ta candidature.
+          </p>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild className="px-8">
-            <Link href="/subscription">Activer mon abonnement</Link>
+            <Link href="/abonnement">Activer mon abonnement</Link>
           </Button>
           <Button asChild variant="outline">
             <Link href="/">Retourner à l&apos;accueil</Link>

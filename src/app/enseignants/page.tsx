@@ -113,9 +113,9 @@ export default async function TeachersPage() {
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-6">
-              Trouvez le mentor <br />
+              Des professeurs vérifiés <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">
-                qui fera la différence.
+                pour faire réussir votre enfant.
               </span>
             </h1>
 

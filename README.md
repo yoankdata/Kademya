@@ -7,7 +7,7 @@ Objectif : aider les familles à trouver facilement un professeur fiable et mode
 
 ## Démo
 
-👉 Site en ligne : https://Kademya.vercel.app/
+👉 Site en ligne : https://www.kademya-ci.com/
 
 ---
 

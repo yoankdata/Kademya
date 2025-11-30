@@ -286,13 +286,13 @@ export default function BecomeATeacherPage() {
                     </span>
                     <span className="text-xl font-bold text-gray-400">FCFA</span>
                   </div>
-                  <p className="text-sm text-gray-400 mt-2">/ mois, sans engagement</p>
+                  <p className="text-sm text-gray-400 mt-2">/ mois (ou 25 000 FCFA / trimestre)</p>
                 </div>
 
                 <div className="p-8">
                   <div className="bg-white/5 rounded-xl p-4 mb-8 text-center border border-white/5">
                     <p className="text-sm font-medium text-white">
-                      💡 Remboursé dès votre <span className="text-green-400 font-bold">1ère heure de cours</span>.
+                      💡 Un abonnement vite <span className="text-green-400 font-bold">amorti par vos cours.</span>
                     </p>
                   </div>
 
@@ -305,7 +305,6 @@ export default function BecomeATeacherPage() {
                   </Button>
 
                   <div className="mt-6 flex justify-center gap-4 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
-                    {/* Placeholder for Mobile Money Logos using simple text for now */}
                     <span className="text-[10px] font-bold text-white border border-white/30 px-2 py-1 rounded">WAVE</span>
                     <span className="text-[10px] font-bold text-white border border-white/30 px-2 py-1 rounded">ORANGE</span>
                     <span className="text-[10px] font-bold text-white border border-white/30 px-2 py-1 rounded">MTN</span>
@@ -368,8 +367,8 @@ export default function BecomeATeacherPage() {
             {[
               { q: "Comment suis-je payé par les parents ?", a: "C'est très simple : directement. Le parent vous paie à la fin du cours ou selon votre accord. Kademya n'intervient pas dans la transaction." },
               { q: "Quels documents pour la vérification ?", a: "Une pièce d'identité valide et une preuve de votre niveau d'études (diplôme ou carte étudiante). Cela rassure énormément les parents." },
-              { q: "Puis-je arrêter l'abonnement quand je veux ?", a: "Oui. L'abonnement est mensuel et sans engagement. Vous pouvez mettre votre profil en pause à tout moment." },
-              { q: "Comment payer l'abonnement ?", a: "Le paiement se fait par Mobile Money (Wave, MTN, Orange) directement depuis votre espace personnel après inscription." }
+              { q: "Puis-je arrêter l'abonnement quand je veux ?", a: "Oui. L'abonnement est sans engagement. Vous pouvez choisir la formule mensuelle ou trimestrielle et arrêter à tout moment." },
+              { q: "Comment payer l'abonnement ?", a: "Le paiement se fait par Mobile Money (Wave, MTN, Orange) directement depuis votre espace personnel. Vous avez le choix entre 10 000 FCFA/mois ou 25 000 FCFA/trimestre." }
             ].map((item, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="bg-background rounded-xl border px-2 shadow-sm data-[state=open]:border-primary/30 transition-all">
                 <AccordionTrigger className="text-lg font-medium py-5 px-4 hover:no-underline text-left">

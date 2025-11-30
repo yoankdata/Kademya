@@ -54,7 +54,7 @@ export default function NotFound() {
             Intéressé(e) ?
             <Link
               href="/devenir-enseignant/formulaire"
-              className="ml-2 inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:underline underline-offset-4"
+              className="ml-2 inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 transition-colors"
             >
               <BookOpen className="h-4 w-4 mr-1" />
               Devenir professeur

@@ -27,10 +27,10 @@ export default function MentionsLegalesPage() {
           <br />
           Adresse de contact&nbsp;:{' '}
           <a
-            href="mailto:contact.kademya@gmail.com"
+            href="mailto:contact@kademya-ci.com"
             className="text-emerald-700 underline"
           >
-            contact.kademya@gmail.com
+            contact@kademya-ci.com
           </a>
         </p>
       </section>
@@ -121,10 +121,10 @@ export default function MentionsLegalesPage() {
           Pour toute question relative à ces mentions légales, vous pouvez nous
           contacter à l&apos;adresse suivante&nbsp;:{' '}
           <a
-            href="mailto:contact.kademya@gmail.com"
+            href="mailto:contact@kademya-ci.com"
             className="text-emerald-700 underline"
           >
-            contact.kademya@gmail.com
+            contact@kademya-ci.com
           </a>
           .
         </p>

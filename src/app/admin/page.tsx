@@ -24,7 +24,7 @@ type DemandeProf = {
   email: string | null;
   biographie: string | null;
   statut: 'en_attente' | 'approuve' | 'refuse';
-  cree_le: string;
+  created_at: string;
   id_document_path: string | null;
   diplome_document_path: string | null;
   photo_profil_path: string | null;
@@ -101,7 +101,7 @@ export default function AdminPage() {
       const { data, error } = await supabase
         .from('demandes_professeurs')
         .select('*')
-        .order('cree_le', { ascending: false });
+        .order('created_at', { ascending: false });
 
       if (!error && data) {
         setDemandes(data as DemandeProf[]);
@@ -116,7 +116,7 @@ export default function AdminPage() {
       const { data, error } = await supabase
         .from('professeurs')
         .select('*')
-        .order('cree_le', { ascending: false });
+        .order('created_at', { ascending: false });
 
       if (!error && data) {
         setProfs(data as Professeur[]);
@@ -174,7 +174,7 @@ export default function AdminPage() {
     const { data: profsData, error: profsError } = await supabase
       .from('professeurs')
       .select('*')
-      .order('cree_le', { ascending: false });
+      .order('created_at', { ascending: false });
 
     if (!profsError && profsData) {
       setProfs(profsData as Professeur[]);

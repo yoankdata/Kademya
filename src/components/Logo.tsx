@@ -10,11 +10,11 @@ export function Logo({ variant = 'header' }: LogoProps) {
   const config =
     variant === 'footer'
       ? {
-        src: '/images/kademya-icon-gold.png',
-        width: 260,
-        height: 90,
+        src: '/images/kademya-logo-primary',
+        width: 1024,
+        height: 1024,
         // >> GROS LOGO DANS LE FOOTER
-        className: 'h-16 md:h-20 w-auto',
+        className: 'h-28 md:h-32 w-auto',
       }
       : variant === 'app'
         ? {

@@ -116,8 +116,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-gray-900">Écoles & Partenaires</h3>
                     <p className="mt-1 text-xs text-gray-500 mb-3">Pour les demandes institutionnelles.</p>
-                    <a href="mailto:contact.kademya@gmail.com" className="text-sm font-medium text-blue-700 underline decoration-blue-200 underline-offset-4 hover:decoration-blue-500 transition-all">
-                      contact.kademya@gmail.com
+                    <a href="mailto:contact@kademya-ci.com" className="text-sm font-medium text-blue-700 underline decoration-blue-200 underline-offset-4 hover:decoration-blue-500 transition-all">
+                      contact@kademya-ci.com
                     </a>
                   </div>
                 </div>

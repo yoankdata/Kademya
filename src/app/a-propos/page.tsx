@@ -327,7 +327,7 @@ export default function AboutPage() {
 
               <div className="space-y-4 pt-8">
                 <a
-                  href="mailto:contact.kademya@gmail.com"
+                  href="mailto:contact@kademya-ci.com"
                   className="flex items-center p-4 bg-background rounded-xl border hover:border-primary transition-colors group max-w-sm mx-auto"
                 >
                   <div className="bg-primary/10 p-3 rounded-lg mr-4 group-hover:bg-primary group-hover:text-white transition-colors">
@@ -336,7 +336,7 @@ export default function AboutPage() {
                   <div className="text-left">
                     <p className="text-sm text-muted-foreground">Email</p>
                     <p className="font-semibold">
-                      contact.kademya@gmail.com
+                      contact@kademya-ci.com
                     </p>
                   </div>
                 </a>

@@ -23,7 +23,7 @@ export const SOCIAL = {
 };
 
 export const CONTACT = {
-    EMAIL: 'contact.kademya@gmail.com',
+    EMAIL: 'contact@kademya-ci.com',
     PHONE: '+225 07 12 34 56 78',
     WHATSAPP_PREFIX: 'https://wa.me/',
 };

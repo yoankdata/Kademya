@@ -33,10 +33,10 @@ export default function PolitiqueConfidentialitePage() {
           <br />
           Email&nbsp;:{' '}
           <a
-            href="mailto:contact.kademya@gmail.com"
+            href="mailto:contact@kademya-ci.com"
             className="text-emerald-700 underline"
           >
-            contact.kademya@gmail.com
+            contact@kademya-ci.com
           </a>
         </p>
       </section>
