@@ -194,10 +194,10 @@ export default function PolitiqueConfidentialitePage() {
         <p className="text-gray-700">
           Pour exercer ces droits, l&apos;utilisateur peut contacter&nbsp;:{' '}
           <a
-            href="mailto:assistance.kademya@gmail.com"
+            href="mailto:contact@kademya-ci.com"
             className="text-emerald-700 underline"
           >
-            assistance.kademya@gmail.com
+            contact@kademya-ci.com
           </a>
           .
         </p>

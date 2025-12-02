@@ -3,7 +3,7 @@
 
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { sendMail } from '@/lib/mail';
+import { Resend } from 'resend';
 import {
   TeacherFormState,
   TeacherFormValues,
@@ -13,35 +13,45 @@ import {
 
 // Mail à l'admin pour chaque nouvelle demande
 async function notifyAdminNewCandidate(values: TeacherFormValues) {
-  const adminEmail =
-    process.env.ADMIN_NOTIFICATION_EMAIL ?? 'ykilolo77@gmail.com';
+  const apiKey = process.env.RESEND_API_KEY;
 
-  const subject = 'Nouvelle demande professeur – Kademya';
+  if (!apiKey) {
+    console.error('[Kademya] ❌ RESEND_API_KEY manquante. Impossible d\'envoyer l\'email.');
+    return;
+  }
 
-  const textLines = [
-    'Une nouvelle demande professeur vient d’être soumise sur Kademya.',
-    '',
-    `Nom : ${values.nom_complet}`,
-    `Matière : ${values.matiere}`,
-    `Niveau : ${values.niveau}`,
-    `Commune : ${values.commune}`,
-    `WhatsApp : ${values.numero_whatsapp}`,
-    values.email ? `Email : ${values.email}` : '',
-    values.tarif_horaire
-      ? `Tarif souhaité : ${values.tarif_horaire} FCFA / h`
-      : '',
-    '',
-    'Connectez-vous à votre espace admin pour traiter cette demande.',
-  ].filter(Boolean);
+  const resend = new Resend(apiKey);
+  const adminEmail = 'contact@kademya-ci.com';
+  const subject = 'Nouvelle candidature professeur – Kademya';
+
+  console.log('[Kademya] 📧 Tentative d\'envoi d\'email à', adminEmail);
+
+  const textBody = `Une nouvelle candidature professeur vient d’être soumise :
+
+Nom : ${values.nom_complet}
+Email : ${values.email || 'Non renseigné'}
+Téléphone : ${values.numero_whatsapp}
+Matière : ${values.matiere}
+Niveau : ${values.niveau}
+Commune : ${values.commune}
+
+Connecte-toi à l’admin pour traiter la demande.`;
 
   try {
-    await sendMail({
+    const data = await resend.emails.send({
+      from: 'Kademya <no-reply@meatturo.resend.app>',
       to: adminEmail,
-      subject,
-      text: textLines.join('\n'),
+      subject: subject,
+      text: textBody,
     });
+
+    if (data.error) {
+      console.error('[Kademya] ❌ Erreur API Resend :', data.error);
+    } else {
+      console.log('[Kademya] ✅ Email envoyé avec succès. ID:', data.data?.id);
+    }
   } catch (err) {
-    console.error('[Kademya] Erreur envoi email admin :', err);
+    console.error('[Kademya] ❌ Exception envoi email admin via Resend :', err);
   }
 }
 
@@ -52,6 +62,7 @@ export async function createTeacherCandidate(
   try {
     // Initialiser le client Supabase avec les cookies pour les Server Actions
     const cookieStore = await cookies();
+    // @ts-ignore
     const supabase = createServerComponentClient({ cookies: () => cookieStore });
 
     // 0. Honeypot anti-bot
@@ -291,6 +302,7 @@ export async function createTeacherCandidate(
     }
 
     // 7. Notification admin (non bloquant)
+    // On envoie l'email immédiatement après l'insertion réussie
     await notifyAdminNewCandidate(values);
 
     // 8. Succès : on renvoie un state clean

@@ -297,6 +297,19 @@ export default function Page() {
             </Button>
           </div>
         </section>
+
+        {/* Contact */}
+        <section className="mt-8 text-center">
+          <p className="text-sm text-muted-foreground">
+            Une question sur cette charte ? Contactez-nous à{' '}
+            <a
+              href="mailto:contact@kademya-ci.com"
+              className="text-primary underline font-medium"
+            >
+              contact@kademya-ci.com
+            </a>
+          </p>
+        </section>
       </section>
     </div>
   );

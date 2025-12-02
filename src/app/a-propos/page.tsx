@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   Mail,
   Phone,
@@ -69,10 +70,10 @@ export default function AboutPage() {
               className="h-12 px-8 text-base rounded-full shadow-lg hover:shadow-primary/25 transition-all"
               asChild
             >
-              <a href="/enseignants">
+              <Link href="/enseignants">
                 Trouver un professeur
                 <ArrowRight className="ml-2 w-4 h-4" />
-              </a>
+              </Link>
             </Button>
             <Button
               variant="outline"
@@ -80,7 +81,7 @@ export default function AboutPage() {
               className="h-12 px-8 text-base rounded-full bg-background/50 backdrop-blur-sm"
               asChild
             >
-              <a href="#story">Découvrir notre histoire</a>
+              <Link href="#story">Découvrir notre histoire</Link>
             </Button>
           </div>
         </div>
@@ -381,10 +382,10 @@ export default function AboutPage() {
               className="h-12 px-8 rounded-full shadow-lg hover:shadow-xl transition-all bg-primary text-white hover:bg-primary/90"
               asChild
             >
-              <a href="/enseignants">
+              <Link href="/enseignants">
                 Explorer les professeurs
                 <ArrowRight className="ml-2 w-4 h-4" />
-              </a>
+              </Link>
             </Button>
 
             <Button
@@ -393,7 +394,7 @@ export default function AboutPage() {
               className="h-12 px-8 rounded-full border-primary text-primary hover:bg-primary/10"
               asChild
             >
-              <a href="/devenir-enseignant">Devenir professeur</a>
+              <Link href="/devenir-enseignant">Devenir professeur</Link>
             </Button>
           </div>
         </div>

@@ -117,10 +117,14 @@ export default function CguPage() {
             d&apos;un cours, dans des délais raisonnables.
           </li>
           <li>
-            disposer d&apos;un abonnement mensuel actif afin de rester visible
-            dans le catalogue public de Kademya. À ce jour, le tarif de cet
-            abonnement de visibilité est fixé à{' '}
-            <strong>10&nbsp;000&nbsp;FCFA par mois</strong>.
+            disposer d&apos;un abonnement actif afin de rester visible
+            dans le catalogue public de Kademya. Deux formules sont disponibles :
+            <br />
+            - <strong>Abonnement mensuel : 10 000 FCFA</strong>
+            <br />
+            - <strong>Abonnement trimestriel : 25 000 FCFA</strong>
+            <br />
+            Un profil enseignant n’est visible qu’avec un abonnement actif, peu importe la formule choisie.
           </li>
         </ul>
         <p className="text-gray-700">
