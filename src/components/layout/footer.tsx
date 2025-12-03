@@ -108,7 +108,7 @@ export function Footer() {
 
                 <div className="flex items-center gap-4">
                   <Link
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/people/Kademya/61584208002758/"
                     aria-label="Facebook"
                     className="text-muted-foreground hover:text-primary transition-colors p-2 hover:bg-secondary/50 rounded-full"
                   >
