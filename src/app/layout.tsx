@@ -3,7 +3,7 @@ import './globals.css';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
-import { Poppins, Nunito } from 'next/font/google';
+import { Poppins, Nunito, Space_Grotesk } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import SupabaseProvider from '@/components/SupabaseProvider';
 
@@ -12,6 +12,11 @@ const poppins = Poppins({
   subsets: ['latin'],
   weight: ['600'],
   variable: '--font-poppins',
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
 });
 
 const nunito = Nunito({
@@ -40,6 +45,7 @@ export default function RootLayout({
           'font-body antialiased',
           poppins.variable,
           nunito.variable,
+          spaceGrotesk.variable,
         )}
       >
         <SupabaseProvider>

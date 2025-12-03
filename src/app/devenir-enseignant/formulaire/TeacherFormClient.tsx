@@ -237,7 +237,7 @@ export default function TeacherFormClient({ submitted }: Props) {
   // Formulaire principal
   return (
     <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
-      <main className="container mx-auto px-4 py-12 md:py-16 max-w-4xl space-y-8">
+      <main className="container mx-auto px-4 py-12 md:py-16 max-w-4xl space-y-8 pt-header-offset">
         <div className="space-y-4 text-center">
           <h1 className="text-3xl md:text-5xl font-headline font-bold text-gray-900 dark:text-white">
             Rejoignez la communauté Kademya

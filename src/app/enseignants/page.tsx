@@ -33,7 +33,8 @@ type TeacherProfileDB = {
 };
 
 export default async function TeachersPage() {
-  const supabase = createServerComponentClient({ cookies });
+  const cookieStore = await cookies();
+  const supabase = createServerComponentClient({ cookies: () => cookieStore });
 
   // Récupération optimisée
   const { data, error } = await supabase
@@ -97,7 +98,7 @@ export default async function TeachersPage() {
 
   // --- PAGE PRINCIPALE ---
   return (
-    <div className="min-h-screen bg-gray-50/30 selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen bg-gray-50/30 selection:bg-emerald-100 selection:text-emerald-900 pt-header-offset">
 
       {/* 1. HERO SECTION AVEC BACKGROUND SUBTIL */}
       <div className="relative pt-12 pb-12 md:pt-20 md:pb-16 overflow-hidden">

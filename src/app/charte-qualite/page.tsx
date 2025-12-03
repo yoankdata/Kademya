@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="bg-background">
+    <div className="bg-background pt-header-offset">
       {/* Bandeau haut */}
       <section className="border-b bg-white">
         <div className="container mx-auto px-4 md:px-6 py-10 md:py-14">

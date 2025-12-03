@@ -67,7 +67,7 @@ export default async function TeacherProfilePage({ params }: PageProps) {
   const reviewsCount = prof.avis_nombre || 0;
 
   return (
-    <div className="min-h-screen bg-gray-50/50 pb-20 md:pb-10">
+    <div className="min-h-screen bg-gray-50/50 pb-20 md:pb-10 pt-header-offset">
 
       {/* 1. NAVBAR DE RETOUR (Simple et propre) */}
       <div className="bg-white border-b sticky top-0 z-30 md:relative md:z-0">

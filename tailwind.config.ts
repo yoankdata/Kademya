@@ -10,14 +10,17 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: {
+        DEFAULT: '1rem',
+        lg: '2rem',
+      },
       screens: {
         '2xl': '1400px',
       },
     },
     extend: {
       fontFamily: {
-        headline: ['var(--font-poppins)', 'sans-serif'],
+        headline: ['var(--font-space-grotesk)', 'sans-serif'],
         body: ['var(--font-nunito)', 'sans-serif'],
       },
       colors: {

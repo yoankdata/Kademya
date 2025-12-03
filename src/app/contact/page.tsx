@@ -18,7 +18,7 @@ export default function ContactPage() {
   // const ACCENT = '#6BBD78'; // Utilisé via les classes emerald de Tailwind pour la variation
 
   return (
-    <main className="relative min-h-screen bg-gray-50 selection:bg-emerald-100 selection:text-emerald-900">
+    <main className="relative min-h-screen bg-gray-50 selection:bg-emerald-100 selection:text-emerald-900 pt-header-offset">
       {/* BACKGROUND DECORATION: Dégradé subtil pour un effet premium */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-[20%] right-[10%] h-[500px] w-[500px] rounded-full bg-emerald-100/40 blur-[100px]" />

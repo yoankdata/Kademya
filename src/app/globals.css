@@ -8,8 +8,10 @@
 @layer base {
   :root {
     /* COULEURS DE BASE - Premium & Clean */
-    --background: 0 0% 99%; /* Blanc cassé très subtil pour moins d'éblouissement */
-    --foreground: 240 10% 3.9%; /* Noir doux */
+    --background: 0 0% 99%;
+    /* Blanc cassé très subtil pour moins d'éblouissement */
+    --foreground: 240 10% 3.9%;
+    /* Noir doux */
 
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
@@ -18,35 +20,42 @@
     --popover-foreground: 240 10% 3.9%;
 
     /* COULEURS PRINCIPALES - Modern Green */
-    --primary: 153 45% 25%; /* Vert Kademya conservé mais utilisé avec parcimonie */
+    --primary: 153 45% 25%;
+    /* Vert Kademya conservé mais utilisé avec parcimonie */
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 240 4.8% 95.9%; /* Gris très clair pour les fonds secondaires */
+    --secondary: 240 4.8% 95.9%;
+    /* Gris très clair pour les fonds secondaires */
     --secondary-foreground: 240 5.9% 10%;
 
     --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%; /* Gris moyen pour le texte secondaire */
+    --muted-foreground: 240 3.8% 46.1%;
+    /* Gris moyen pour le texte secondaire */
 
-    --accent: 35 90% 55%; /* Touche d'or conservée */
+    --accent: 35 90% 55%;
+    /* Touche d'or conservée */
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     /* BORDURES & INPUTS - Plus doux */
-    --border: 240 5.9% 90%; /* Gris très pâle */
+    --border: 240 5.9% 90%;
+    /* Gris très pâle */
     --input: 240 5.9% 90%;
     --ring: 153 45% 25%;
 
     /* RADIUS + SHADOW - Premium Feel */
-    --radius: 1rem; /* Arrondis plus prononcés (16px) */
+    --radius: 1rem;
+    /* Arrondis plus prononcés (16px) */
 
     /* Ombres diffusées style Stripe/Linear */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-    --shadow-md: 0 12px 24px -6px rgb(0 0 0 / 0.08), 0 4px 8px -4px rgb(0 0 0 / 0.04); /* Plus profonde */
+    --shadow-md: 0 12px 24px -6px rgb(0 0 0 / 0.08), 0 4px 8px -4px rgb(0 0 0 / 0.04);
+    /* Plus profonde */
     --shadow-lg: 0 20px 30px -10px rgb(0 0 0 / 0.1), 0 8px 12px -6px rgb(0 0 0 / 0.05);
-    
+
     --shadow-subtle: var(--shadow-md);
 
     /* CHART COLORS */
@@ -88,12 +97,12 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 153 45% 45%;
-    
+
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
     --shadow-md: 0 12px 24px -6px rgb(0 0 0 / 0.5), 0 4px 8px -4px rgb(0 0 0 / 0.5);
     --shadow-lg: 0 20px 30px -10px rgb(0 0 0 / 0.6), 0 8px 12px -6px rgb(0 0 0 / 0.6);
-    
+
     --shadow-subtle: var(--shadow-md);
 
     /* CHART COLORS */
@@ -114,7 +123,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans bg-noise;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -167,6 +176,210 @@
    ================================================================ */
 @layer components {
 
+  /* TEXTURE GRAIN */
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  /* Ombre Kademya standard (cards, images, blocs) */
+  .shadow-subtle {
+    box-shadow: var(--shadow-subtle);
+  }
+
+  /* Bloc de texte premium (About, pages éditoriales) */
+  .prose-Kademya {
+    @apply max-w-3xl mx-auto text-left space-y-4;
+  }
+
+  .prose-Kademya p {
+    @apply text-[16px] md:text-[18px] leading-relaxed md:leading-loose text-foreground/80;
+  }
+
+  .prose-Kademya h2 {
+    @apply font-headline text-2xl md:text-3xl font-semibold text-primary mt-6 mb-3;
+  }
+
+  .prose-Kademya h3 {
+    @apply font-headline text-xl md:text-2xl font-semibold text-foreground mt-4 mb-2;
+  }
+
+  .prose-Kademya ul,
+  .prose-Kademya ol {
+    @apply pl-5 space-y-1 text-foreground/80;
+  }
+
+  :root {
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    /* COULEURS PRINCIPALES - Modern Green */
+    --primary: 153 45% 25%;
+    /* Vert Kademya conservé mais utilisé avec parcimonie */
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    /* Gris très clair pour les fonds secondaires */
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    /* Gris moyen pour le texte secondaire */
+
+    --accent: 35 90% 55%;
+    /* Touche d'or conservée */
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* BORDURES & INPUTS - Plus doux */
+    --border: 240 5.9% 90%;
+    /* Gris très pâle */
+    --input: 240 5.9% 90%;
+    --ring: 153 45% 25%;
+
+    /* RADIUS + SHADOW - Premium Feel */
+    --radius: 1rem;
+    /* Arrondis plus prononcés (16px) */
+
+    /* Ombres diffusées style Stripe/Linear */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05),
+      0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-md: 0 12px 24px -6px rgb(0 0 0 / 0.08),
+      0 4px 8px -4px rgb(0 0 0 / 0.04);
+    /* Plus profonde */
+    --shadow-lg: 0 20px 30px -10px rgb(0 0 0 / 0.1),
+      0 8px 12px -6px rgb(0 0 0 / 0.05);
+
+    --shadow-subtle: var(--shadow-md);
+
+    /* CHART COLORS */
+    --chart-1: 153 45% 25%;
+    --chart-2: 35 90% 55%;
+    --chart-3: 153 20% 50%;
+    --chart-4: 35 90% 75%;
+    --chart-5: 153 45% 35%;
+  }
+
+  /* ================================================================
+     MODE SOMBRE
+     ================================================================ */
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 153 45% 45%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 35 90% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 153 45% 45%;
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 12px 24px -6px rgb(0 0 0 / 0.5), 0 4px 8px -4px rgb(0 0 0 / 0.5);
+    --shadow-lg: 0 20px 30px -10px rgb(0 0 0 / 0.6), 0 8px 12px -6px rgb(0 0 0 / 0.6);
+
+    --shadow-subtle: var(--shadow-md);
+
+    /* CHART COLORS */
+    --chart-1: 153 45% 25%;
+    --chart-2: 35 90% 55%;
+    --chart-3: 153 20% 50%;
+    --chart-4: 35 90% 75%;
+    --chart-5: 153 45% 35%;
+  }
+}
+
+/* ================================================================
+   BASE STYLES
+   ================================================================ */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans bg-noise;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-headline text-foreground tracking-tight;
+  }
+
+  /* Paragraphes – base moderne et lisible */
+  p {
+    @apply text-[15px] sm:text-[16px] md:text-[17px] lg:text-[18px] leading-relaxed md:leading-loose text-foreground/80;
+  }
+
+  /* Liens de base */
+  a {
+    @apply text-primary underline-offset-4;
+  }
+
+  /* Sélection */
+  ::selection {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* Micro-interactions et focus accessibles */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    @apply transition-colors duration-200 ease-in-out;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+/* ================================================================
+   COMPONENT UTILITIES
+   ================================================================ */
+@layer components {
+
+  /* TEXTURE GRAIN */
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
   /* Ombre Kademya standard (cards, images, blocs) */
   .shadow-subtle {
     box-shadow: var(--shadow-subtle);
@@ -196,5 +409,18 @@
 
   .prose-Kademya li::marker {
     color: hsl(var(--accent));
+  }
+
+  /* Header Offset Utility */
+  .pt-header-offset {
+    padding-top: 5rem;
+    /* Mobile: 80px */
+  }
+
+  @media (min-width: 768px) {
+    .pt-header-offset {
+      padding-top: 8rem;
+      /* Desktop: 128px */
+    }
   }
 }

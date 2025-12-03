@@ -2,7 +2,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Star, ArrowRight, BadgeCheck } from 'lucide-react';
 
-// ... (Ton type TeacherForClient reste le même)
+export type TeacherForClient = {
+  id: string;
+  nom_complet: string;
+  photo_url: string | null;
+  matiere: string;
+  niveau: string;
+  commune: string;
+  tarif_horaire: number;
+  avis_moyenne: number | null;
+  biographie: string | null;
+};
 
 export function TeacherCard({ teacher }: { teacher: TeacherForClient }) {
   const placeholder = '/images/teachers/placeholder-teacher.jpg';
@@ -12,74 +22,74 @@ export function TeacherCard({ teacher }: { teacher: TeacherForClient }) {
   return (
     <Link
       href={`/enseignants/${teacher.id}`}
-      className="group relative flex flex-col bg-white border border-gray-200 rounded-xl p-5 hover:border-primary/20 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 h-full"
+      className="group relative flex flex-col bg-white/50 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl p-6 hover:bg-white dark:hover:bg-white/10 transition-all duration-500 h-full overflow-hidden"
     >
-      {/* HEADER : Avatar + Info + Note */}
-      <div className="flex items-start gap-4 mb-4">
+      {/* GLOW EFFECT ON HOVER */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+      {/* HEADER : Avatar + Info */}
+      <div className="relative flex items-start gap-5 mb-6 z-10">
         {/* AVATAR */}
-        <div className="relative w-14 h-14 flex-shrink-0">
+        <div className="relative w-16 h-16 flex-shrink-0">
           <Image
             src={photoUrl}
             alt={teacher.nom_complet}
             fill
-            className="object-cover rounded-full border border-gray-100 group-hover:scale-105 transition-transform duration-300"
-            sizes="56px"
+            className="object-cover rounded-full ring-4 ring-white dark:ring-black/20 group-hover:scale-105 transition-transform duration-500"
+            sizes="64px"
           />
-          {/* Indicateur de disponibilité (optionnel, touche sympa) */}
-          <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>
+          {/* Badge Vérifié (si applicable, ou juste déco) */}
+          <div className="absolute -bottom-1 -right-1 bg-white dark:bg-black p-1 rounded-full">
+            <BadgeCheck className="w-4 h-4 text-blue-500 fill-blue-500/10" />
+          </div>
         </div>
 
         {/* INFO PRINCIPALE */}
-        <div className="flex-1 min-w-0">
-          <div className="flex justify-between items-start">
-            <h3 className="text-base font-bold text-gray-900 truncate group-hover:text-primary transition-colors">
-              {teacher.nom_complet}
-            </h3>
-            {/* Note Star */}
-            {teacher.avis_moyenne && (
-              <div className="flex items-center gap-1 text-xs font-semibold text-amber-500 bg-amber-50 px-2 py-0.5 rounded-full">
-                <Star className="w-3 h-3 fill-current" />
-                <span>{teacher.avis_moyenne.toFixed(1)}</span>
-              </div>
-            )}
-          </div>
-
-          {/* LOCALISATION (Remontée ici pour lier au prof) */}
-          <div className="flex items-center text-xs text-gray-400 mt-1">
-            <MapPin className="w-3 h-3 mr-1" />
+        <div className="flex-1 min-w-0 pt-1">
+          <h3 className="text-lg font-headline font-bold text-foreground truncate group-hover:text-primary transition-colors">
+            {teacher.nom_complet}
+          </h3>
+          <div className="flex items-center text-sm text-muted-foreground mt-1">
+            <MapPin className="w-3.5 h-3.5 mr-1.5 opacity-70" />
             {teacher.commune}
           </div>
         </div>
       </div>
 
-      {/* BADGES (Matière & Niveau) - Plus structuré que du texte simple */}
-      <div className="flex flex-wrap gap-2 mb-3">
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-primary/10 text-primary">
+      {/* TAGS (Matière & Niveau) */}
+      <div className="flex flex-wrap gap-2 mb-4 relative z-10">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/10">
           {teacher.matiere}
         </span>
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-gray-100 text-gray-600">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground border border-border/50">
           {teacher.niveau}
         </span>
       </div>
 
       {/* BIO */}
-      <p className="text-sm text-gray-500 line-clamp-2 mb-6 flex-grow">
+      <p className="text-sm text-muted-foreground line-clamp-2 mb-8 flex-grow leading-relaxed relative z-10">
         {teacher.biographie || "Professeur passionné, je m'adapte aux besoins de chaque élève pour garantir leur réussite."}
       </p>
 
-      {/* FOOTER : PRIX & CALL TO ACTION */}
-      <div className="flex items-center justify-between pt-4 border-t border-gray-50 mt-auto">
+      {/* FOOTER : PRIX & NOTE */}
+      <div className="flex items-center justify-between pt-5 border-t border-border/40 mt-auto relative z-10">
         <div className="flex flex-col">
-          <span className="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Tarif</span>
-          <div className="text-lg font-bold text-gray-900">
-            {formattedPrice} <span className="text-sm font-normal text-gray-500">FCFA/h</span>
+          <div className="text-xl font-bold text-foreground">
+            {formattedPrice} <span className="text-xs font-medium text-muted-foreground">FCFA/h</span>
           </div>
         </div>
 
-        {/* BOUTON DISCRET MAIS EFFICACE */}
-        <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-          <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" />
-        </div>
+        {/* Note Star */}
+        {teacher.avis_moyenne ? (
+          <div className="flex items-center gap-1.5 text-sm font-bold text-foreground bg-secondary/50 px-3 py-1.5 rounded-full border border-border/50">
+            <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+            <span>{teacher.avis_moyenne.toFixed(1)}</span>
+          </div>
+        ) : (
+          <div className="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center text-muted-foreground/50">
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </div>
+        )}
       </div>
     </Link>
   );

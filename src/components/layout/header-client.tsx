@@ -3,10 +3,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { Menu, BookOpen } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Menu, X, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
+import { Button } from '@/components/ui/button';
 import { COLORS, LINKS } from '@/lib/constants';
 
 const navLinks = [
@@ -20,6 +20,18 @@ const navLinks = [
 export function HeaderClient() {
     const pathname = usePathname() || '/';
     const [mobileOpen, setMobileOpen] = useState(false);
+
+    // Lock body scroll when menu is open
+    useEffect(() => {
+        if (mobileOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [mobileOpen]);
 
     const isActive = (href: string) => {
         if (href === '/') return pathname === '/';
@@ -49,7 +61,7 @@ export function HeaderClient() {
                 ))}
             </nav>
 
-            {/* CTA + MENU MOBILE */}
+            {/* CTA + MENU MOBILE TRIGGER */}
             <div className="flex items-center gap-3">
                 <Link
                     href="/enseignants"
@@ -61,47 +73,59 @@ export function HeaderClient() {
                 </Link>
 
                 {/* MOBILE MENU BUTTON */}
-                <button
-                    onClick={() => setMobileOpen(!mobileOpen)}
-                    className="md:hidden inline-flex items-center justify-center rounded-md border border-gray-300 p-2 hover:bg-gray-100 transition-all"
-                    aria-label="Toggle mobile menu"
-                    aria-expanded={mobileOpen}
-                    aria-controls="mobile-menu"
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    className="md:hidden h-11 w-11"
+                    onClick={() => setMobileOpen(true)}
+                    aria-label="Ouvrir le menu"
                 >
-                    <Menu className="h-6 w-6" aria-hidden="true" />
-                </button>
+                    <Menu className="h-6 w-6" />
+                </Button>
             </div>
 
-            {/* MOBILE MENU */}
+            {/* FULL SCREEN MOBILE OVERLAY */}
             {mobileOpen && (
-                <div id="mobile-menu" className="md:hidden border-t border-gray-200 bg-white absolute top-full left-0 right-0 z-50">
-                    <nav className="container mx-auto px-4 py-4 space-y-2">
+                <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm md:hidden flex flex-col animate-in fade-in duration-200">
+                    {/* HEADER INSIDE MENU */}
+                    <div className="flex items-center justify-end p-6 h-20">
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-11 w-11"
+                            onClick={() => setMobileOpen(false)}
+                            aria-label="Fermer le menu"
+                        >
+                            <X className="h-6 w-6" />
+                        </Button>
+                    </div>
+
+                    {/* LINKS */}
+                    <nav className="flex flex-col items-center justify-center flex-1 gap-8 px-6 pb-20">
                         {navLinks.map(link => (
                             <Link
                                 key={link.href}
                                 href={link.href}
                                 onClick={() => setMobileOpen(false)}
                                 className={cn(
-                                    'block px-3 py-3 rounded-md font-semibold transition-all',
+                                    'text-2xl font-bold transition-colors py-2',
                                     isActive(link.href)
-                                        ? 'bg-green-50 text-gray-900'
-                                        : 'text-gray-700 hover:bg-gray-100',
+                                        ? 'text-primary'
+                                        : 'text-foreground/80 hover:text-foreground'
                                 )}
-                                style={{
-                                    color: isActive(link.href) ? COLORS.PRIMARY : undefined,
-                                }}
                             >
                                 {link.label}
                             </Link>
                         ))}
 
+                        {/* MOBILE CTA */}
                         <Link
                             href="/enseignants"
                             onClick={() => setMobileOpen(false)}
-                            className="mt-2 block px-3 py-3 rounded-md font-semibold text-white text-center transition-all"
+                            className="flex items-center font-bold text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all mt-4 text-lg"
                             style={{ backgroundColor: COLORS.PRIMARY }}
                         >
-                            <BookOpen className="inline-block h-4 w-4 mr-2" aria-hidden="true" />
+                            <BookOpen className="w-5 h-5 mr-2" aria-hidden="true" />
                             Voir les profs
                         </Link>
                     </nav>

@@ -26,6 +26,7 @@ import {
 
 import FeaturedTeachersSection from '@/components/teachers/FeaturedTeachersSection';
 import { findImage } from '@/lib/placeholder-data';
+import FadeIn from '@/components/FadeIn';
 
 const heroImage = findImage('hero-image');
 
@@ -90,8 +91,6 @@ const faqItems = [
   },
 ];
 
-import FadeIn from '@/components/FadeIn';
-
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground selection:bg-primary/10">
@@ -101,7 +100,7 @@ export default function Home() {
           {/* ------------------------------------------ */}
           {/* HERO SECTION */}
           {/* ------------------------------------------ */}
-          <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+          <section className="relative pt-24 pb-12 lg:pt-48 lg:pb-32 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-0 pointer-events-none" />
             <GridPattern />
             <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 blur-3xl opacity-20 w-96 h-96 bg-primary rounded-full pointer-events-none" />
@@ -117,7 +116,7 @@ export default function Home() {
                     <span className="text-xs md:text-sm">Plateforme de confiance n°1 à Abidjan</span>
                   </div>
 
-                  <h1 className="text-4xl sm:text-5xl lg:text-7xl font-headline font-extrabold tracking-tight text-foreground leading-[1.1]">
+                  <h1 className="text-3xl sm:text-5xl lg:text-7xl font-headline font-extrabold tracking-tight text-foreground leading-[1.1]">
                     L&apos;excellence scolaire <br />
                     <span className="relative inline-block text-primary">
                       à portée de main
@@ -208,7 +207,7 @@ export default function Home() {
           </section>
 
           {/* FEATURED TEACHERS */}
-          <section className="py-24 bg-gradient-to-b from-background to-secondary/20">
+          <section className="py-12 md:py-24 bg-gradient-to-b from-background to-secondary/20">
             <div className="container mx-auto px-4 md:px-6">
               <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
                 <div className="space-y-3">
@@ -232,7 +231,7 @@ export default function Home() {
           </section>
 
           {/* HOW IT WORKS */}
-          <section className="py-32 bg-background relative overflow-hidden">
+          <section className="py-16 md:py-32 bg-background relative overflow-hidden">
             <div className="container mx-auto px-4 md:px-6 relative z-10">
               <div className="text-center mb-20">
                 <Badge variant="secondary" className="mb-4">Simple & Rapide</Badge>
@@ -261,91 +260,137 @@ export default function Home() {
             </div>
           </section>
 
-          {/* SECURITY */}
-          <section className="py-24 bg-secondary/30">
+          {/* SECURITY - BENTO GRID */}
+          <section className="py-12 md:py-24 bg-secondary/30">
             <div className="container mx-auto px-4 md:px-6">
               <div className="mb-16 md:text-center max-w-3xl mx-auto">
                 <h2 className="text-3xl md:text-4xl font-headline font-bold mb-6">La confiance, c&apos;est la base.</h2>
                 <p className="text-lg text-muted-foreground">
                   Nous avons conçu Kademya pour offrir aux parents d&apos;Abidjan une tranquillité d&apos;esprit totale.
-                  Voici nos engagements.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
 
-                <div className="md:col-span-2 bg-white dark:bg-card border border-border/50 rounded-3xl p-8 shadow-sm flex flex-col md:flex-row items-center gap-8 relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                  <div className="flex-1 space-y-4 relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
-                      <ShieldCheck className="w-6 h-6" />
+                {/* 1. IDENTITÉ VÉRIFIÉE */}
+                <div className="group relative bg-white dark:bg-card border border-border/50 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[420px] overflow-hidden">
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <ShieldCheck className="w-7 h-7" />
                     </div>
-                    <h3 className="text-2xl font-bold">Identité Vérifiée à 100%</h3>
-                    <p className="text-muted-foreground">Nous collectons et vérifions manuellement les pièces d&apos;identité de chaque professeur. Pas de faux profils, pas de mauvaises surprises.</p>
+                    <h3 className="text-2xl font-bold mb-3 text-foreground">Identité Vérifiée</h3>
+                    <p className="text-muted-foreground leading-relaxed max-w-sm">
+                      Chaque professeur est vérifié manuellement. Nous validons pièces d&apos;identité et diplômes pour garantir une sécurité totale.
+                    </p>
                   </div>
 
-                  <div className="w-full md:w-1/3 bg-gray-50 rounded-2xl p-4 border border-gray-100 rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                    <div className="flex items-center gap-3 mb-3 opacity-50">
-                      <div className="w-8 h-8 rounded-full bg-gray-300" />
-                      <div className="h-2 w-20 bg-gray-300 rounded" />
+                  {/* Visual: ID Card Mockup */}
+                  <div className="relative mt-8 w-full h-32 bg-gray-50 rounded-t-xl border-t border-x border-gray-100 p-5 translate-y-4 group-hover:translate-y-2 transition-transform duration-500">
+                    <div className="flex gap-4 opacity-60 group-hover:opacity-100 transition-opacity">
+                      <div className="w-12 h-12 bg-gray-200 rounded-lg shrink-0" />
+                      <div className="space-y-2 w-full">
+                        <div className="h-3 w-2/3 bg-gray-200 rounded-full" />
+                        <div className="h-2 w-1/2 bg-gray-100 rounded-full" />
+                      </div>
                     </div>
-                    <div className="h-2 w-full bg-gray-200 rounded mb-2" />
-                    <div className="h-2 w-2/3 bg-gray-200 rounded" />
-                    <div className="mt-4 flex justify-end">
-                      <Badge variant="default" className="bg-green-500 hover:bg-green-600">
-                        <CheckCircle2 className="w-3 h-3 mr-1" /> Vérifié
-                      </Badge>
+                    <div className="absolute top-4 right-4">
+                      <div className="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3" /> VÉRIFIÉ
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="md:col-span-1 bg-white dark:bg-card border border-border/50 rounded-3xl p-8 shadow-sm relative overflow-hidden group hover:border-primary/30 transition-colors">
-                  <div className="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center mb-6">
-                    <Banknote className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">0% Commission</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Les parents paient le professeur directement (main à main ou Mobile Money).
-                    Modèle clair : gratuit pour les parents, 10 000 FCFA / mois pour les professeurs.
-                  </p>
-                  <div className="absolute bottom-0 right-0 opacity-10 transform translate-x-1/4 translate-y-1/4">
-                    <Banknote className="w-48 h-48" />
-                  </div>
-                </div>
-
-                <div className="md:col-span-1 bg-white dark:bg-card border border-border/50 rounded-3xl p-8 shadow-sm relative overflow-hidden">
-                  <div className="w-12 h-12 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center mb-6">
-                    <Star className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">Avis Certifiés</h3>
-                  <p className="text-muted-foreground">
-                    Seuls les parents ayant réellement contacté un professeur peuvent laisser un avis.
-                  </p>
-                </div>
-
-                <div className="md:col-span-2 bg-primary text-primary-foreground rounded-3xl p-8 shadow-lg relative overflow-hidden flex flex-col justify-center group">
-                  <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay" />
-                  <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div>
-                      <h3 className="text-2xl font-bold mb-2 text-white">Charte de Qualité Kademya</h3>
-                      <p className="text-primary-foreground/80 max-w-md">Un engagement mutuel pour l&apos;excellence pédagogique et le respect des familles.</p>
+                {/* 2. ZÉRO COMMISSION */}
+                <div className="group relative bg-white dark:bg-card border border-border/50 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[420px] overflow-hidden">
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Banknote className="w-7 h-7" />
                     </div>
-                    <Button
-                      variant="outline"
-                      className="bg-transparent text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground hover:text-primary transition-colors whitespace-nowrap"
-                      asChild
-                    >
-                      <Link href="/charte-qualite">Lire la charte</Link>
+                    <h3 className="text-2xl font-bold mb-3 text-foreground">Zéro Commission</h3>
+                    <p className="text-muted-foreground leading-relaxed max-w-sm">
+                      Un modèle transparent et équitable. Vous payez le professeur directement, sans aucun frais caché ni intermédiaire.
+                    </p>
+                  </div>
+
+                  {/* Visual: Price Block */}
+                  <div className="relative mt-8 bg-emerald-50/50 rounded-xl p-5 border border-emerald-100/50 group-hover:bg-emerald-50 transition-colors">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-sm font-medium text-gray-600">Prix du cours</span>
+                      <span className="font-bold text-gray-900">10 000 F</span>
+                    </div>
+                    <div className="flex justify-between items-center pt-3 border-t border-emerald-200/50">
+                      <span className="text-sm font-bold text-emerald-700">Pour le prof</span>
+                      <span className="font-bold text-emerald-700">10 000 F</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. AVIS CERTIFIÉS */}
+                <div className="group relative bg-white dark:bg-card border border-border/50 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[420px] overflow-hidden">
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Star className="w-7 h-7 fill-current" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3 text-foreground">Avis Certifiés</h3>
+                    <p className="text-muted-foreground leading-relaxed max-w-sm">
+                      La confiance se mérite. Seuls les parents ayant réellement effectué des cours peuvent noter nos professeurs.
+                    </p>
+                  </div>
+
+                  {/* Visual: Review Card */}
+                  <div className="relative mt-8 bg-amber-50/30 rounded-xl p-5 border border-amber-100/50">
+                    <div className="flex gap-1 text-amber-400 mb-2">
+                      {[1, 2, 3, 4, 5].map((i) => (
+                        <Star key={i} className="w-4 h-4 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-sm text-gray-600 italic">"Excellent pédagogue, ma fille a repris confiance..."</p>
+                    <div className="mt-2 flex items-center gap-2">
+                      <div className="w-5 h-5 rounded-full bg-gray-200" />
+                      <span className="text-xs font-bold text-gray-900">Mme. Kouassi</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4. CHARTE QUALITÉ */}
+                <div className="group relative bg-white dark:bg-card border border-border/50 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[420px] overflow-hidden">
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <ShieldCheck className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3 text-foreground">Charte Qualité</h3>
+                    <p className="text-muted-foreground leading-relaxed max-w-sm mb-6">
+                      Nous ne faisons aucun compromis sur la qualité. Ponctualité, pédagogie et bienveillance sont nos piliers.
+                    </p>
+
+                    <Button variant="outline" className="rounded-full border-primary/20 text-primary hover:bg-primary hover:text-white transition-colors" asChild>
+                      <Link href="/charte-qualite">
+                        Découvrir nos engagements <ArrowRight className="w-4 h-4 ml-2" />
+                      </Link>
                     </Button>
                   </div>
-                </div>
 
+                  {/* Visual: Checklist */}
+                  <div className="relative mt-8 bg-primary/5 rounded-xl p-5 border border-primary/10">
+                    <div className="space-y-3">
+                      {['Pédagogie bienveillante', 'Suivi régulier', 'Ponctualité garantie'].map((item, i) => (
+                        <div key={i} className="flex items-center gap-3 text-sm font-medium text-foreground/80">
+                          <div className="w-5 h-5 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0">
+                            <CheckCircle2 className="w-3 h-3" />
+                          </div>
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
 
           {/* CTA */}
-          <section className="relative py-32 overflow-hidden">
+          <section className="relative py-16 md:py-32 overflow-hidden">
             <div className="absolute inset-0 bg-primary z-0">
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-90" />
               <div className="absolute inset-0 opacity-20" style={{
@@ -355,11 +400,11 @@ export default function Home() {
             </div>
 
             <div className="container mx-auto px-4 relative z-10 text-center text-white">
-              <h2 className="text-4xl md:text-6xl font-headline font-bold mb-6 tracking-tight text-white">
+              <h2 className="text-3xl md:text-6xl font-headline font-bold mb-6 tracking-tight text-white">
                 Ne laissez pas les lacunes s&apos;installer.
               </h2>
               <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10 font-light">
-                Donnez à votre enfant les moyens de réussir son année scolaire dès d&apos;aujourd&apos;hui.
+                Donnez à votre enfant les moyens de réussir son année scolaire dès aujourd&apos;hui.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button
@@ -378,7 +423,7 @@ export default function Home() {
           </section>
 
           {/* FAQ */}
-          <section className="py-24 bg-background">
+          <section className="py-12 md:py-24 bg-background">
             <div className="container mx-auto px-4 md:px-6 max-w-3xl">
               <h2 className="text-3xl font-headline font-bold text-center mb-12">Questions fréquentes</h2>
 
@@ -403,6 +448,6 @@ export default function Home() {
 
         </FadeIn>
       </main>
-    </div>
+    </div >
   );
 }
