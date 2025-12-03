@@ -2,10 +2,11 @@ import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MapPin, Phone, Verified, Star, ShieldCheck, Clock, ArrowLeft } from 'lucide-react';
+import { MapPin, Verified, Star, ShieldCheck, Clock, ArrowLeft } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ajouterAvisAction } from './actions';
+import WhatsAppButton from './WhatsAppButton';
 
 // ... Tes types restent les mêmes ...
 type ProfesseurRow = {
@@ -62,7 +63,6 @@ export default async function TeacherProfilePage({ params }: PageProps) {
 
   const avis = (avisData ?? []) as AvisRow[];
   const photoUrl = prof.photo_url || PLACEHOLDER_PHOTO;
-  const whatsappLink = `https://wa.me/${prof.numero_whatsapp}`;
   const formattedPrice = prof.tarif_horaire.toLocaleString('fr-FR');
   const reviewsCount = prof.avis_nombre || 0;
 
@@ -112,15 +112,11 @@ export default async function TeacherProfilePage({ params }: PageProps) {
                   </div>
                 </div>
 
-                <Button
-                  asChild
-                  size="lg"
+                <WhatsAppButton
+                  teacherId={prof.id}
+                  phoneNumber={prof.numero_whatsapp}
                   className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold text-base shadow-md h-12"
-                >
-                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                    <Phone className="mr-2 h-5 w-5" /> Contacter sur WhatsApp
-                  </a>
-                </Button>
+                />
 
                 {/* Réassurance */}
                 <div className="space-y-3 pt-4 border-t border-gray-100">
@@ -276,9 +272,12 @@ export default async function TeacherProfilePage({ params }: PageProps) {
           <span className="text-lg font-bold text-[#1A3626]">{formattedPrice} FCFA</span>
           <span className="text-xs text-gray-500">/ heure</span>
         </div>
-        <Button asChild className="bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full px-6">
-          <a href={whatsappLink}>WhatsApp</a>
-        </Button>
+        <WhatsAppButton
+          teacherId={prof.id}
+          phoneNumber={prof.numero_whatsapp}
+          className="bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full px-6"
+          label="WhatsApp"
+        />
       </div>
 
     </div>

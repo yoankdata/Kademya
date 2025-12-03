@@ -1,108 +1,85 @@
-// src/app/become-a-teacher/form/actions.ts
 'use server';
 
-import { supabase } from '@/lib/supabase';
-import { sendMail } from '@/lib/mail';
-import {
-  TeacherFormState,
-  TeacherFormValues,
-  sanitize,
-  validate,
-} from './form-state';
+import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { revalidateTag } from 'next/cache';
+import { isAdminUser } from '@/lib/admin-auth';
 
-// Mail à l'admin pour chaque nouvelle demande
-async function notifyAdminNewCandidate(values: TeacherFormValues) {
-  const adminEmail =
-    process.env.ADMIN_NOTIFICATION_EMAIL ?? 'ykilolo77@gmail.com';
+export type DemandeProf = {
+  id: string;
+  nom_complet: string;
+  matiere: string;
+  niveau: string;
+  commune: string;
+  tarif_horaire: number | null;
+  numero_whatsapp: string;
+  email: string | null;
+  biographie: string | null;
+  statut: 'en_attente' | 'approuve' | 'refuse';
+  created_at: string;
+  id_document_path: string | null;
+  diplome_document_path: string | null;
+  photo_profil_path: string | null;
+};
 
-  const subject = 'Nouvelle demande professeur – Kademya';
+export async function approveTeacher(demande: DemandeProf) {
+  const cookieStore = await cookies();
+  const supabase = createServerActionClient({ cookies: () => Promise.resolve(cookieStore) });
 
-  const textLines = [
-    'Une nouvelle demande professeur vient d’être soumise sur Kademya.',
-    '',
-    `Nom : ${values.nom_complet}`,
-    `Matière : ${values.matiere}`,
-    `Niveau : ${values.niveau}`,
-    `Commune : ${values.commune}`,
-    `WhatsApp : ${values.numero_whatsapp}`,
-    values.email ? `Email : ${values.email}` : '',
-    values.tarif_horaire
-      ? `Tarif souhaité : ${values.tarif_horaire} FCFA / h`
-      : '',
-    '',
-    'Connectez-vous à votre espace admin pour traiter cette demande.',
-  ].filter(Boolean);
+  // 1. Vérification Admin
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-  try {
-    await sendMail({
-      to: adminEmail,
-      subject,
-      text: textLines.join('\n'),
-    });
-  } catch (err) {
-    console.error('[Kademya] Erreur envoi email admin :', err);
-  }
-}
-
-// Server Action utilisée par useActionState
-export async function createTeacherCandidate(
-  _prevState: TeacherFormState,
-  formData: FormData
-): Promise<TeacherFormState> {
-  // 1) Nettoyage + validation
-  const values = sanitize(formData);
-  const errors = validate(values);
-
-  if (Object.keys(errors).length > 0) {
-    return {
-      success: false,
-      errors,
-      values,
-    };
+  if (!session || !isAdminUser(session.user)) {
+    return { error: 'Non autorisé' };
   }
 
-  // 2) Conversion tarif
-  const tarifNumber = values.tarif_horaire
-    ? Number(values.tarif_horaire)
-    : null;
+  // 2. Helpers pour URLs
+  const getTeacherPhotoUrl = (path: string | null): string | null => {
+    if (!path) return null;
+    const { data } = supabase.storage.from('teacher-photos').getPublicUrl(path);
+    return data?.publicUrl ?? null;
+  };
 
-  // 3) Insertion dans demandes_professeurs
-  const { error } = await supabase.from('demandes_professeurs').insert([
+  const photoUrl = getTeacherPhotoUrl(demande.photo_profil_path);
+
+  // 3. Insertion dans la table professeurs
+  const { error: insertError } = await supabase.from('professeurs').insert([
     {
-      nom_complet: values.nom_complet,
-      email: values.email || null,
-      matiere: values.matiere,
-      niveau: values.niveau,
-      commune: values.commune,
-      numero_whatsapp: values.numero_whatsapp,
-      tarif_horaire: tarifNumber,
-      biographie: values.biographie || null,
-      statut: 'en_attente',
+      nom_complet: demande.nom_complet,
+      matiere: demande.matiere,
+      niveau: demande.niveau,
+      commune: demande.commune,
+      tarif_horaire: demande.tarif_horaire,
+      biographie: demande.biographie,
+      photo_url: photoUrl,
+      numero_whatsapp: demande.numero_whatsapp,
+      verifie: false,
+      abonnement_actif: false,
+      abonnement_expire_le: null,
+      cree_le: new Date().toISOString(), // Important pour le tri
     },
   ]);
 
-  if (error) {
-    console.error('Erreur insertion demande professeur :', error.message);
-
-    return {
-      success: false,
-      errors: {
-        ...errors,
-        global:
-          "Une erreur est survenue lors de l'envoi de votre demande. Merci de réessayer.",
-      },
-      values,
-    };
+  if (insertError) {
+    console.error('Erreur insertion professeur:', insertError.message);
+    return { error: insertError.message };
   }
 
-  // 4) Notification admin (non bloquant pour l’utilisateur)
-  await notifyAdminNewCandidate(values);
+  // 4. Mise à jour du statut de la demande
+  const { error: updateError } = await supabase
+    .from('demandes_professeurs')
+    .update({ statut: 'approuve' })
+    .eq('id', demande.id);
 
-  // 5) Succès : on retourne un state avec success = true
-  // (le composant client affiche alors l’écran de succès)
-  return {
-    success: true,
-    errors: {},
-    values,
-  };
+  if (updateError) {
+    console.error('Erreur update demande:', updateError.message);
+    return { error: updateError.message };
+  }
+
+  // 5. Invalidation du cache pour la liste des enseignants
+  revalidateTag('enseignants');
+
+  return { success: true };
 }

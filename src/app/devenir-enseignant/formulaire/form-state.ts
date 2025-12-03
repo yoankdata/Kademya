@@ -1,4 +1,80 @@
 // src/app/become-a-teacher/form/form-state.ts
+import { z } from 'zod';
+
+// --- Listes pour UI + validation ---
+
+export const MATIERES = [
+  'Mathématiques',
+  'Physique-Chimie',
+  'SVT',
+  'Français',
+  'Anglais',
+  'Histoire-Géographie',
+  'Philosophie',
+  'Économie',
+  'Informatique',
+  'Autres',
+] as const;
+
+export const NIVEAUX = ['Primaire', 'Collège', 'Lycée', 'Supérieur'] as const;
+
+export const COMMUNES = [
+  'Abobo',
+  'Adjamé',
+  'Anyama',
+  'Bingerville',
+  'Cocody',
+  'Koumassi',
+  'Marcory',
+  'Plateau',
+  'Port-Bouët',
+  'Treichville',
+  'Yopougon',
+  'Hors Abidjan',
+] as const;
+
+// --- Schéma Zod ---
+
+export const TeacherSchema = z.object({
+  nom_complet: z
+    .string()
+    .min(3, 'Le nom doit contenir au moins 3 caractères.')
+    .trim(),
+  email: z
+    .string()
+    .email('Veuillez saisir une adresse e-mail valide.')
+    .or(z.literal('')) // Email optionnel mais si rempli, doit être valide
+    .optional(),
+  matiere: z.enum(MATIERES, {
+    errorMap: () => ({ message: 'Matière sélectionnée invalide.' }),
+  }),
+  niveau: z.enum(NIVEAUX, {
+    errorMap: () => ({ message: 'Niveau sélectionné invalide.' }),
+  }),
+  commune: z.enum(COMMUNES, {
+    errorMap: () => ({ message: 'Commune sélectionnée invalide.' }),
+  }),
+  numero_whatsapp: z
+    .string()
+    .regex(
+      /^(?:\+?225|225)?[0-9]{8}$/,
+      'Numéro WhatsApp invalide. Format attendu : 225XXXXXXXX ou +225XXXXXXXX.',
+    ),
+  tarif_horaire: z
+    .string()
+    .transform(val => Number(val))
+    .refine(val => !isNaN(val), { message: 'Le tarif doit être un nombre.' })
+    .refine(val => val >= 3000 && val <= 20000, {
+      message: 'Le tarif horaire doit être compris entre 3 000 et 20 000 FCFA.',
+    }),
+  biographie: z
+    .string()
+    .min(50, 'Merci de détailler un peu plus votre expérience (au moins 50 caractères).')
+    .optional()
+    .or(z.literal('')),
+});
+
+// --- Types dérivés ---
 
 export type TeacherFormValues = {
   nom_complet: string;
@@ -12,19 +88,7 @@ export type TeacherFormValues = {
 };
 
 export type TeacherFormErrors = Partial<
-  Record<
-    | 'nom_complet'
-    | 'email'
-    | 'matiere'
-    | 'niveau'
-    | 'commune'
-    | 'numero_whatsapp'
-    | 'tarif_horaire'
-    | 'biographie'
-    | 'cgu_accepted'
-    | 'global',
-    string
-  >
+  Record<keyof TeacherFormValues | 'cgu_accepted' | 'global', string>
 >;
 
 export type TeacherFormState = {
@@ -62,100 +126,4 @@ export function sanitize(formData: FormData): TeacherFormValues {
     tarif_horaire: get('tarif_horaire'),
     biographie: get('biographie'),
   };
-}
-
-// --- Listes pour UI + validation ---
-
-export const MATIERES = [
-  'Mathématiques',
-  'Physique-Chimie',
-  'SVT',
-  'Français',
-  'Anglais',
-  'Histoire-Géographie',
-  'Philosophie',
-  'Économie',
-  'Informatique',
-  'Autres',
-];
-
-export const NIVEAUX = ['Primaire', 'Collège', 'Lycée', 'Supérieur'];
-
-export const COMMUNES = [
-  'Abobo',
-  'Adjamé',
-  'Anyama',
-  'Bingerville',
-  'Cocody',
-  'Koumassi',
-  'Marcory',
-  'Plateau',
-  'Port-Bouët',
-  'Treichville',
-  'Yopougon',
-  'Hors Abidjan',
-];
-
-export function validate(values: TeacherFormValues): TeacherFormErrors {
-  const errors: TeacherFormErrors = {};
-
-  if (!values.nom_complet) {
-    errors.nom_complet = 'Le nom complet est obligatoire.';
-  } else if (values.nom_complet.length < 3) {
-    errors.nom_complet = 'Le nom doit contenir au moins 3 caractères.';
-  }
-
-  if (values.email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(values.email)) {
-      errors.email = 'Veuillez saisir une adresse e-mail valide.';
-    }
-  }
-
-  if (!values.matiere) {
-    errors.matiere = 'La matière principale est obligatoire.';
-  } else if (!MATIERES.includes(values.matiere)) {
-    errors.matiere = 'Matière sélectionnée invalide.';
-  }
-
-  if (!values.niveau) {
-    errors.niveau = 'Le niveau est obligatoire.';
-  } else if (!NIVEAUX.includes(values.niveau)) {
-    errors.niveau = 'Niveau sélectionné invalide.';
-  }
-
-  if (!values.commune) {
-    errors.commune = 'La commune est obligatoire.';
-  } else if (!COMMUNES.includes(values.commune)) {
-    errors.commune = 'Commune sélectionnée invalide.';
-  }
-
-  if (!values.numero_whatsapp) {
-    errors.numero_whatsapp = 'Le numéro WhatsApp est obligatoire.';
-  } else {
-    const whatsappRegex = /^(?:\+?225|225)?[0-9]{8}$/;
-    if (!whatsappRegex.test(values.numero_whatsapp)) {
-      errors.numero_whatsapp =
-        'Numéro WhatsApp invalide. Format attendu : 225XXXXXXXX ou +225XXXXXXXX.';
-    }
-  }
-
-  if (!values.tarif_horaire) {
-    errors.tarif_horaire = 'Le tarif horaire est obligatoire.';
-  } else {
-    const n = Number(values.tarif_horaire);
-    if (Number.isNaN(n)) {
-      errors.tarif_horaire = 'Le tarif doit être un nombre.';
-    } else if (n < 3000 || n > 20000) {
-      errors.tarif_horaire =
-        'Le tarif horaire doit être compris entre 3 000 et 20 000 FCFA.';
-    }
-  }
-
-  if (values.biographie && values.biographie.length < 50) {
-    errors.biographie =
-      'Merci de détailler un peu plus votre expérience (au moins 50 caractères).';
-  }
-
-  return errors;
 }

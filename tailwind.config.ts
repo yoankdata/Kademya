@@ -20,8 +20,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        headline: ['var(--font-space-grotesk)', 'sans-serif'],
-        body: ['var(--font-nunito)', 'sans-serif'],
+        headline: ['var(--font-poppins)', 'sans-serif'],
+        body: ['var(--font-geist-sans)', 'sans-serif'],
+        sans: ['var(--font-geist-sans)', 'sans-serif'],
       },
       colors: {
         background: 'hsl(var(--background))',

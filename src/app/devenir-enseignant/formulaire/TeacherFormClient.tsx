@@ -2,7 +2,7 @@
 'use client';
 
 import type { ElementType } from 'react';
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import Link from 'next/link';
 
@@ -33,7 +33,9 @@ import {
   CheckCircle,
   AlertTriangle,
   Camera,
+  Sparkles,
 } from 'lucide-react';
+import { generateTeacherBio } from './ai-actions';
 
 // Bouton de soumission avec état pending
 function SubmitButton() {
@@ -93,14 +95,55 @@ export default function TeacherFormClient({ submitted }: Props) {
   }) => {
     const Icon = fieldIcons[name];
 
+    const [isGenerating, setIsGenerating] = useState(false);
+
+    const handleGenerateBio = async () => {
+      const matiere = (document.getElementById('matiere') as HTMLSelectElement)?.value;
+      const niveau = (document.getElementById('niveau') as HTMLSelectElement)?.value;
+      const experience = (document.getElementById('biographie') as HTMLTextAreaElement)?.value;
+
+      if (!matiere || !niveau) {
+        alert("Veuillez d'abord sélectionner une matière et un niveau.");
+        return;
+      }
+
+      setIsGenerating(true);
+      const result = await generateTeacherBio({ matiere, niveau, experience });
+      setIsGenerating(false);
+
+      if (result.success && result.bio) {
+        const textarea = document.getElementById('biographie') as HTMLTextAreaElement;
+        if (textarea) {
+          textarea.value = result.bio;
+        }
+      } else {
+        alert("Erreur lors de la génération. Veuillez réessayer.");
+      }
+    };
+
     return (
       <div className="space-y-2">
-        <Label htmlFor={id} className="flex items-center gap-2 font-semibold">
-          {Icon && (
-            <Icon className="h-4 w-4 text-green-600 dark:text-green-400" />
+        <div className="flex justify-between items-end">
+          <Label htmlFor={id} className="flex items-center gap-2 font-semibold">
+            {Icon && (
+              <Icon className="h-4 w-4 text-green-600 dark:text-green-400" />
+            )}
+            {label}
+          </Label>
+          {name === 'biographie' && (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={handleGenerateBio}
+              disabled={isGenerating}
+              className="text-xs h-7 gap-1 bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100"
+            >
+              <Sparkles className="w-3 h-3" />
+              {isGenerating ? 'Rédaction...' : "Améliorer avec l'IA"}
+            </Button>
           )}
-          {label}
-        </Label>
+        </div>
 
         {name === 'biographie' ? (
           <Textarea

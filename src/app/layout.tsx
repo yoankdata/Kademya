@@ -1,36 +1,27 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import { Header } from '@/components/layout/header';
-import { Footer } from '@/components/layout/footer';
-import { Toaster } from '@/components/ui/toaster';
-import { Poppins, Nunito, Space_Grotesk } from 'next/font/google';
-import { cn } from '@/lib/utils';
-import SupabaseProvider from '@/components/SupabaseProvider';
+import type { Metadata } from "next";
+import { Geist, Poppins } from "next/font/google";
+import "./globals.css";
+import { cn } from "@/lib/utils";
+import SmoothScroll from '@/components/SmoothScroll';
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+import { Toaster } from "@/components/ui/toaster";
+import SupabaseProvider from "@/components/SupabaseProvider";
 
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['600'],
-  variable: '--font-poppins',
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-space-grotesk',
-});
-
-const nunito = Nunito({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-nunito',
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://www.kademya.com'),
-  title: 'Kademya - Trouvez un professeur fiable à Abidjan',
-  description:
-    'Mise en relation avec des professeurs vérifiés et passionnés pour des cours particuliers de qualité.',
-  icons: null,
+  title: "Kademya",
+  description: "Plateforme éducative",
 };
 
 export default function RootLayout({
@@ -39,23 +30,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="fr" suppressHydrationWarning>
       <body
         className={cn(
           'font-body antialiased',
+          geistSans.variable,
           poppins.variable,
-          nunito.variable,
-          spaceGrotesk.variable,
         )}
       >
-        <SupabaseProvider>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-grow">{children}</main>
-            <Footer />
-          </div>
-          <Toaster />
-        </SupabaseProvider>
+        <SmoothScroll>
+          <SupabaseProvider>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </div>
+            <Toaster />
+          </SupabaseProvider>
+        </SmoothScroll>
       </body>
     </html>
   );

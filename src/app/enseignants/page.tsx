@@ -1,5 +1,5 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { createClient } from '@supabase/supabase-js';
+import { unstable_cache } from 'next/cache';
 import { TeachersListClient } from './TeachersListClient';
 import type { TeacherForClient } from './TeacherCard';
 import type { Metadata } from 'next';
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     'Accédez à l’élite des professeurs vérifiés à Cocody, Yopougon, Marcory. Soutien scolaire, coaching et langues. Réservez votre cours aujourd\'hui.',
 };
 
-// Force le rendu dynamique pour avoir des données fraîches
-export const dynamic = 'force-dynamic';
+// ISR : Revalidation toutes les heures
+export const revalidate = 3600;
 
 // Type brut DB
 type TeacherProfileDB = {
@@ -32,24 +32,48 @@ type TeacherProfileDB = {
   cree_le: string;
 };
 
-export default async function TeachersPage() {
-  const cookieStore = await cookies();
-  const supabase = createServerComponentClient({ cookies: () => cookieStore });
+// Fonction de fetching mise en cache
+const getCachedTeachers = unstable_cache(
+  async () => {
+    // Client Supabase "anonyme" pour le rendu statique (pas de cookies)
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
 
-  // Récupération optimisée
-  const { data, error } = await supabase
-    .from('professeurs')
-    .select(
-      'id, nom_complet, matiere, niveau, tarif_horaire, commune, biographie, photo_url, verifie, avis_moyenne, avis_nombre, abonnement_actif, cree_le',
-    )
-    .eq('abonnement_actif', true)
-    .eq('verifie', true)
-    .order('cree_le', { ascending: false })
-    .limit(100);
+    const { data, error } = await supabase
+      .from('professeurs')
+      .select(
+        'id, nom_complet, matiere, niveau, tarif_horaire, commune, biographie, photo_url, verifie, avis_moyenne, avis_nombre, abonnement_actif, cree_le'
+      )
+      .eq('abonnement_actif', true)
+      .eq('verifie', true)
+      .order('cree_le', { ascending: false })
+      .limit(100);
+
+    if (error) throw error;
+    return data as TeacherProfileDB[];
+  },
+  ['enseignants-list'], // Key parts
+  {
+    tags: ['enseignants'], // Cache tags pour revalidation on-demand
+    revalidate: 3600,
+  }
+);
+
+export default async function TeachersPage() {
+  let data: TeacherProfileDB[] | null = null;
+  let error = null;
+
+  try {
+    data = await getCachedTeachers();
+  } catch (err) {
+    console.error('Erreur de chargement des professeurs:', err);
+    error = err;
+  }
 
   // --- UI ERREUR PREMIUM ---
   if (error) {
-    console.error('Erreur de chargement des professeurs:', error);
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 bg-gray-50/50">
         <div className="max-w-md text-center space-y-6 p-8 bg-white rounded-3xl shadow-xl border border-gray-100">

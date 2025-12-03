@@ -2,7 +2,22 @@
 
 import { supabase } from '@/lib/supabase';
 import { redirect } from 'next/navigation';
-import { revalidatePath } from 'next/cache'; // Ajouté pour rafraîchir le cache après soumission
+import { revalidatePath } from 'next/cache';
+import { headers } from 'next/headers';
+
+export async function trackContactClick(teacherId: string) {
+  const headersList = await headers();
+  const userAgent = headersList.get('user-agent');
+
+  try {
+    await supabase.from('stats_contacts').insert({
+      teacher_id: teacherId,
+      user_agent: userAgent,
+    });
+  } catch (error) {
+    console.error('Erreur tracking contact:', error);
+  }
+}
 
 export async function ajouterAvisAction(formData: FormData) {
   // 1. Récupération des données du formulaire

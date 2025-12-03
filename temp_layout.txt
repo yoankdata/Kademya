@@ -1,0 +1,33 @@
+﻿import SmoothScroll from '@/components/SmoothScroll';
+
+// ... imports ...
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="fr" suppressHydrationWarning>
+      <body
+        className={cn(
+          'font-body antialiased',
+          poppins.variable,
+          nunito.variable,
+          spaceGrotesk.variable,
+        )}
+      >
+        <SmoothScroll>
+          <SupabaseProvider>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </div>
+            <Toaster />
+          </SupabaseProvider>
+        </SmoothScroll>
+      </body>
+    </html>
+  );
+}

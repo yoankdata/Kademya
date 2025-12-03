@@ -7,7 +7,8 @@ import { Resend } from 'resend';
 import {
   TeacherFormState,
   TeacherFormValues,
-  validate,
+  TeacherSchema,
+  TeacherFormErrors,
   initialFormState,
 } from './form-state';
 
@@ -62,8 +63,7 @@ export async function createTeacherCandidate(
   try {
     // Initialiser le client Supabase avec les cookies pour les Server Actions
     const cookieStore = await cookies();
-    // @ts-ignore
-    const supabase = createServerComponentClient({ cookies: () => cookieStore });
+    const supabase = createServerComponentClient({ cookies: () => Promise.resolve(cookieStore) });
 
     // 0. Honeypot anti-bot
     const honeypot = formData.get('website');
@@ -88,8 +88,22 @@ export async function createTeacherCandidate(
       biographie: (formData.get('biographie') ?? '').toString().trim(),
     };
 
-    // 2. Validation (réutilise ta fonction existante)
-    const baseErrors = validate(values);
+    // 2. Validation avec Zod
+    const result = TeacherSchema.safeParse(values);
+    const baseErrors: TeacherFormErrors = {};
+
+    if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      // Mapping des erreurs Zod vers notre structure TeacherFormErrors
+      for (const key in fieldErrors) {
+        if (Object.prototype.hasOwnProperty.call(fieldErrors, key)) {
+          const message = fieldErrors[key as keyof typeof fieldErrors]?.[0];
+          if (message) {
+            baseErrors[key as keyof TeacherFormErrors] = message;
+          }
+        }
+      }
+    }
 
     // CGU (gérée côté server pour être sûr)
     const cguAccepted = formData.get('cgu_accepted');
