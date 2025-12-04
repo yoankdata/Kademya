@@ -12,6 +12,7 @@ export type TeacherForClient = {
   tarif_horaire: number;
   avis_moyenne: number | null;
   biographie: string | null;
+  slug?: string;
 };
 
 export function TeacherCard({ teacher }: { teacher: TeacherForClient }) {
@@ -21,7 +22,7 @@ export function TeacherCard({ teacher }: { teacher: TeacherForClient }) {
 
   return (
     <Link
-      href={`/enseignants/${teacher.id}`}
+      href={`/enseignants/${teacher.slug || teacher.id}`}
       className="group relative flex flex-col bg-white/50 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl p-6 hover:bg-white dark:hover:bg-white/10 transition-all duration-500 h-full overflow-hidden"
     >
       {/* GLOW EFFECT ON HOVER */}

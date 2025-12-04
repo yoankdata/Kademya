@@ -1,0 +1,86 @@
+﻿node.exe : npm warn 
+ERESOLVE overriding 
+peer dependency
+Au caractère Ligne:1 
+: 1
++ & "C:\Program Files\
+nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo    
+          : NotSpeci  
+  fied: (npm warn E   
+ RESOL...peer depe    
+ndency:String) []    
+, RemoteException
+    + FullyQualifiedE 
+   rrorId : NativeCo  
+  mmandError
+ 
+npm warn While 
+resolving: zod-validat
+ion-error@4.0.2
+npm warn Found: 
+zod@3.24.2
+npm warn 
+node_modules/zod
+npm warn   
+zod@"^3.24.2" from 
+the root project
+npm warn   7 more (@as
+teasolutions/zod-to-op
+enapi, 
+@genkit-ai/core, ...)
+npm warn
+npm warn Could not 
+resolve dependency:
+npm warn peer 
+zod@"^3.25.0 || 
+^4.0.0" from zod-valid
+ation-error@4.0.2
+npm warn node_modules/
+zod-validation-error
+npm warn   zod-validat
+ion-error@"^3.5.0 || 
+^4.0.0" from eslint-pl
+ugin-react-hooks@7.0.1
+npm warn   node_module
+s/eslint-plugin-react-
+hooks
+npm warn
+npm warn Conflicting 
+peer dependency: 
+zod@4.1.13
+npm warn 
+node_modules/zod
+npm warn   peer 
+zod@"^3.25.0 || 
+^4.0.0" from zod-valid
+ation-error@4.0.2
+npm warn   node_module
+s/zod-validation-error
+npm warn     zod-valid
+ation-error@"^3.5.0 
+|| ^4.0.0" from eslint
+-plugin-react-hooks@7.
+0.1
+npm warn     node_modu
+les/eslint-plugin-reac
+t-hooks
+
+added 56 packages, removed 450 packages, changed 9 packages, and audited 961 packages in 38s
+
+185 packages are looking for funding
+  run `npm fund` for details
+
+5 vulnerabilities (3 low, 1 moderate, 1 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.

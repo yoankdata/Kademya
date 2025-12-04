@@ -4,6 +4,7 @@ import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { revalidateTag } from 'next/cache';
 import { isAdminUser } from '@/lib/admin-auth';
+import { slugify } from '@/lib/utils';
 
 export type DemandeProf = {
   id: string;
@@ -44,6 +45,10 @@ export async function approveTeacher(demande: DemandeProf) {
 
   const photoUrl = getTeacherPhotoUrl(demande.photo_profil_path);
 
+  // Génération du slug : Nom + Matière + Commune + 4 derniers chars de l'ID
+  const baseSlug = `${demande.nom_complet} ${demande.matiere} ${demande.commune}`;
+  const slug = `${slugify(baseSlug)}-${demande.id.slice(-4)}`;
+
   // 3. Insertion dans la table professeurs
   const { error: insertError } = await supabase.from('professeurs').insert([
     {
@@ -59,6 +64,7 @@ export async function approveTeacher(demande: DemandeProf) {
       abonnement_actif: false,
       abonnement_expire_le: null,
       cree_le: new Date().toISOString(), // Important pour le tri
+      slug: slug,
     },
   ]);
 

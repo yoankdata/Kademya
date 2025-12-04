@@ -11,7 +11,7 @@ export function TeacherCard({ teacher }: { teacher: TeacherForClient }) {
 
   return (
     <Link
-      href={`/enseignants/${teacher.id}`}
+      href={`/enseignants/${teacher.slug || teacher.id}`}
       className="group relative flex flex-col bg-white border border-gray-200 rounded-xl p-5 hover:border-primary/20 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 h-full"
     >
       {/* HEADER : Avatar + Info + Note */}

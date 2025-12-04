@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabase';
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Verified, Star, ShieldCheck, Clock, ArrowLeft } from 'lucide-react';
@@ -25,6 +25,7 @@ type ProfesseurRow = {
   abonnement_actif: boolean;
   avis_moyenne?: number | null;
   avis_nombre?: number | null;
+  slug?: string;
 };
 
 type AvisRow = {
@@ -36,22 +37,27 @@ type AvisRow = {
   cree_le: string;
 };
 
-type PageProps = {
-  params: { id: string };
-};
-
-
-
 const PLACEHOLDER_PHOTO = '/images/teachers/placeholder-teacher.jpg';
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { id } = await params;
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const { slug } = await params;
 
-  const { data: prof } = await supabase
+  // 1. Recherche par slug
+  let { data: prof } = await supabase
     .from('professeurs')
     .select('nom_complet, matiere, niveau, photo_url, biographie')
-    .eq('id', id)
+    .eq('slug', slug)
     .single();
+
+  // 2. Fallback: Si pas trouvé et que slug ressemble à un UUID, chercher par ID
+  if (!prof && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug)) {
+    const { data: profById } = await supabase
+      .from('professeurs')
+      .select('nom_complet, matiere, niveau, photo_url, biographie')
+      .eq('id', slug)
+      .single();
+    prof = profById;
+  }
 
   if (!prof) {
     return {
@@ -73,7 +79,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${prof.nom_complet} - Professeur de ${prof.matiere}`,
       description: `Réservez un cours avec ${prof.nom_complet}. ${prof.niveau} - ${prof.matiere}.`,
-      url: `https://www.kademya-ci.com/enseignants/${id}`,
+      url: `https://www.kademya-ci.com/enseignants/${slug}`,
       images: [
         {
           url: ogUrl.toString(),
@@ -86,22 +92,38 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function TeacherProfilePage({ params }: PageProps) {
-  const { id } = await params;
+export default async function TeacherProfilePage({ params }: { params: { slug: string } }) {
+  const { slug } = await params;
 
-  // Récupération des données (identique à ton code)
-  const { data: prof, error } = await supabase
+  // 1. Recherche par SLUG
+  let { data: prof, error } = await supabase
     .from('professeurs')
     .select('*')
-    .eq('id', id)
+    .eq('slug', slug)
     .maybeSingle<ProfesseurRow>();
+
+  // 2. Fallback : Si pas trouvé par slug, vérifier si c'est un UUID (ancien lien)
+  if (!prof && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug)) {
+    const { data: profById } = await supabase
+      .from('professeurs')
+      .select('*')
+      .eq('id', slug)
+      .maybeSingle<ProfesseurRow>();
+
+    if (profById && profById.slug) {
+      // Redirection 301 vers la nouvelle URL avec slug
+      redirect(`/enseignants/${profById.slug}`);
+    }
+    // Si pas de slug encore généré pour ce prof, on affiche quand même la page (mode compatibilité)
+    prof = profById;
+  }
 
   if (error || !prof || !prof.abonnement_actif) notFound();
 
   const { data: avisData } = await supabase
     .from('avis_professeurs')
     .select('*')
-    .eq('id_professeur', id)
+    .eq('id_professeur', prof.id)
     .eq('est_modere', true)
     .order('cree_le', { ascending: false })
     .limit(10);
@@ -128,7 +150,7 @@ export default async function TeacherProfilePage({ params }: PageProps) {
       price: prof.tarif_horaire,
       priceCurrency: 'XOF',
       availability: 'https://schema.org/InStock',
-      url: `https://www.kademya-ci.com/enseignants/${prof.id}`,
+      url: `https://www.kademya-ci.com/enseignants/${prof.slug || prof.id}`,
       areaServed: {
         '@type': 'City',
         name: prof.commune

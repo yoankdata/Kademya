@@ -30,6 +30,7 @@ type TeacherProfileDB = {
   avis_nombre: number | null;
   abonnement_actif: boolean;
   cree_le: string;
+  slug?: string;
 };
 
 // Fonction de fetching mise en cache
@@ -44,7 +45,7 @@ const getCachedTeachers = unstable_cache(
     const { data, error } = await supabase
       .from('professeurs')
       .select(
-        'id, nom_complet, matiere, niveau, tarif_horaire, commune, biographie, photo_url, verifie, avis_moyenne, avis_nombre, abonnement_actif, cree_le'
+        'id, nom_complet, matiere, niveau, tarif_horaire, commune, biographie, photo_url, verifie, avis_moyenne, avis_nombre, abonnement_actif, cree_le, slug'
       )
       .eq('abonnement_actif', true)
       .eq('verifie', true)
@@ -118,6 +119,7 @@ export default async function TeachersPage() {
     photo_url: t.photo_url,
     avis_moyenne: t.avis_moyenne,
     avis_nombre: t.avis_nombre ?? 0,
+    slug: t.slug,
   }));
 
   // --- PAGE PRINCIPALE ---
