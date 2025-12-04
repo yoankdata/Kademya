@@ -159,7 +159,7 @@ export default function AdminDashboardClient({
 
                 {/* STATS */}
                 <section>
-                    <h2 className="text-lg font-semibold mb-3">Vue d&apos;ensemble</h2>
+                    <h2 className="text-lg font-semibold mb-3">Vue d'ensemble</h2>
                     <div className="grid gap-4 md:grid-cols-4">
                         <Card>
                             <CardHeader className="pb-2">
@@ -214,7 +214,7 @@ export default function AdminDashboardClient({
                                     {abonnesExpirantBientot}
                                 </div>
                                 <p className="text-xs text-muted-foreground">
-                                    Professeurs dont l&apos;abonnement expire dans ≤ 3 jours
+                                    Professeurs dont l'abonnement expire dans ≤ 3 jours
                                 </p>
                             </CardContent>
                         </Card>
@@ -286,7 +286,7 @@ export default function AdminDashboardClient({
                                                     Documents fournis :
                                                 </p>
                                                 <p>
-                                                    Pièce d&apos;identité :{' '}
+                                                    Pièce d'identité :{' '}
                                                     {idDocUrl ? (
                                                         <a
                                                             href={idDocUrl}
@@ -430,7 +430,7 @@ export default function AdminDashboardClient({
                                                         </Badge>
                                                     ) : (
                                                         <Badge variant="outline">
-                                                            Pas d&apos;abonnement
+                                                            Pas d'abonnement
                                                         </Badge>
                                                     )}
                                                 </div>

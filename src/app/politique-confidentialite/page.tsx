@@ -9,13 +9,13 @@ export const metadata: Metadata = {
 
 export default function PolitiqueConfidentialitePage() {
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
+    <main className="max-w-3xl mx-auto px-4 pt-24 md:pt-36 pb-12">
       <h1 className="text-3xl font-bold mb-6 text-gray-900">
         Politique de confidentialité – Kademya
       </h1>
 
       <p className="text-gray-700 mb-6">
-        La présente politique de confidentialité a pour objectif d&apos;informer
+        La présente politique de confidentialité a pour objectif d'informer
         les utilisateurs de la plateforme <strong>Kademya</strong> sur la
         manière dont leurs données personnelles sont collectées, utilisées,
         stockées et protégées.
@@ -46,7 +46,7 @@ export default function PolitiqueConfidentialitePage() {
           2. Données collectées
         </h2>
         <p className="text-gray-700">
-          Dans le cadre de l&apos;utilisation de la plateforme, Kademya peut
+          Dans le cadre de l'utilisation de la plateforme, Kademya peut
           collecter les catégories de données suivantes&nbsp;:
         </p>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
@@ -54,7 +54,7 @@ export default function PolitiqueConfidentialitePage() {
             <strong>Données professeurs</strong> : nom, prénom, photo de profil,
             ville/quartier, matières enseignées, niveaux, tarif horaire,
             description/bio, diplômes, disponibilités, liens de contact (WhatsApp,
-            email), documents de vérification (copie de pièce d&apos;identité,
+            email), documents de vérification (copie de pièce d'identité,
             justificatif de diplôme, etc.).
           </li>
           <li>
@@ -86,7 +86,7 @@ export default function PolitiqueConfidentialitePage() {
             documents transmis).
           </li>
           <li>Gestion des demandes envoyées via les formulaires de contact.</li>
-          <li>Amélioration de la qualité du service et de l&apos;expérience utilisateur.</li>
+          <li>Amélioration de la qualité du service et de l'expérience utilisateur.</li>
           <li>Prévention des fraudes et abus sur la plateforme.</li>
         </ul>
       </section>
@@ -101,15 +101,15 @@ export default function PolitiqueConfidentialitePage() {
         </p>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
           <li>
-            l&apos;exécution de mesures précontractuelles ou contractuelles
+            l'exécution de mesures précontractuelles ou contractuelles
             (mise en relation, gestion des profils professeurs) ;
           </li>
           <li>
-            le consentement de l&apos;utilisateur (création de compte, envoi de
+            le consentement de l'utilisateur (création de compte, envoi de
             formulaire, transmission de documents) ;
           </li>
           <li>
-            l&apos;intérêt légitime de Kademya à sécuriser sa plateforme et à
+            l'intérêt légitime de Kademya à sécuriser sa plateforme et à
             prévenir la fraude.
           </li>
         </ul>
@@ -120,7 +120,7 @@ export default function PolitiqueConfidentialitePage() {
           5. Durée de conservation
         </h2>
         <p className="text-gray-700">
-          Les données sont conservées pour une durée n&apos;excédant pas celle
+          Les données sont conservées pour une durée n'excédant pas celle
           nécessaire aux finalités pour lesquelles elles sont collectées&nbsp;:
         </p>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
@@ -156,7 +156,7 @@ export default function PolitiqueConfidentialitePage() {
             sécurité), uniquement dans la mesure nécessaire à leur mission.
           </li>
           <li>
-            Les autorités compétentes, en cas d&apos;obligation légale ou de
+            Les autorités compétentes, en cas d'obligation légale ou de
             procédure judiciaire.
           </li>
         </ul>
@@ -169,8 +169,8 @@ export default function PolitiqueConfidentialitePage() {
         <p className="text-gray-700">
           Kademya met en œuvre des mesures techniques et organisationnelles
           adaptées pour protéger les données personnelles contre la destruction
-          accidentelle ou illicite, la perte, l&apos;altération, la
-          divulgation ou l&apos;accès non autorisé.
+          accidentelle ou illicite, la perte, l'altération, la
+          divulgation ou l'accès non autorisé.
         </p>
       </section>
 
@@ -184,15 +184,15 @@ export default function PolitiqueConfidentialitePage() {
           données personnelles&nbsp;:
         </p>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>Droit d&apos;accès ;</li>
+          <li>Droit d'accès ;</li>
           <li>Droit de rectification ;</li>
-          <li>Droit d&apos;effacement (dans les limites légales) ;</li>
-          <li>Droit d&apos;opposition au traitement ;</li>
+          <li>Droit d'effacement (dans les limites légales) ;</li>
+          <li>Droit d'opposition au traitement ;</li>
           <li>Droit à la limitation du traitement ;</li>
           <li>Droit à la portabilité (dans les cas applicables).</li>
         </ul>
         <p className="text-gray-700">
-          Pour exercer ces droits, l&apos;utilisateur peut contacter&nbsp;:{' '}
+          Pour exercer ces droits, l'utilisateur peut contacter&nbsp;:{' '}
           <a
             href="mailto:contact@kademya-ci.com"
             className="text-emerald-700 underline"

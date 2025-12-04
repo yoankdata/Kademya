@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Poppins } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import SmoothScroll from '@/components/SmoothScroll';
@@ -38,6 +39,21 @@ export default function RootLayout({
           poppins.variable,
         )}
       >
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RGXG6YN0D5"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-RGXG6YN0D5');
+          `}
+        </Script>
+
         <SmoothScroll>
           <SupabaseProvider>
             <div className="flex flex-col min-h-screen">

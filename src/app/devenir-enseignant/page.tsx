@@ -60,7 +60,7 @@ export default function BecomeATeacherPage() {
           <div className="relative z-10 container px-4 mx-auto max-w-5xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-primary/20 shadow-sm text-primary text-sm font-medium mb-8 animate-fade-in-up">
               <Sparkles className="w-4 h-4" />
-              <span>Rejoignez l&apos;élite des professeurs à Abidjan</span>
+              <span>Rejoignez l'élite des professeurs à Abidjan</span>
             </div>
             <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 leading-[1.1] text-foreground">
               Enseignez librement. <br className="hidden md:block" />
@@ -127,7 +127,7 @@ export default function BecomeATeacherPage() {
                   <h2 className="text-3xl md:text-5xl font-headline font-bold leading-tight text-foreground">
                     Votre talent mérite <br />
                     <span className="text-primary relative inline-block">
-                      d&apos;être reconnu.
+                      d'être reconnu.
                       <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary/20 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
                         <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
                       </svg>
@@ -136,7 +136,7 @@ export default function BecomeATeacherPage() {
                 </div>
 
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Kademya n&apos;est pas une simple plateforme d&apos;annonces. C&apos;est un environnement professionnel conçu pour valoriser votre parcours académique et pédagogique auprès des familles qui cherchent la qualité.
+                  Kademya n'est pas une simple plateforme d'annonces. C'est un environnement professionnel conçu pour valoriser votre parcours académique et pédagogique auprès des familles qui cherchent la qualité.
                 </p>
 
                 <div className="space-y-5">
@@ -153,7 +153,7 @@ export default function BecomeATeacherPage() {
                     },
                     {
                       title: "Gestion simplifiée",
-                      desc: "Recevez les demandes directement sur WhatsApp. Discutez, planifiez, enseignez. C&apos;est tout.",
+                      desc: "Recevez les demandes directement sur WhatsApp. Discutez, planifiez, enseignez. C'est tout.",
                       icon: Zap
                     }
                   ].map((item, i) => (
@@ -339,7 +339,7 @@ export default function BecomeATeacherPage() {
               {
                 step: '02',
                 title: 'Activation',
-                text: "Après validation de vos documents, réglez l&apos;abonnement mensuel pour activer votre visibilité.",
+                text: "Après validation de vos documents, réglez l'abonnement mensuel pour activer votre visibilité.",
                 icon: ShieldCheck
               },
               {
@@ -367,10 +367,12 @@ export default function BecomeATeacherPage() {
 
             <Accordion type="single" collapsible className="w-full space-y-4">
               {[
-                { q: "Comment suis-je payé par les parents ?", a: "C&apos;est très simple : directement. Le parent vous paie à la fin du cours ou selon votre accord. Kademya n&apos;intervient pas dans la transaction." },
-                { q: "Quels documents pour la vérification ?", a: "Une pièce d&apos;identité valide et une preuve de votre niveau d&apos;études (diplôme ou carte étudiante). Cela rassure énormément les parents." },
-                { q: "Puis-je arrêter l&apos;abonnement quand je veux ?", a: "Oui. L&apos;abonnement est sans engagement. Vous pouvez choisir la formule mensuelle ou trimestrielle et arrêter à tout moment." },
-                { q: "Comment payer l&apos;abonnement ?", a: "Le paiement se fait par Mobile Money (Wave, MTN, Orange) directement depuis votre espace personnel. Vous avez le choix entre 10 000 FCFA/mois ou 25 000 FCFA/trimestre." }
+                { q: "Comment suis-je payé par les parents ?", a: "C'est très simple : directement. Le parent vous paie à la fin du cours ou selon votre accord. Kademya n'intervient pas dans la transaction." },
+                {
+                  q: "Quels documents pour la vérification ?", a: "Une pièce d'identité valide et une preuve de votre niveau d'études (diplôme ou carte étudiante).Cela rassure énormément les parents."
+                },
+                { q: "Puis-je arrêter l'abonnement quand je veux ?", a: "Oui. L'abonnement est sans engagement. Vous pouvez choisir la formule mensuelle ou trimestrielle et arrêter à tout moment." },
+                { q: "Comment payer l'abonnement ?", a: "Le paiement se fait par Mobile Money (Wave, MTN, Orange) directement depuis votre espace personnel. Vous avez le choix entre 10 000 FCFA/mois ou 25 000 FCFA/trimestre." }
               ].map((item, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="bg-background rounded-xl border px-2 shadow-sm data-[state=open]:border-primary/30 transition-all">
                   <AccordionTrigger className="text-lg font-medium py-5 px-4 hover:no-underline text-left">

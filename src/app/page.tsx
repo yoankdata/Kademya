@@ -118,7 +118,7 @@ export default function Home() {
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-7xl font-headline font-extrabold tracking-tight text-foreground leading-[1.1]">
-                      L&apos;excellence scolaire <br />
+                      L'excellence scolaire <br />
                       <span className="relative inline-block text-primary">
                         à portée de main
                         <svg className="absolute w-full h-3 -bottom-1 left-0 text-accent/30 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
@@ -129,7 +129,7 @@ export default function Home() {
 
                     <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
                       Trouvez le professeur idéal pour votre enfant parmi une sélection vérifiée.
-                      <span className="font-medium text-foreground"> Sans frais d&apos;agence, sans intermédiaire.</span>
+                      <span className="font-medium text-foreground"> Sans frais d'agence, sans intermédiaire.</span>
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -246,7 +246,7 @@ export default function Home() {
                 <div className="grid md:grid-cols-3 gap-8">
                   {[
                     { icon: Search, title: '1. Recherchez', desc: "Filtrez par matière, niveau et commune. Notre algorithme vous propose les meilleurs profils à proximité." },
-                    { icon: BookOpen, title: '2. Comparez', desc: "Consultez les expériences détaillées, les diplômes vérifiés et les avis laissés par d&apos;autres parents." },
+                    { icon: BookOpen, title: '2. Comparez', desc: "Consultez les expériences détaillées, les diplômes vérifiés et les avis laissés par d'autres parents." },
                     { icon: Phone, title: '3. Contactez', desc: "Échangez directement via WhatsApp ou téléphone. Organisez le premier cours sans intermédiaire." },
                   ].map((step, idx) => (
                     <div key={idx} className="group relative bg-card hover:bg-secondary/20 border border-border/50 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2">
@@ -271,9 +271,9 @@ export default function Home() {
             <section className="py-12 md:py-24 bg-secondary/30">
               <div className="container mx-auto px-4 md:px-6">
                 <div className="mb-16 md:text-center max-w-3xl mx-auto">
-                  <h2 className="text-3xl md:text-4xl font-headline font-bold mb-6">La confiance, c&apos;est la base.</h2>
+                  <h2 className="text-3xl md:text-4xl font-headline font-bold mb-6">La confiance, c'est la base.</h2>
                   <p className="text-lg text-muted-foreground">
-                    Nous avons conçu Kademya pour offrir aux parents d&apos;Abidjan une tranquillité d&apos;esprit totale.
+                    Nous avons conçu Kademya pour offrir aux parents d'Abidjan une tranquillité d'esprit totale.
                   </p>
                 </div>
 
@@ -287,7 +287,7 @@ export default function Home() {
                       </div>
                       <h3 className="text-2xl font-bold mb-3 text-foreground">Identité Vérifiée</h3>
                       <p className="text-muted-foreground leading-relaxed max-w-sm">
-                        Chaque professeur est vérifié manuellement. Nous validons pièces d&apos;identité et diplômes pour garantir une sécurité totale.
+                        Chaque professeur est vérifié manuellement. Nous validons pièces d'identité et diplômes pour garantir une sécurité totale.
                       </p>
                     </div>
 
@@ -401,7 +401,7 @@ export default function Home() {
           <Reveal width="100%">
             <section className="relative py-16 md:py-32 overflow-hidden">
               <div className="absolute inset-0 bg-primary z-0">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-90" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-accent/30 via-primary/80 to-transparent" />
                 <div className="absolute inset-0 opacity-20" style={{
                   backgroundImage:
                     `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
@@ -410,10 +410,10 @@ export default function Home() {
 
               <div className="container mx-auto px-4 relative z-10 text-center text-white">
                 <h2 className="text-3xl md:text-6xl font-headline font-bold mb-6 tracking-tight text-white">
-                  Ne laissez pas les lacunes s&apos;installer.
+                  Ne laissez pas les lacunes s'installer.
                 </h2>
                 <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10 font-light">
-                  Donnez à votre enfant les moyens de réussir son année scolaire dès aujourd&apos;hui.
+                  Donnez à votre enfant les moyens de réussir son année scolaire dès aujourd'hui.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <Button

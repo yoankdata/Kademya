@@ -24,7 +24,7 @@ export default function NotFound() {
               Page Absente du Carnet 🧭
             </h1>
             <p className="text-base text-muted-foreground leading-relaxed">
-              Nous n&apos;avons pas trouvé la page que vous cherchez. Elle n&apos;existe pas, n&apos;existe plus ou n&apos;a pas encore été écrite dans l&apos;histoire de Kademya.
+              Nous n'avons pas trouvé la page que vous cherchez. Elle n'existe pas, n'existe plus ou n'a pas encore été écrite dans l'histoire de Kademya.
             </p>
           </div>
 
@@ -35,7 +35,7 @@ export default function NotFound() {
             <Button asChild size="lg" className="w-full sm:w-auto font-semibold shadow-md hover:shadow-lg transition-shadow">
               <Link href="/">
                 <Home className="h-4 w-4 mr-2" />
-                Retourner à l&apos;accueil
+                Retourner à l'accueil
               </Link>
             </Button>
 
@@ -63,7 +63,7 @@ export default function NotFound() {
 
           {/* Lien de support en bas */}
           <p className="text-[11px] text-muted-foreground/60 pt-6 border-t border-dashed dark:border-gray-800/80">
-            Si vous pensez qu&apos;il s&apos;agit d&apos;une erreur technique, vous pouvez nous écrire à{' '}
+            Si vous pensez qu'il s'agit d'une erreur technique, vous pouvez nous écrire à{' '}
             <a
               href="mailto:support@kademya.com"
               className="underline underline-offset-2 text-current hover:text-blue-500 transition-colors"

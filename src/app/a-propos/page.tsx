@@ -41,7 +41,7 @@ export default function AboutPage() {
           </Badge>
 
           <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-foreground mb-6 max-w-4xl mx-auto leading-[1.1]">
-            Réinventer l&apos;éducation à{' '}
+            Réinventer l'éducation à{' '}
             <span className="text-primary relative inline-block">
               Abidjan
               <svg
@@ -60,7 +60,7 @@ export default function AboutPage() {
           </h1>
 
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10">
-            Plus qu&apos;une plateforme, Kademya est le pont de confiance entre
+            Plus qu'une plateforme, Kademya est le pont de confiance entre
             des professeurs talentueux et des élèves ambitieux.
           </p>
 
@@ -143,7 +143,7 @@ export default function AboutPage() {
                 Notre engagement
               </p>
               <p className="text-xs text-muted-foreground">
-                Rendre l&apos;éducation accessible à tous, sans barrières.
+                Rendre l'éducation accessible à tous, sans barrières.
               </p>
             </div>
           </div>
@@ -152,7 +152,7 @@ export default function AboutPage() {
           <div className="space-y-8 order-1 lg:order-2">
             <div>
               <h2 className="font-headline text-3xl md:text-5xl font-bold mb-6 text-foreground">
-                Né d&apos;un constat simple à{' '}
+                Né d'un constat simple à{' '}
                 <span className="text-primary">Abidjan</span>
               </h2>
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
@@ -164,9 +164,9 @@ export default function AboutPage() {
                   visibilité et de confiance.
                 </p>
                 <p>
-                  D&apos;un autre côté, des centaines d&apos;étudiants brillants
+                  D'un autre côté, des centaines d'étudiants brillants
                   et de pédagogues passionnés cherchaient à transmettre leur
-                  savoir, mais n&apos;avaient aucun espace professionnel pour
+                  savoir, mais n'avaient aucun espace professionnel pour
                   valoriser leurs compétences.
                 </p>
                 <p className="font-medium text-foreground border-l-4 border-primary pl-4">
@@ -202,7 +202,7 @@ export default function AboutPage() {
                   Pour les professeurs
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  L&apos;inscription est{' '}
+                  L'inscription est{' '}
                   <span className="font-semibold text-foreground">
                     100% gratuite
                   </span>
@@ -318,11 +318,11 @@ export default function AboutPage() {
               <h2 className="font-headline text-3xl md:text-5xl font-bold">
                 Une question ?
                 <br />
-                L&apos;équipe est là pour vous.
+                L'équipe est là pour vous.
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Que vous soyez parent cherchant le meilleur pour son enfant, ou
-                professeur souhaitant rejoindre l&apos;aventure, nos lignes sont
+                professeur souhaitant rejoindre l'aventure, nos lignes sont
                 ouvertes.
               </p>
 
@@ -367,7 +367,7 @@ export default function AboutPage() {
           </Badge>
 
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground leading-snug">
-            Prêt à faire évoluer l&apos;éducation à Abidjan&nbsp;?
+            Prêt à faire évoluer l'éducation à Abidjan&nbsp;?
           </h2>
 
           <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto">

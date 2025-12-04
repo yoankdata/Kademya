@@ -42,7 +42,7 @@ export default function LoginPage() {
           Connexion Administrateur
         </h1>
         <p className="text-xs text-muted-foreground text-center mb-6">
-          Accès strictement réservé à l&apos;administration Kademya.
+          Accès strictement réservé à l'administration Kademya.
         </p>
 
         {errorMsg && (

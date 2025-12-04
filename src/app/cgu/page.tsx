@@ -9,14 +9,14 @@ export const metadata: Metadata = {
 
 export default function CguPage() {
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
+    <main className="max-w-3xl mx-auto px-4 pt-24 md:pt-36 pb-12">
       <h1 className="text-3xl font-bold mb-6 text-gray-900">
-        Conditions Générales d&apos;Utilisation – Kademya
+        Conditions Générales d'Utilisation – Kademya
       </h1>
 
       <p className="text-gray-700 mb-6">
-        Les présentes Conditions Générales d&apos;Utilisation (CGU) ont pour
-        objet de définir les modalités et conditions d&apos;utilisation de la
+        Les présentes Conditions Générales d'Utilisation (CGU) ont pour
+        objet de définir les modalités et conditions d'utilisation de la
         plateforme <strong>Kademya</strong> par les parents, élèves et
         professeurs.
       </p>
@@ -53,9 +53,9 @@ export default function CguPage() {
         <p className="text-gray-700">
           Kademya met à disposition une plateforme permettant aux professeurs de
           proposer leurs services de cours et aux parents/élèves de trouver un
-          professeur correspondant à leurs besoins. Kademya n&apos;est pas
+          professeur correspondant à leurs besoins. Kademya n'est pas
           partie au contrat qui peut être conclu entre un parent/élève et un
-          professeur, et n&apos;intervient pas dans le contenu ou la
+          professeur, et n'intervient pas dans le contenu ou la
           réalisation des cours.
         </p>
       </section>
@@ -65,7 +65,7 @@ export default function CguPage() {
           3. Rôle et responsabilité de Kademya
         </h2>
         <p className="text-gray-700">
-          Kademya agit en tant qu&apos;intermédiaire technique de mise en
+          Kademya agit en tant qu'intermédiaire technique de mise en
           relation. À ce titre&nbsp;:
         </p>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
@@ -75,17 +75,17 @@ export default function CguPage() {
           </li>
           <li>
             Kademya effectue une vérification de base des informations et
-            documents fournis par les professeurs, sans pouvoir garantir l&apos;
-            exhaustivité ou l&apos;authenticité absolue de ces éléments.
+            documents fournis par les professeurs, sans pouvoir garantir l'
+            exhaustivité ou l'authenticité absolue de ces éléments.
           </li>
           <li>
-            Kademya n&apos;est pas responsable du déroulement des cours, de la
+            Kademya n'est pas responsable du déroulement des cours, de la
             ponctualité, de la qualité pédagogique ou du résultat scolaire.
           </li>
         </ul>
         <p className="text-gray-700">
           Kademya ne saurait être tenue responsable des litiges survenant entre
-          un parent/élève et un professeur. En cas de problème sérieux, l&apos;
+          un parent/élève et un professeur. En cas de problème sérieux, l'
           utilisateur est invité à contacter Kademya, qui pourra intervenir à
           titre de médiateur dans la mesure du possible.
         </p>
@@ -96,7 +96,7 @@ export default function CguPage() {
           4. Obligations des professeurs
         </h2>
         <p className="text-gray-700">
-          Le professeur s&apos;engage à&nbsp;:
+          Le professeur s'engage à&nbsp;:
         </p>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
           <li>
@@ -105,7 +105,7 @@ export default function CguPage() {
           </li>
           <li>
             transmettre des documents authentiques (diplômes, justificatifs,
-            pièce d&apos;identité) lors de la vérification ;
+            pièce d'identité) lors de la vérification ;
           </li>
           <li>
             respecter les élèves et les familles, agir avec professionnalisme,
@@ -113,11 +113,11 @@ export default function CguPage() {
             confidentialité ;
           </li>
           <li>
-            prévenir le parent/élève en cas de retard ou d&apos;annulation
-            d&apos;un cours, dans des délais raisonnables.
+            prévenir le parent/élève en cas de retard ou d'annulation
+            d'un cours, dans des délais raisonnables.
           </li>
           <li>
-            disposer d&apos;un abonnement actif afin de rester visible
+            disposer d'un abonnement actif afin de rester visible
             dans le catalogue public de Kademya. Deux formules sont disponibles :
             <br />
             - <strong>Abonnement mensuel : 10 000 FCFA</strong>
@@ -128,10 +128,10 @@ export default function CguPage() {
           </li>
         </ul>
         <p className="text-gray-700">
-          Kademya se réserve le droit de suspendre ou supprimer le profil d&apos;
+          Kademya se réserve le droit de suspendre ou supprimer le profil d'
           un professeur en cas de comportement inapproprié, fraude, non-respect
-          des présentes CGU, ou en cas de non-renouvellement de l&apos;abonnement
-          de visibilité. En l&apos;absence d&apos;abonnement actif, le profil
+          des présentes CGU, ou en cas de non-renouvellement de l'abonnement
+          de visibilité. En l'absence d'abonnement actif, le profil
           du professeur peut être masqué ou rendu inaccessible aux parents/élèves.
         </p>
       </section>
@@ -141,7 +141,7 @@ export default function CguPage() {
           5. Obligations des parents/élèves
         </h2>
         <p className="text-gray-700">
-          Le parent/élève s&apos;engage à&nbsp;:
+          Le parent/élève s'engage à&nbsp;:
         </p>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
           <li>utiliser la plateforme de manière honnête et loyale ;</li>
@@ -154,7 +154,7 @@ export default function CguPage() {
             (horaires, lieu, mode de paiement, etc.) ;
           </li>
           <li>
-            adopter un comportement respectueux à l&apos;égard des professeurs.
+            adopter un comportement respectueux à l'égard des professeurs.
           </li>
         </ul>
       </section>
@@ -164,11 +164,11 @@ export default function CguPage() {
         <p className="text-gray-700">
           Dans la version actuelle de la plateforme, les paiements des cours sont gérés
           directement entre le parent/élève et le professeur (espèces, Mobile
-          Money, virement, etc.). Kademya n&apos;encaisse pas les paiements et
-          n&apos;intervient pas dans la négociation des conditions financières.
+          Money, virement, etc.). Kademya n'encaisse pas les paiements et
+          n'intervient pas dans la négociation des conditions financières.
         </p>
         <p className="text-gray-700">
-          Il appartient au parent/élève et au professeur de s&apos;accorder sur
+          Il appartient au parent/élève et au professeur de s'accorder sur
           le tarif, les modalités et la fréquence des paiements.
         </p>
         <p className="text-gray-700">
@@ -189,7 +189,7 @@ export default function CguPage() {
         <p className="text-gray-700">
           Kademya se réserve le droit de modérer, suspendre ou supprimer tout
           avis contenant des propos injurieux, diffamatoires, discriminatoires ou
-          manifestement sans lien avec l&apos;expérience réelle.
+          manifestement sans lien avec l'expérience réelle.
         </p>
       </section>
 
@@ -198,7 +198,7 @@ export default function CguPage() {
           8. Accès au site et disponibilité
         </h2>
         <p className="text-gray-700">
-          Kademya s&apos;efforce de maintenir le site accessible et fonctionnel,
+          Kademya s'efforce de maintenir le site accessible et fonctionnel,
           mais ne peut garantir une disponibilité continue et sans interruption.
           Des opérations de maintenance ou des incidents techniques peuvent
           entraîner une indisponibilité temporaire.
@@ -210,11 +210,11 @@ export default function CguPage() {
           9. Suspension et suppression de compte
         </h2>
         <p className="text-gray-700">
-          Kademya se réserve le droit de suspendre ou supprimer le compte d&apos;
+          Kademya se réserve le droit de suspendre ou supprimer le compte d'
           un utilisateur (professeur ou parent/élève) en cas de non-respect des
           présentes CGU, de fraude, de tentative de détournement de la
           plateforme ou de comportement inapproprié. En ce qui concerne les
-          professeurs, le non-renouvellement de l&apos;abonnement de visibilité
+          professeurs, le non-renouvellement de l'abonnement de visibilité
           peut également entraîner la désactivation du profil public.
         </p>
       </section>
@@ -227,7 +227,7 @@ export default function CguPage() {
           Kademya se réserve le droit de modifier les présentes CGU à tout
           moment. La version à jour est celle publiée sur cette page. Il est
           recommandé de consulter régulièrement cette page pour prendre
-          connaissance d&apos;éventuelles modifications.
+          connaissance d'éventuelles modifications.
         </p>
       </section>
 
@@ -235,7 +235,7 @@ export default function CguPage() {
         <h2 className="text-xl font-semibold text-gray-900">11. Contact</h2>
         <p className="text-gray-700">
           Pour toute question relative aux présentes CGU, vous pouvez nous
-          contacter à l&apos;adresse suivante&nbsp;:{' '}
+          contacter à l'adresse suivante&nbsp;:{' '}
           <a
             href="mailto:contact@kademya-ci.com"
             className="text-emerald-700 underline"

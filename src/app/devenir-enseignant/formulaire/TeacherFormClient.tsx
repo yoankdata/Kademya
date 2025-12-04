@@ -2,7 +2,7 @@
 'use client';
 
 import type { ElementType } from 'react';
-import { useActionState, useState } from 'react';
+import { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import Link from 'next/link';
 
@@ -33,9 +33,7 @@ import {
   CheckCircle,
   AlertTriangle,
   Camera,
-  Sparkles,
 } from 'lucide-react';
-import { generateTeacherBio } from './ai-actions';
 
 // Bouton de soumission avec état pending
 function SubmitButton() {
@@ -95,31 +93,7 @@ export default function TeacherFormClient({ submitted }: Props) {
   }) => {
     const Icon = fieldIcons[name];
 
-    const [isGenerating, setIsGenerating] = useState(false);
 
-    const handleGenerateBio = async () => {
-      const matiere = (document.getElementById('matiere') as HTMLSelectElement)?.value;
-      const niveau = (document.getElementById('niveau') as HTMLSelectElement)?.value;
-      const experience = (document.getElementById('biographie') as HTMLTextAreaElement)?.value;
-
-      if (!matiere || !niveau) {
-        alert("Veuillez d'abord sélectionner une matière et un niveau.");
-        return;
-      }
-
-      setIsGenerating(true);
-      const result = await generateTeacherBio({ matiere, niveau, experience });
-      setIsGenerating(false);
-
-      if (result.success && result.bio) {
-        const textarea = document.getElementById('biographie') as HTMLTextAreaElement;
-        if (textarea) {
-          textarea.value = result.bio;
-        }
-      } else {
-        alert("Erreur lors de la génération. Veuillez réessayer.");
-      }
-    };
 
     return (
       <div className="space-y-2">
@@ -130,51 +104,42 @@ export default function TeacherFormClient({ submitted }: Props) {
             )}
             {label}
           </Label>
-          {name === 'biographie' && (
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={handleGenerateBio}
-              disabled={isGenerating}
-              className="text-xs h-7 gap-1 bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100"
-            >
-              <Sparkles className="w-3 h-3" />
-              {isGenerating ? 'Rédaction...' : "Améliorer avec l'IA"}
-            </Button>
-          )}
         </div>
 
-        {name === 'biographie' ? (
-          <Textarea
-            id={id}
-            name={name}
-            rows={5}
-            placeholder={placeholder}
-            defaultValue={state.values[name]}
-            required={required}
-            className="focus-visible:ring-green-500"
-          />
-        ) : (
-          <Input
-            id={id}
-            name={name}
-            type={type}
-            placeholder={placeholder}
-            defaultValue={state.values[name]}
-            required={required}
-            min={min}
-            className="focus-visible:ring-green-500"
-          />
-        )}
+        {
+          name === 'biographie' ? (
+            <Textarea
+              id={id}
+              name={name}
+              rows={5}
+              placeholder={placeholder}
+              defaultValue={state.values[name]}
+              required={required}
+              className="focus-visible:ring-green-500"
+            />
+          ) : (
+            <Input
+              id={id}
+              name={name}
+              type={type}
+              placeholder={placeholder}
+              defaultValue={state.values[name]}
+              required={required}
+              min={min}
+              className="focus-visible:ring-green-500"
+            />
+          )
+        }
 
-        {state.errors[name] && (
-          <div role="alert" aria-live="assertive" className="text-xs text-red-500 flex items-center gap-1 mt-1">
-            <AlertTriangle className="h-3 w-3" />
-            {state.errors[name]}
-          </div>
-        )}
-      </div>
+        {
+          state.errors[name] && (
+            <div role="alert" aria-live="assertive" className="text-xs text-red-500 flex items-center gap-1 mt-1">
+              <AlertTriangle className="h-3 w-3" />
+              {state.errors[name]}
+            </div>
+          )
+        }
+      </div >
     );
   };
 
@@ -236,7 +201,7 @@ export default function TeacherFormClient({ submitted }: Props) {
           Candidature envoyée avec succès
         </h1>
         <p className="text-lg text-muted-foreground mb-6">
-          Merci pour ta confiance. Ton dossier a bien été reçu et sera examiné par l&apos;équipe
+          Merci pour ta confiance. Ton dossier a bien été reçu et sera examiné par l'équipe
           Kademya dans les prochaines heures.
         </p>
 
@@ -245,7 +210,7 @@ export default function TeacherFormClient({ submitted }: Props) {
             Étape indispensable pour apparaître dans le catalogue
           </p>
           <p>
-            Choisis ton abonnement professeur pour devenir visible auprès des parents d&apos;Abidjan :
+            Choisis ton abonnement professeur pour devenir visible auprès des parents d'Abidjan :
           </p>
 
           <div className="bg-secondary/30 p-6 rounded-xl text-left space-y-3 border border-border/50">
@@ -270,7 +235,7 @@ export default function TeacherFormClient({ submitted }: Props) {
             <Link href="/abonnement">Activer mon abonnement</Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href="/">Retourner à l&apos;accueil</Link>
+            <Link href="/">Retourner à l'accueil</Link>
           </Button>
         </div>
       </div>
@@ -288,7 +253,7 @@ export default function TeacherFormClient({ submitted }: Props) {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Remplissez ce formulaire pour créer votre profil enseignant. Nous
             vérifions chaque candidature manuellement pour garantir
-            l&apos;excellence et la confiance des familles à Abidjan.
+            l'excellence et la confiance des familles à Abidjan.
           </p>
         </div>
 
@@ -419,7 +384,7 @@ export default function TeacherFormClient({ submitted }: Props) {
                   {/* Pièce d’identité */}
                   <div className="space-y-2">
                     <Label htmlFor="id_document" className="font-semibold">
-                      Pièce d&apos;identité (obligatoire)
+                      Pièce d'identité (obligatoire)
                     </Label>
                     <Input
                       id="id_document"
@@ -478,16 +443,16 @@ export default function TeacherFormClient({ submitted }: Props) {
                       de Kademya.
                     </label>
                     <p className="text-xs text-muted-foreground">
-                      En cochant cette case, j&apos;autorise Kademya à collecter
+                      En cochant cette case, j'autorise Kademya à collecter
                       et traiter mes données personnelles (y compris ma pièce
-                      d&apos;identité et mes diplômes) uniquement pour la
+                      d'identité et mes diplômes) uniquement pour la
                       vérification de mon profil et la mise en relation avec les
                       familles.
                     </p>
                     <p className="text-xs">
                       Lire les{' '}
                       <Link href="/cgu" className="underline">
-                        Conditions Générales d&apos;Utilisation
+                        Conditions Générales d'Utilisation
                       </Link>{' '}
                       et la{' '}
                       <Link href="/confidentialite" className="underline">

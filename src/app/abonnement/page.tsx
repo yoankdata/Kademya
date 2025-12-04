@@ -1,4 +1,3 @@
-// src/app/abonnement/page.tsx
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
@@ -28,7 +27,8 @@ export default function abonnementPage() {
 
   return (
     <main className="bg-gray-50 min-h-screen">
-      <div className="relative mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+      {/* Modification ici : pt-24 (mobile) et pt-36 (desktop) pour l'espace sous la navbar */}
+      <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-24 md:px-6 md:pb-14 md:pt-36">
         {/* Bandeau discret en fond */}
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-64 bg-gradient-to-b from-emerald-50/80 to-transparent" />
 
@@ -158,7 +158,7 @@ export default function abonnementPage() {
                 href="/"
                 className="inline-flex items-center text-sm text-emerald-700 font-medium hover:text-emerald-800 transition-colors"
               >
-                ← Retour à l&apos;accueil
+                ← Retour à l'accueil
               </Link>
             </div>
           </section>

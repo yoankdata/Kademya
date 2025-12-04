@@ -158,7 +158,7 @@ export default function ReviewSubmissionForm({ teacherId }: ReviewSubmissionForm
                 <h3 className="text-xl font-semibold">Avis Reçu !</h3>
               </div>
               <p className="mt-2">
-                Merci pour votre retour. Votre avis a été soumis et sera visible sur le profil après une brève vérification manuelle par l&apos;équipe Kademya.
+                Merci pour votre retour. Votre avis a été soumis et sera visible sur le profil après une brève vérification manuelle par l'équipe Kademya.
               </p>
               <button
                 onClick={() => setSubmissionStatus('idle')}
@@ -174,7 +174,7 @@ export default function ReviewSubmissionForm({ teacherId }: ReviewSubmissionForm
           <div className="p-6 bg-white rounded-lg shadow-xl mt-6">
             <h3 className="text-2xl font-bold text-gray-800 mb-4">Laisser un Avis Vérifié</h3>
             <p className="text-sm text-gray-600 mb-6">
-              Votre avis sera publié après une vérification rapide de votre identité par notre équipe, afin de garantir l&apos;authenticité des retours.
+              Votre avis sera publié après une vérification rapide de votre identité par notre équipe, afin de garantir l'authenticité des retours.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -245,13 +245,13 @@ export default function ReviewSubmissionForm({ teacherId }: ReviewSubmissionForm
                 ) : (
                   <>
                     <Send className="w-5 h-5 mr-2" />
-                    Soumettre l&apos;Avis
+                    Soumettre l'Avis
                   </>
                 )}
               </Button>
 
               {submissionStatus === 'error' && (
-                <p className="text-red-500 mt-2 text-center">Une erreur s&apos;est produite lors de l&apos;envoi. Veuillez réessayer.</p>
+                <p className="text-red-500 mt-2 text-center">Une erreur s'est produite lors de l'envoi. Veuillez réessayer.</p>
               )}
             </form>
           </div>

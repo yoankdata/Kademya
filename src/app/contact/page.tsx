@@ -127,7 +127,7 @@ export default function ContactPage() {
             <div className="pt-4 text-center lg:text-left">
               <Link href="/" className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-emerald-700 transition-colors">
                 <ArrowRight className="mr-2 h-4 w-4 rotate-180" />
-                Retour à l&apos;accueil
+                Retour à l'accueil
               </Link>
             </div>
           </section>

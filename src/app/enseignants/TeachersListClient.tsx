@@ -239,7 +239,7 @@ export function TeachersListClient({ initialTeachers }: TeachersListClientProps)
             <SlidersHorizontal className="w-8 h-8 text-gray-400" />
           </div>
           <h3 className="text-lg font-semibold text-gray-900">La plateforme est en préparation</h3>
-          <p className="text-gray-500 mt-2">Aucun professeur n&apos;est encore inscrit. Revenez très vite !</p>
+          <p className="text-gray-500 mt-2">Aucun professeur n'est encore inscrit. Revenez très vite !</p>
         </div>
       ) : filteredTeachers.length === 0 ? (
         // État vide (Filtres trop stricts)
@@ -251,8 +251,8 @@ export function TeachersListClient({ initialTeachers }: TeachersListClientProps)
             Aucun résultat pour cette recherche
           </h3>
           <p className="text-gray-500 max-w-md mx-auto mb-8">
-            Il semble qu&apos;aucun professeur ne corresponde exactement à vos critères.
-            Essayez d&apos;élargir votre recherche (par exemple en changeant de commune).
+            Il semble qu'aucun professeur ne corresponde exactement à vos critères.
+            Essayez d'élargir votre recherche (par exemple en changeant de commune).
           </p>
           <button
             onClick={resetFilters}

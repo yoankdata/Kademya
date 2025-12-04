@@ -88,7 +88,7 @@ export function Footer() {
 
               <div>
                 <h3 className="font-headline text-base font-semibold text-foreground mb-4">
-                  Besoin d&apos;aide ?
+                  Besoin d'aide ?
                 </h3>
 
                 <Link
